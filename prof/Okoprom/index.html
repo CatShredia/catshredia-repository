@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Главная Страница</title>
+
+    <!-- icon -->
+    <link rel="icon" href="rec/img/logo.png" type="image/x-icon" />
+    <!-- css -->
+    <link rel="stylesheet" href="null.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="animations.css" />
+    <!-- slider css -->
+    <link rel="stylesheet" href="slider/style.css" />
+  </head>
+  <body class="body">
+    <header class="header">
+      <div class="container header__inner">
+        <a href="index.html" class="header-a"
+          ><img src="rec/img/logo.png" alt="Логотип" class="header-logo-img" />
+          <h1 class="title">Окопром</h1></a
+        >
+
+        <div class="header-contacts">
+          <p class="header-text">myemail@gmail.com</p>
+          <p class="header-text">+7(950)3451211</p>
+        </div>
+
+        <a class="header-link link" href="delivery.html">Доставка</a>
+
+        <a class="header-link link" href="delivery.html">Гарантии</a>
+
+        <button type="button" class="header-menu-button link">
+          Консультация
+        </button>
+
+        <div class="menu">
+          <button type="button" class="header-menu-button" onclick="menu()">
+            <img
+              src="rec/img/Menu.png"
+              alt="Меню"
+              srcset=""
+              class="menu-button"
+            />
+          </button>
+        </div>
+      </div>
+      <div class="menu-active0 container">
+        <a class="header-link link" href="catalog.html">Каталог</a>
+        <a class="header-link link" href="aboutcompany.html">О компании</a>
+        <a class="header-link link" href="contacts.html">Контакты</a>
+      </div>
+    </header>
+    <main class="main">
+      <div class="form_inner container">
+        <form action="" method="post">
+          <div class="inputs">
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Ваше Имя"
+              class="font-input link2"
+            />
+            <input
+              type="text"
+              name="phone"
+              id="phone"
+              placeholder="Телефон"
+              class="font-input link2"
+            />
+            <input
+              type="text"
+              name="email"
+              id="email"
+              placeholder="Почта"
+              class="font-input link2"
+            />
+          </div>
+
+          <button type="button" class="font-button button1">ОТПРАВИТЬ</button>
+        </form>
+      </div>
+
+      <h1 class="container slider-title title">Товары</h1>
+      <div type class="slider container">
+        <button type="button" class="slider-button rotate180"></button>
+        <div class="slid sld" id="slid1">
+          <h2 class="slid-title link">Производство 1</h2>
+          <p class="slid-title">
+            1000 сотрудников <br />
+            Доход: 1000 000 руб
+          </p>
+          <span class="slid-title">230000$</span>
+          <img
+            src="rec/img/slider/slid1.webp"
+            alt="Картинка"
+            srcset=""
+            class="slid-img"
+          />
+
+          <a href="product.html" class="slid-button">Подробнее..</a>
+        </div>
+        <div class="slid sld" id="slid2">
+          <h2 class="slid-title link">Производство 2</h2>
+          <p class="slid-title">
+            1000 сотрудников <br />
+            Доход: 1000 000 руб
+          </p>
+          <span class="slid-title">2300$</span>
+          <img
+            src="rec/img/slider/slid2.webp"
+            alt="Картинка"
+            srcset=""
+            class="slid-img"
+          />
+
+          <a href="product.html" class="slid-button">Подробнее..</a>
+        </div>
+        <div class="slid sld" id="slid3">
+          <h2 class="slid-title link">Производство 3</h2>
+          <p class="slid-title">
+            1000 сотрудников <br />
+            Доход: 1000 000 руб
+          </p>
+          <span class="slid-title">2378400$</span>
+          <img
+            src="rec/img/slider/slid3.webp"
+            alt="Картинка"
+            srcset=""
+            class="slid-img"
+          />
+
+          <a href="product.html" class="slid-button">Подробнее..</a>
+        </div>
+        <div class="slid sld" id="slid4">
+          <h2 class="slid-title link">Грузовые перевозки</h2>
+          <p class="slid-title">Перелеты и перевозки</p>
+          <span class="slid-title">2000$ за кг</span>
+          <img
+            src="rec/img/slider/slid4.webp"
+            alt="Картинка"
+            srcset=""
+            class="slid-img"
+          />
+
+          <a href="product.html" class="slid-button">Подробнее..</a>
+        </div>
+        <div class="slid sld" id="slid5">
+          <h2 class="slid-title link">Выроботки шахт</h2>
+          <p class="slid-title">Грубокое и мощное бурение</p>
+          <span class="slid-title">23000$</span>
+          <img
+            src="rec/img/slider/slid5.webp"
+            alt="Картинка"
+            srcset=""
+            class="slid-img"
+          />
+
+          <a href="product.html" class="slid-button">Подробнее..</a>
+        </div>
+        <div class="slid sld" id="slid6">
+          <h2 class="slid-title link">Бурение шахт</h2>
+          <p class="slid-title">Грубокое и мощное бурение</p>
+          <span class="slid-title">23100$</span>
+          <img
+            src="rec/img/slider/slid6.webp"
+            alt="Картинка"
+            srcset=""
+            class="slid-img"
+          />
+
+          <a href="product.html" class="slid-button">Подробнее..</a>
+        </div>
+        <div class="slid sld" id="slid7">
+          <h2 class="slid-title link">Аренда Белаза</h2>
+          <p class="slid-title">Параметры Услуги 1</p>
+          <span class="slid-title">2300000$</span>
+          <img
+            src="rec/img/slider/slid7.webp"
+            alt="Картинка"
+            srcset=""
+            class="slid-img"
+          />
+
+          <a href="product.html" class="slid-button">Подробнее..</a>
+        </div>
+        <div class="slid sld" id="slid8">
+          <h2 class="slid-title link">Аренда Фуры</h2>
+          <p class="slid-title">Параметры Услуги 2</p>
+          <span class="slid-title">2300$</span>
+          <img
+            src="rec/img/slider/slid8.webp"
+            alt="Картинка"
+            srcset=""
+            class="slid-img"
+          />
+
+          <a href="product.html" class="slid-button">Подробнее..</a>
+        </div>
+
+        <button type="button" class="slider-button"></button>
+      </div>
+
+      <div class="category container">
+        <h1 class="category-title title">Категории</h1>
+        <div class="categorys-text">
+          Имеется спорная точка зрения, гласящая примерно следующее: ключевые
+          особенности структуры проекта, которые представляют собой яркий пример
+          континентально-европейского типа политической культуры, будут
+          рассмотрены исключительно в разрезе маркетинговых и финансовых
+          предпосылок!
+        </div>
+        <div class="category-div">
+          <div class="category" id="category1">
+            <h2 class="categor-title link">Перевозки</h2>
+            <img
+              src="rec/img/slider/slid1.webp"
+              alt="Категория"
+              srcset=""
+              class="category-img"
+            />
+          </div>
+          <div class="category" id="category2">
+            <h2 class="categor-title link">Аренда</h2>
+            <img
+              src="rec/img/slider/slid6.webp"
+              alt="Категория"
+              srcset=""
+              class="category-img"
+            />
+          </div>
+          <div class="category" id="category3">
+            <h2 class="categor-title link">Бурение</h2>
+            <img
+              src="rec/img/slider/slid7.webp"
+              alt="Категория"
+              srcset=""
+              class="category-img"
+            />
+          </div>
+          <div class="category" id="category3">
+            <h2 class="categor-title link">Перевозки</h2>
+            <img
+              src="rec/img/slider/slid8.webp"
+              alt="Категория"
+              srcset=""
+              class="category-img"
+            />
+          </div>
+          <div class="category" id="category3">
+            <h2 class="categor-title link">Рыболовство</h2>
+            <img
+              src="rec/img/slider/slid9.webp"
+              alt="Категория"
+              srcset=""
+              class="category-img"
+            />
+          </div>
+          <div class="category" id="category3">
+            <h2 class="categor-title link">Добыча</h2>
+            <img
+              src="rec/img/slider/slid10.webp"
+              alt="Категория"
+              srcset=""
+              class="category-img"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="advantages container">
+        <h1 class="advantages-title title">Преимущества</h1>
+        <div class="advantages-div">
+          <div class="advantages-cart">
+            <img
+              src="rec/icons/check.svg"
+              alt="Иконка"
+              srcset=""
+              class="advantages-icon"
+            />
+            <h2 class="advantages-title link">Преимущество 1</h2>
+            <p class="advantages-text">
+              Имеется спорная точка зрения, гласящая примерно следующее:
+              ключевые особенности структуры проекта, которые представляют собой
+              яркий пример континентально-европейского типа политической
+              культуры, будут рассмотрены исключительно в разрезе маркетинговых
+              и финансовых предпосылок!
+            </p>
+          </div>
+          <div class="advantages-cart">
+            <img
+              src="rec/icons/search.svg"
+              alt="Иконка"
+              srcset=""
+              class="advantages-icon"
+            />
+            <h2 class="advantages-title link">Преимущество 2</h2>
+            <p class="advantages-text">
+              Имеется спорная точка зрения, гласящая примерно следующее:
+              ключевые особенности структуры проекта, которые представляют собой
+              яркий пример континентально-европейского типа политической
+              культуры, будут рассмотрены исключительно в разрезе маркетинговых
+              и финансовых предпосылок!
+            </p>
+          </div>
+          <div class="advantages-cart">
+            <img
+              src="rec/icons/plus.svg"
+              alt="Иконка"
+              srcset=""
+              class="advantages-icon"
+            />
+            <h2 class="advantages-title link">Преимущество 3</h2>
+            <p class="advantages-text">
+              Имеется спорная точка зрения, гласящая примерно следующее:
+              ключевые особенности структуры проекта, которые представляют собой
+              яркий пример континентально-европейского типа политической
+              культуры, будут рассмотрены исключительно в разрезе маркетинговых
+              и финансовых предпосылок!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="why-me container advantages">
+        <h1 class="why-me-text title">Почему мы?</h1>
+        <p class="why-me-text">
+          Но реализация намеченных плановых заданий предопределяет высокую
+          востребованность стандартных подходов.
+        </p>
+        <div class="partners">
+          <a class="partner" href="#">
+            <img src="rec/cc/1.svg" alt="Партнер" class="partner-img" />
+          </a>
+          <a class="partner" href="#">
+            <img src="rec/cc/2.svg" alt="Партнер" class="partner-img" />
+          </a>
+          <a class="partner" href="#">
+            <img src="rec/cc/3.svg" alt="Партнер" class="partner-img" />
+          </a>
+          <a class="partner" href="#">
+            <img src="rec/cc/4.svg" alt="Партнер" class="partner-img" />
+          </a>
+          <a class="partner" href="#">
+            <img src="rec/cc/5.svg" alt="Партнер" class="partner-img" />
+          </a>
+          <a class="partner" href="#">
+            <img src="rec/cc/6.svg" alt="Партнер" class="partner-img" />
+          </a>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="menu-footer container">
+        <a href="delivery.html" class="menu-link link">Доставка и Оплата</a>
+        <a href="#" class="menu-link link">Гарантия</a>
+        <a href="#" class="menu-link link">О компании</a>
+        <a href="#" class="menu-link link">Контакты</a>
+      </div>
+      <div class="container footer_inner">
+        <a href="#" class="header-a"
+          ><img src="rec/img/logo.png" alt="Логотип" class="header-logo-img" />
+          <h1 class="title">Окопром</h1></a
+        >
+
+        <div class="footer-contacts">
+          <p class="footer-text">myemail@gmail.com</p>
+          <p class="footer-text">РФ, г.Казань, ул.Кремлевская, д.11</p>
+          <p class="footer-text">+7(950)3451211</p>
+        </div>
+        <div class="footer-icons">
+          <a href="https://whatsapp.com" class="footer-a"
+            ><img src="rec/img/whatsapp.svg" alt="WhatsApp" class="footer-img"
+          /></a>
+          <a href="https://telegram.org/" class="footer-a"
+            ><img src="rec/img/tg.svg" alt="Telegram" class="footer-img"
+          /></a>
+        </div>
+        <button type="button" class="header-menu-button" onclick="menu2()">
+          <img
+            src="rec/img/Menu.png"
+            alt="Меню"
+            srcset=""
+            class="menu-button"
+          />
+        </button>
+      </div>
+      <p class="copyright">Kazan 2024©</p>
+    </footer>
+
+    <!-- js -->
+    <script src="script.js"></script>
+    <!-- script js -->
+    <script src="slider/script.js"></script>
+  </body>
+</html>

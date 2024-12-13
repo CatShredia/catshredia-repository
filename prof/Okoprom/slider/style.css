@@ -1,0 +1,54 @@
+.slider {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 0.1fr 1fr 1fr 1fr 0.1fr;
+
+  gap: 15px;
+
+  min-height: 200px;
+}
+.slid {
+  padding: 10px;
+
+  display: none;
+}
+.slider-button {
+  /* background-color: black; */
+  background: url(../rec/img/arrow.png);
+
+  background-position: center;
+
+  width: 100px;
+  height: 100px;
+
+  background-size: 70%;
+  background-repeat: no-repeat;
+}
+.sld {
+  /* height: 500px; */
+
+  display: grid;
+  grid-template-rows: 50px 50px 50px 150px 50px;
+
+  align-items: center;
+  justify-items: center;
+  /* justify-content: center; */
+
+  background-color: rgb(220, 220, 220);
+
+  gap: 15px;
+}
+.slid-img {
+  width: 90%;
+  height: 200px;
+}
+.slid-button {
+  background-color: white;
+
+  color: black;
+  padding: 15px;
+}
+.slider-title {
+  align-items: center;
+  justify-content: center;
+}
