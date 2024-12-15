@@ -7,6 +7,7 @@
     <!-- css -->
     <link rel="stylesheet" href="styles/style.css" />
     <link rel="stylesheet" href="styles/font.css" />
+    <link rel="stylesheet" href="styles/filters.css" />
     <!-- icon -->
     <link rel="icon" href="rec/icons/icon.png" type="image/x-icon" />
   </head>
@@ -28,16 +29,34 @@
     <main class="main">
       <div class="main__inner container">
         <nav class="nav">
-          <form class="filter-1">
+          <form class="find-form">
+            <input
+              type="text"
+              name="find"
+              id="find-input"
+              class="find-input"
+              placeholder="Поиск по названию: "
+            />
+            <button type="button" class="find-button"></button>
+          </form>
+          <form class="filters">
             <label for="filter-cost" class="filter-cost">Цена:</label>
             <input
-              type="range"
-              name="fiter-rand"
-              id="fiter-rand-1"
-              class="fiter-rand"
-              step="100"
+              class="cost-input"
+              type="number"
+              name="cost-min"
+              id="cost-min"
             />
-            <label for="fitler-cost-value" class="fitler-cost-value">0</label>
+            <input
+              class="cost-input"
+              type="number"
+              name="cost-ma"
+              id="cost-max"
+            />
+
+            <button type="button" class="apply-button" id="apply-button">
+              Применить:
+            </button>
           </form>
         </nav>
         <div class="content">

@@ -48,6 +48,8 @@ button {
 .main__inner {
   display: grid;
 
+  align-items: start;
+
   grid-template-columns: 1fr 2fr;
 }
 .content {
@@ -65,7 +67,7 @@ button {
   align-items: center;
   justify-items: center;
 
-  gap: 10px;
+  gap: 15px;
 
   padding: 30px 10px;
 
@@ -76,7 +78,8 @@ button {
 
   aspect-ratio: 1 / 1;
 }
-.cart-button {
+.cart-button,
+.apply-button {
   padding: 15px 30px;
 
   background-color: rgb(171, 171, 171);
@@ -85,12 +88,18 @@ button {
 
   transition: 0.5s;
 }
-.cart-button:hover {
+.cart-button:hover,
+.apply-button:hover {
   background-color: black;
   color: white;
 }
-.cart-button:active {
+.cart-button:active,
+.apply-button:active {
   color: black;
 
   background-color: white;
+}
+/* TODO: не указаны */
+.cart-option {
+  /* display: none; */
 }
