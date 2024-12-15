@@ -34,24 +34,58 @@
               type="text"
               name="find"
               id="find-input"
-              class="find-input"
+              class="filter-input find-input"
               placeholder="Поиск по названию: "
             />
             <button type="button" class="find-button"></button>
           </form>
           <form class="filters">
-            <label for="filter-cost" class="filter-cost">Цена:</label>
+            <label for="filter-cost" class="filter-title" id="cost-title"
+              >Цена:</label
+            >
             <input
-              class="cost-input"
+              class="filter-input"
               type="number"
               name="cost-min"
               id="cost-min"
             />
             <input
-              class="cost-input"
+              class="filter-input"
               type="number"
               name="cost-ma"
               id="cost-max"
+            />
+
+            <label for="filter-ram" class="filter-ram"
+              >Оперативная память:</label
+            >
+            <input
+              class="filter-input"
+              type="number"
+              name="ram-min"
+              id="ram-min"
+            />
+            <input
+              class="filter-input"
+              type="number"
+              name="ram-ma"
+              id="ram-max"
+            />
+
+            <label for="filter-int" class="filter-int"
+              >Встроенная память:</label
+            >
+            <input
+              class="filter-input"
+              type="number"
+              name="int-min"
+              id="int-min"
+            />
+            <input
+              class="filter-input"
+              type="number"
+              name="int-max"
+              id="int-max"
             />
 
             <button type="button" class="apply-button" id="apply-button">
@@ -67,11 +101,11 @@
             </h4>
             <h5 class="cart-cost cost">3200 ₽</h5>
 
-            <div class="cart-options">
-              <p class="cart-option">Оперативная память: 1 гб</p>
-              <p class="cart-option">Встроенная память: 8 гб</p>
-              <p class="cart-option">Производитель: DEXP</p>
-            </div>
+            <!-- <div class="cart-options"> -->
+            <p class="cart-option ram">1 гб Оперативная Память</p>
+            <p class="cart-option">Встроенная память: 8 гб</p>
+            <p class="cart-option">Производитель: DEXP</p>
+            <!-- </div> -->
 
             <button type="button" class="cart-button">
               Добавить в Корзину
@@ -82,11 +116,11 @@
             <h4 class="cart-title title2">Смартфон POCO F3 Белый</h4>
             <h5 class="cart-cost cost">34999 ₽</h5>
 
-            <div class="cart-options">
-              <p class="cart-option">Оперативная память: 6 гб</p>
-              <p class="cart-option">Встроенная память: 128 гб</p>
-              <p class="cart-option">Производитель: POCO</p>
-            </div>
+            <!-- <div class="cart-options"> -->
+            <p class="cart-option ram">6 гб Оперативная Память</p>
+            <p class="cart-option">Встроенная память: 256 гб</p>
+            <p class="cart-option">Производитель: POCO</p>
+            <!-- </div> -->
 
             <button type="button" class="cart-button">
               Добавить в Корзину
@@ -97,11 +131,11 @@
             <h4 class="cart-title title2">Samsung Galaxy M52</h4>
             <h5 class="cart-cost cost">40999 ₽</h5>
 
-            <div class="cart-options">
-              <p class="cart-option">Оперативная память: 6 гб</p>
-              <p class="cart-option">Встроенная память: 256 гб</p>
-              <p class="cart-option">Производитель: Samsung</p>
-            </div>
+            <!-- <div class="cart-options"> -->
+            <p class="cart-option ram">6 гб Оперативная Память</p>
+            <p class="cart-option">Встроенная память: 128 гб</p>
+            <p class="cart-option">Производитель: Samsung</p>
+            <!-- </div> -->
 
             <button type="button" class="cart-button">
               Добавить в Корзину
@@ -112,11 +146,41 @@
             <h4 class="cart-title title2">Смартфон POCO F3 Черный</h4>
             <h5 class="cart-cost cost">32999 ₽</h5>
 
-            <div class="cart-options">
-              <p class="cart-option">Оперативная память: 6 гб</p>
-              <p class="cart-option">Встроенная память: 128 гб</p>
-              <p class="cart-option">Производитель: POCO</p>
-            </div>
+            <!-- <div class="cart-options"> -->
+            <p class="cart-option ram">6 гб Оперативная Память</p>
+            <p class="cart-option">Встроенная память: 128 гб</p>
+            <p class="cart-option">Производитель: POCO</p>
+            <!-- </div> -->
+
+            <button type="button" class="cart-button">
+              Добавить в Корзину
+            </button>
+          </div>
+          <div class="cart" id="cart5">
+            <img src="rec/picture/4.jpg" alt="Картинка" srcset="" />
+            <h4 class="cart-title title2">НовыйСмартфон 1</h4>
+            <h5 class="cart-cost cost">32000 ₽</h5>
+
+            <!-- <div class="cart-options"> -->
+            <p class="cart-option ram">4 гб Оперативная Память</p>
+            <p class="cart-option">Встроенная память: 32 гб</p>
+            <p class="cart-option">Производитель: НовыйСмартфон</p>
+            <!-- </div> -->
+
+            <button type="button" class="cart-button">
+              Добавить в Корзину
+            </button>
+          </div>
+          <div class="cart" id="cart6">
+            <img src="rec/picture/4.jpg" alt="Картинка" srcset="" />
+            <h4 class="cart-title title2">НовыйСмартфон 2</h4>
+            <h5 class="cart-cost cost">64000 ₽</h5>
+
+            <!-- <div class="cart-options"> -->
+            <p class="cart-option ram">16 гб Оперативная Память</p>
+            <p class="cart-option">Встроенная память: 512 гб</p>
+            <p class="cart-option">Производитель: НовыйСмартфон</p>
+            <!-- </div> -->
 
             <button type="button" class="cart-button">
               Добавить в Корзину
