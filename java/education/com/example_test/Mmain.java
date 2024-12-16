@@ -1,18 +1,32 @@
 package com.example_test;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class Mmain {
     public static void main(String args[]) {
         System.out.println("Hello World!");
 
+        Scanner s = new Scanner(System.in);
+
+        int str = 0;
         try {
-            testMethod();
-        } catch (ArithmeticException e) {
-            System.out.println("Отлов");
+            str = s.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Введите число!");
+        } finally {
+            System.out.println(str);
         }
 
+        stopMain();
     }
 
-    public static void testMethod() {
-        // System.out.println(2 / 0);
+    public static void stopMain() {
+        System.out.println("---");
+
+        Scanner s = new Scanner(System.in);
+
+        s.nextLine();
+        System.out.print("\033[H\033[2J");
     }
 }
