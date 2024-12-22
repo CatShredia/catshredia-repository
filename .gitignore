@@ -8,3 +8,7 @@ cs/testProject/testProject.csproj
 
 OAIP.sln
 .vscode/launch.json
+eclipse-formatter.xml
+.vscode/settings.json
+
+java/education/com/testProject

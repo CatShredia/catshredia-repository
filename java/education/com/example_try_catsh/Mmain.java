@@ -1,4 +1,4 @@
-package com.example_test;
+package com.example_try_catsh;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
