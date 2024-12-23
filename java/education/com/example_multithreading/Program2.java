@@ -18,17 +18,31 @@ public class Program2 {
     private static void checkThreadStates() throws InterruptedException {
         Thread mainThread = currentThread();
 
-        Runnable task0 = () -> out.println(currentThread().getName());
-        Thread thread = new Thread(task0);
+        Runnable task0 = () -> {
+            writeThreadStatus(currentThread());
+        };
+        Thread thread0 = new Thread(task0);
 
         // out.println(thread.getState()); // default method
-        writeThreadStatus(thread); // NEW
-        thread.start(); // start thread
-        writeThreadStatus(thread); // RUNNABLE
+        writeThreadStatus(thread0); // NEW
+        thread0.start(); // start thread
+        writeThreadStatus(thread0); // RUNNABLE
 
-        waitEndOffAllThreads(thread);
-        writeThreadStatus(thread); // TERMINATED
+        writeThreadStatus(thread0); // TERMINATED
+        waitEndOffAllThreads(thread0);
+        writeThreadStatus(thread0);
 
+        Thread thread1 = new Thread(() -> {
+            writeThreadStatus(currentThread());
+        });
+
+        thread1.start();
+        thread1.setName("TestName");
+        waitEndOffAllThreads(thread1);
+        writeThreadStatus(thread1);
+
+        mainThread.join(1000);
+        writeThreadStatus(mainThread);
     }
 
     // stop thread to complete others
