@@ -4,7 +4,6 @@ import static java.lang.Thread.currentThread; //импорт библиотек�
 import static java.lang.System.out;
 
 import java.util.Scanner;
-import java.util.stream.IntStream;
 
 public class Program {
     public static void main(String[] args) throws InterruptedException {
@@ -33,26 +32,40 @@ public class Program {
 
         thread.start(); // запускаем его
 
-        stopConsole();
-
         // TODO: задание
+        out.println("---");
         Scanner s = new Scanner(System.in);
         final int firstNumber = s.nextInt();
         final int lastNumber = s.nextInt();
         final int period = s.nextInt();
 
         final Task task0 = new Task(firstNumber, lastNumber / 2, period);
-        startThread(task0);
+        final Thread thread0 = new Thread(task0);
+        thread0.start();
 
         final Task task1 = new Task(lastNumber / 2 + 1, lastNumber, period);
-        startThread(task1);
+        final Thread thread1 = new Thread(task1);
+        thread1.start();
 
-        Thread.sleep(150);
+        // Thread.sleep(1000);
+        waitForEndAllThreads(thread0, thread1);
         currentThread().interrupt();
 
         int result = task0.getSummTask() + task1.getSummTask();
 
         out.println("Результат: " + result);
+
+        stopConsole();
+
+    }
+
+    // вызов этого метода в потоке, прервет его
+    // до выполнения потоков (передаваемых в параметрах)
+    private static final void waitForEndAllThreads(Thread... threads) throws InterruptedException {
+        // Thread... threads - потоки, ожидание которых
+        for (Thread thread : threads) {
+            thread.join(); // Прерывания самого потока
+        }
     }
 
     private static final class TestThread extends Thread {
@@ -72,11 +85,6 @@ public class Program {
         out.print("\033[H\033[2J");
     }
 
-    // запуск задачи в процессе
-    public static void startThread(Runnable runnable) {
-        final Thread thread = new Thread(runnable);
-        thread.start();
-    }
 }
 
 class Task implements Runnable {
@@ -101,11 +109,9 @@ class Task implements Runnable {
     @Override
     public void run() {
         // находим сумму
-        System.out.println("тест " + fistNumber + " " + lastNumber + " " + period);
         for (int i = fistNumber; i < lastNumber; i += period) {
             summTask += i;
         }
-        out.println("Имя потока " + currentThread().getName());
         out.println(summTask + " сумма потока");
 
     }
