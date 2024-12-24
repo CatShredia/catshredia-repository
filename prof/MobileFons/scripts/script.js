@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM loaded!");
 
   const finderClass = new FinderClass(".cart-title", ".find-form");
-  const filterClass = new FiltersClass(".cost");
+  const costFilter = new FiltersClass(".cost", ".cost-input");
 });
 
 // TODO: for finder form
@@ -35,13 +35,33 @@ class FinderClass {
 
 // TODO: filters
 class FiltersClass {
-  constructor(classCosts) {
-    this.cost = document.querySelectorAll(classCosts);
+  constructor(classCosts, classForms) {
+    this.costs = document.querySelectorAll(classCosts); // берем цены
+
+    console.log(this.costs);
+
+    for (let i = 0; i < this.costs.length; i++) {
+      console.log(this.costs[i]);
+      this.costs[i] = this.costs[i];
+    }
 
     this.devMode = true;
 
     if (this.devMode) {
-      console.log(this.cost);
+      console.log("Dev Mode: ");
+      console.log(this.costs);
+    }
+
+    this.setCostsToFilters(classForms);
+  }
+  setCostsToFilters(classForms) {
+    this.filterMin = document.querySelectorAll(classForms)[0];
+    this.filterMax = document.querySelectorAll(classForms)[1];
+    // this.filterMax = document.querySelector("#cost-min");
+
+    if (this.devMode) {
+      console.log(this.filterMin);
+      console.log(this.filterMax);
     }
   }
 }
