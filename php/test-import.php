@@ -5,5 +5,5 @@ function testMethod($num0, $num1): int
     return $num0 + $num1;
 }
 
-testMethod(1, 111)
-    ?>
+testMethod(1, 111);
+?>
