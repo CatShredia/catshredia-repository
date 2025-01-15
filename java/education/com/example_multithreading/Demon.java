@@ -11,9 +11,19 @@ public class Demon {
 
         testMethod();
 
+        Thread myThread = new Thread(() -> {
+            for (int i = 0; i <= 10; i++) {
+                System.out.println(currentThread().getName() + " is active!");
+            }
+        });
+
+        synchronized (myThread) {
+
+        }
     }
 
-    private static void testMethod() throws InterruptedException {
+    synchronized static void testMethod() throws InterruptedException {
+
         informationAboutThreadConsole(currentThread());
 
         Thread myThread = new Thread(() -> {
