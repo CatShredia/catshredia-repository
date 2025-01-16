@@ -1,11 +1,3 @@
-cs/OAIP/bin
-cs/OAIP/obj
-cs/OAIP/OAIP.csproj
+.idea
 
-cs/testProject/bin
-cs/testProject/obj
-cs/testProject/testProject.csproj
-
-OAIP.sln
-catshredia-repository.sln
-.vscode/launch.json
+first-project
