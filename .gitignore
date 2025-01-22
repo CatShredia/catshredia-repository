@@ -1,6 +1,4 @@
-cs/OAIP/bin
-cs/OAIP/obj
-cs/OAIP/OAIP.csproj
+.idea
 
 cs/testProject/bin
 cs/testProject/obj
@@ -12,3 +10,4 @@ catshredia-repository.sln
 
 first-project
 .vscode
+first-project
