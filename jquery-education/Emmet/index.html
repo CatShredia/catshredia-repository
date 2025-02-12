@@ -1,0 +1,29 @@
+<!-- ? теги -->
+.
+<div class=""></div>
+.container
+<div class="container"></div>
+<!-- ? атрибуты -->
+<!--  attribute - атрибут, value - значение -->
+.div[attribute="value"]
+<div class="div" attribute="value"></div>
+<!-- ? Дочерние элементы -->
+.div>.container
+<div class="div">
+  <div class="container"></div>
+</div>
+<!-- ? Кол-во элементов -->
+.div>.container*3
+<div class="div">
+  <div class="container"></div>
+  <div class="container"></div>
+  <div class="container"></div>
+</div>
+<!-- ? Нумерация объектов -->
+ul.ulClass>li.liClass#li${Number $}*4
+<ul class="ulClass">
+  <li class="liClass" id="li1">Number 1</li>
+  <li class="liClass" id="li2">Number 2</li>
+  <li class="liClass" id="li3">Number 3</li>
+  <li class="liClass" id="li4">Number 4</li>
+</ul>
