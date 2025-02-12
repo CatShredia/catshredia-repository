@@ -9,6 +9,7 @@ console.log("Hi");
 // }
 
 // ? JQuery
+// * selectors
 let elem = $(".www");
 elem.css("color", "red").html("!!!");
 
@@ -25,3 +26,6 @@ console.log(elem);
 
 let inputsTexts = $("input[type='text']");
 console.log(inputsTexts);
+
+let newElem = $("h6").parent();
+console.log(newElem);
