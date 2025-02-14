@@ -39,6 +39,8 @@
 .slider-obj img {
   width: 80%;
   height: 200px;
+
+  object-fit: cover;
 }
 .slider-title {
   font-family: "Shafarik", serif;
@@ -57,6 +59,8 @@
   border-radius: 0.5em;
 
   text-decoration: none;
+
+  display: block;
 }
 .slider-button:hover {
   background-color: black;
@@ -73,5 +77,7 @@
 }
 /* non-js */
 .slider-obj {
-  display: none;
+  opacity: 0;
+
+  transition: opacity 0.3s ease-in-out;
 }
