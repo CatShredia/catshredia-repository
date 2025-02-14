@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Shafarik&family=Smooch+Sans:wght@100..900&display=swap");
+.slider {
+  display: grid;
+
+  grid-template-columns: 0.1fr 1fr 0.1fr;
+
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+}
+.slider__inner {
+  display: grid;
+
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 15px;
+}
+.slider-obj {
+  margin: 10px;
+  padding: 15px 5px;
+
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+}
+.slider-obj img {
+  width: 80%;
+  height: 200px;
+}
+.slider-title {
+  font-family: "Shafarik", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.slider-button {
+  padding: 10px 15px;
+
+  background-color: blue;
+
+  color: white;
+
+  transition: linear 0.4s;
+
+  border-radius: 0.5em;
+
+  text-decoration: none;
+}
+.slider-button:hover {
+  background-color: black;
+}
+.slider-arr {
+  font-size: 3em;
+
+  transition: linear 0.4s;
+}
+.slider-arr:hover {
+  font-size: 3.03em;
+
+  color: blue;
+}
+/* non-js */
+.slider-obj {
+  display: none;
+}
