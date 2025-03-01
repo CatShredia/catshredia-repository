@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+
+    text-decoration: none;
+}
+
+body {
+    padding: 40px;
+}
+
+.warning {
+    color: black;
+}
+
+/* ! псевдо элемент до основного контента */
+.warning::before {
+    content: "До";
+}
+
+/* ! псевдо элемент после основного контента */
+.warning::after {
+    content: "После";
+}
+
+/* ! текст */
+.text {
+    color: green;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.text::after {
+    content: "";
+    display: block;
+
+    background: url(icon_1.svg);
+
+    background-position: center;
+    background-size: 30%;
+    background-repeat: no-repeat;
+
+    /* * для того, чтобы не сжималось */
+    flex-shrink: 0;
+
+}
