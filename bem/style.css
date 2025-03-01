@@ -110,6 +110,7 @@ body {
 
 .card__img {
     width: 100%;
+    height: 200px;
     /* скрытие контента, который выходит за рамки блока (с учетом пропорций) */
     object-fit: cover;
 }
@@ -137,11 +138,41 @@ body {
     font-weight: normal;
 }
 
+/* прикольный способ установки ссылки поверх изображения */
+.card__title::before {
+    content: "";
+    display: block;
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 200px;
+}
+
+/* прикольный способ вывода информации из атрибута в псевдоэлемент */
+.card[data-information]::after {
+    content: attr(data-information);
+}
+
 .card__location {
     display: block;
     margin-bottom: 18px;
     font-size: 16px;
     color: #999;
+}
+
+/* изменение стиоищации первого символа */
+.card__location::first-letter {
+    color: red;
+
+    font-size: 24px;
+}
+
+/* изменение стилизации выделяемых символов */
+.card__location::selection {
+    color: gold;
 }
 
 /* ? промо карточка */
