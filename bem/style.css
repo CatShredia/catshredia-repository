@@ -54,7 +54,25 @@ body {
     outline-offset: 3px;
 }
 
-/* ! кнопка */
+/* ? модификатор желтого цвета */
+.btn_yellow {
+    background-color: yellow;
+}
+
+.btn_yellow:hover {
+    background-color: rgb(202, 202, 0);
+}
+
+.btn_yellow:active {
+    background-color: yellow;
+}
+
+.btn_yellow:focus {
+    outline: 1px solid rgb(111, 111, 0);
+    outline-offset: 3px;
+}
+
+/* ! рейтинг */
 .rating {
     display: flex;
 
@@ -69,11 +87,21 @@ body {
     margin-right: 5px;
 }
 
+.rating__star_nonactive_small {
+    transform: scale(0.5);
+}
+
+.rating__star_nonactive_middle {
+    transform: scale(1.5);
+}
+
+.rating__star_nonactive_big {
+    transform: scale(2);
+}
+
 /* !карточка */
 /* Карточка */
 .card {
-    width: 374px;
-    min-width: 440px;
     background-color: white;
     border-radius: 15px;
     /* скрытие контента, который выходит за рамки блока */
@@ -114,4 +142,40 @@ body {
     margin-bottom: 18px;
     font-size: 16px;
     color: #999;
+}
+
+/* ? промо карточка */
+/* Модификатор акции */
+.card_promo {
+    position: relative;
+    outline: 5px solid #FFB800;
+}
+
+.card_promo::before {
+    content: "АКЦИЯ";
+
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+
+    background-color: #FFB800;
+
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    color: white;
+    font-weight: 700;
+
+    padding: 10px 30px;
+}
+
+/* ! списко карточек */
+.card-list {
+    display: flex;
+
+    gap: 15px;
+
+    list-style-type: none;
 }
