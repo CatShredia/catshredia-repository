@@ -1,5 +1,8 @@
 <form id="myForm" action="/form/create" method="POST" onsubmit="return validateForm()">
     <h2>Форма обратной связи</h2>
+    <?php if (!empty($successMessage)): ?>
+        <div class="success"><?php echo htmlspecialchars($successMessage); ?></div>
+    <?php endif; ?>
     <?php if (!empty($errors['name'])): ?>
         <div class="error"><?php echo htmlspecialchars($errors['name']); ?></div>
     <?php endif; ?>
@@ -20,3 +23,4 @@
 
     <button type="submit">Отправить</button>
 </form>
+<script src="/scripts/validation.js"></script>

@@ -1,4 +1,5 @@
 <?php
+session_start(); // Добавляем старт сессии
 require __DIR__ . '/controllers/Controller.php';
 require __DIR__ . '/controllers/HomePageController.php';
 require __DIR__ . '/controllers/FormPageController.php';

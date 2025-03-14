@@ -3,14 +3,18 @@ class FormPageController extends Controller
 {
     public function index()
     {
-        $errors = []; // Массив для хранения ошибок
+        $errors = $_SESSION['errors'] ?? []; // Получаем ошибки из сессии
+        $successMessage = $_SESSION['success_message'] ?? ''; // Получаем сообщение об успехе из сессии
+        unset($_SESSION['errors']); // Очищаем ошибки после использования
+        unset($_SESSION['success_message']); // Очищаем сообщение об успехе после использования
+
         $page = 'FormPage.php';
         include __DIR__ . "/../views/Main.php";
     }
 
     public function createUser()
     {
-        $errors = []; // Массив для хранения ошибок
+        $errors = [];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = $_POST['name'] ?? '';
@@ -52,18 +56,20 @@ class FormPageController extends Controller
                 $stmt->bind_param("sss", $name, $email, $message);
 
                 if ($stmt->execute()) {
-                    echo "Пользователь успешно создан!";
+                    $_SESSION['success_message'] = 'Пользователь успешно создан!'; // Сохраняем сообщение об успехе
                 } else {
-                    echo "Ошибка при создании пользователя: " . $stmt->error;
+                    $_SESSION['errors']['database'] = 'Ошибка при создании пользователя: ' . $stmt->error; // Сохраняем ошибку базы данных
                 }
 
                 $stmt->close();
                 $mysqli->close();
             } else {
-                // Если есть ошибки, передаем их в представление
-                $page = 'FormPage.php';
-                include __DIR__ . "/../views/Main.php";
+                $_SESSION['errors'] = $errors; // Сохраняем ошибки в сессии
             }
+
+            // Переадресация на страницу формы
+            header('Location: /form');
+            exit();
         }
     }
 }
