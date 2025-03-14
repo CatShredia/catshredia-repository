@@ -1,9 +1,10 @@
-<!-- ! базовая маршрутизация -->
 <?php
 require __DIR__ . '/controllers/Controller.php';
 require __DIR__ . '/controllers/HomePageController.php';
 require __DIR__ . '/controllers/FormPageController.php';
 require __DIR__ . '/controllers/DBController.php';
+
+// базовая маршрутизация 
 
 // Получаем URI (часть URL после имени домена)
 $uri = $_SERVER['REQUEST_URI'];
@@ -22,6 +23,7 @@ if (empty($uri)) {
 // первоначальная
 RedirectTo($uri);
 
+// дальнейшная
 function RedirectTo($uri)
 {
     switch ($uri) {

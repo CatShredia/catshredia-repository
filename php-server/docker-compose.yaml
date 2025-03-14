@@ -27,3 +27,13 @@ services:
       - env/mysql.env
     volumes:
       - ./env/init.sql:/docker-entrypoint-initdb.d/init.sql
+  migrate:
+    build:
+      context: dockerfiles
+      dockerfile: php.dockerfile
+    volumes:
+      - ./src:/var/www/php_server
+    working_dir: /var/www/php_server
+    depends_on:
+      - mysql
+    command: php /var/www/php_server/migrations.php
