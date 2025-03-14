@@ -28,11 +28,14 @@ function RedirectTo($uri)
         case '/':
             $homeController = new HomePageController();
             $homeController->index();
+            break;
         case 'form':
             $formController = new FormPageController();
             $formController->index();
+            break;
         case 'db':
             $dbController = new DBController();
             $dbController->index();
+            break;
     }
 }

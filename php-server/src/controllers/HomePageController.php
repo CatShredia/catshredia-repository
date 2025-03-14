@@ -4,6 +4,8 @@ class HomePageController extends Controller
 {
     public function index()
     {
-        require __DIR__ . "/../views/HomePage.php";
+        $page = 'HomePage.php';
+
+        include __DIR__ . "/../views/Main.php";
     }
 }

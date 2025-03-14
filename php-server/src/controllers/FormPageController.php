@@ -4,6 +4,8 @@ class FormPageController extends Controller
 {
     public function index()
     {
-        require __DIR__ . "/../views/FormPage.php";
+        $page = 'FormPage.php';
+
+        include __DIR__ . "/../views/Main.php";
     }
 }
