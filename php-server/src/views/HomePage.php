@@ -6,11 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Простая Страница</title>
 
-    <link rel="stylesheet" href="<?php echo realpath(__DIR__ . '/../rec/styles.php'); ?>">
+    <link rel="stylesheet" href="/rec/styles.php">
 </head>
 
 <body>
-    <?php echo realpath(__DIR__ . '/../rec/styles.php'); ?>
     <header>
         <h1>Добро пожаловать на мою страницу!</h1>
     </header>
@@ -18,7 +17,7 @@
     <nav>
         <ul>
             <li><a href="#">Главная</a></li>
-            <li><a href="#">Проверка</a></li>
+            <li><a href="<?php echo htmlspecialchars('/views/FormPage.php') ?>">Валидация</a></li>
             <li><a href="#">Услуги</a></li>
             <li><a href="#">Контакты</a></li>
         </ul>

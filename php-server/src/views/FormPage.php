@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Форма с Валидацией</title>
 
+    <link rel="stylesheet" href="/rec/styles.php">
 </head>
 
 <body>
@@ -28,7 +29,7 @@
         <button type="submit">Отправить</button>
     </form>
 
-    <script src="scripts/validation.js"></script>
+    <script src="/scripts/validation.js"></script>
 </body>
 
 </html>
