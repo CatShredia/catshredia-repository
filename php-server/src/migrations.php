@@ -1,4 +1,5 @@
 <?php
+// файл нужен, чтобы при запуске контейнера migrate проводились все миграции в папке migrations 
 echo "Поиск файлов миграций...\n";
 $migrations = glob('migrations/*.php');
 

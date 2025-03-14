@@ -1,4 +1,5 @@
 <?php
+// файл нужен для проверки mysql подключения
 $host = 'mysql';
 $port = 3306;
 $user = 'catshredia';

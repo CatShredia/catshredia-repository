@@ -1,3 +1,4 @@
+-- файл первончальных миграций
 -- миграции
 CREATE TABLE IF NOT EXISTS migrations (
     id INT AUTO_INCREMENT PRIMARY KEY,

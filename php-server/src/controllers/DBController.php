@@ -5,7 +5,7 @@ class DBController extends Controller
     public function index()
     {
         // Учетные данные для подключения к базе данных
-        $host = 'mysql'; // Или IP-адрес сервера MySQL
+        $host = 'mysql';
         $username = 'catshredia';
         $password = 'password';
         $database = 'php_db';
