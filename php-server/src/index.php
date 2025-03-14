@@ -35,6 +35,10 @@ function RedirectTo($uri)
             $formController = new FormPageController();
             $formController->index();
             break;
+        case 'form/create':
+            $formController = new FormPageController();
+            $formController->createUser();
+            break;
         case 'db':
             $dbController = new DBController();
             $dbController->index();
