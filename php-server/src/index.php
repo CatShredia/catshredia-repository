@@ -1,20 +1,28 @@
+<!-- ! базовая маршрутизация -->
 <?php
-$host = 'mysql';
-$port = 3306;
-$user = 'catshredia';
-$password = 'password';
-$database = 'php_db';
+require __DIR__ . '/controllers/HomePageController.php';
+require __DIR__ . '/controllers/FormPageController.php';
 
-try {
-    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$database", $user, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connected successfully to MySQL!\n";
+// Получаем URI (часть URL после имени домена)
+$uri = $_SERVER['REQUEST_URI'];
 
-    // Example query (optional)
-    $sql = "SELECT VERSION()";
-    $stmt = $pdo->query($sql);
-    $version = $stmt->fetchColumn();
-    echo "MySQL version: " . $version . "\n";
-} catch (PDOException $e) {
-    echo "Connection failed: " . $e->getMessage() . "\n";
+// Удаляем параметры запроса (часть после "?")
+$uri = strtok($uri, '?');
+
+// Удаляем ведущий и замыкающий слэши
+$uri = trim($uri, '/');
+
+// Если URI пустой, устанавливаем значение по умолчанию
+if (empty($uri)) {
+    $uri = '/'; // Или любое другое значение по умолчанию
+}
+
+
+switch ($uri) {
+    case '/':
+        $homeController = new HomePageController();
+        $homeController->index();
+    case 'form':
+        $formController = new formPageController();
+        $formController->index();
 }
