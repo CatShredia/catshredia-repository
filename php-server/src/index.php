@@ -3,6 +3,7 @@
 require __DIR__ . '/controllers/Controller.php';
 require __DIR__ . '/controllers/HomePageController.php';
 require __DIR__ . '/controllers/FormPageController.php';
+require __DIR__ . '/controllers/DBController.php';
 
 // Получаем URI (часть URL после имени домена)
 $uri = $_SERVER['REQUEST_URI'];
@@ -28,7 +29,10 @@ function RedirectTo($uri)
             $homeController = new HomePageController();
             $homeController->index();
         case 'form':
-            $formController = new formPageController();
+            $formController = new FormPageController();
             $formController->index();
+        case 'db':
+            $dbController = new DBController();
+            $dbController->index();
     }
 }

@@ -17,8 +17,8 @@
     <nav>
         <ul>
             <li><a href="#">Главная</a></li>
-            <li><a href="<?php echo htmlspecialchars('/views/FormPage.php') ?>">Валидация</a></li>
-            <li><a href="#">Услуги</a></li>
+            <li><a href="<?php echo htmlspecialchars('/form') ?>">Валидация</a></li>
+            <li><a href="<?php echo htmlspecialchars('/db') ?>">DB</a></li>
             <li><a href="#">Контакты</a></li>
         </ul>
     </nav>
