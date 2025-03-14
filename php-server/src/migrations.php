@@ -1,7 +1,13 @@
 <?php
+echo "Поиск файлов миграций...\n";
+$migrations = glob('migrations/*.php');
 
-// выполнение миграций
-$migrations = glob('php-server/migrations/*.php');
+if (empty($migrations)) {
+    echo "Файлы миграций не найдены.\n";
+} else {
+    echo "Найдены следующие файлы миграций:\n";
+    print_r($migrations);
+}
 
 foreach ($migrations as $migration) {
     echo "Выполнение миграции: $migration\n";

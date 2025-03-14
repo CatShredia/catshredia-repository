@@ -13,14 +13,22 @@ if ($mysqli->connect_errno) {
     exit();
 }
 
-// SQL-запрос для добавления колонки `Message` к таблице `users`
-$sql = "ALTER TABLE users ADD COLUMN Message TEXT AFTER password;";
+// Проверка наличия колонки `message` в таблице `users`
+$checkColumnQuery = "SHOW COLUMNS FROM users LIKE 'message'";
+$result = $mysqli->query($checkColumnQuery);
 
-// Выполнение запроса
-if ($mysqli->query($sql) === TRUE) {
-    echo "Колонка 'Message' успешно добавлена к таблице 'users'.";
+if ($result->num_rows > 0) {
+    echo "Колонка 'message' уже существует в таблице 'users'.\n";
 } else {
-    echo "Ошибка при добавлении колонки: " . $mysqli->error;
+    // SQL-запрос для добавления колонки `message` к таблице `users`
+    $sql = "ALTER TABLE users ADD COLUMN message TEXT AFTER email;";
+
+    // Выполнение запроса
+    if ($mysqli->query($sql) === TRUE) {
+        echo "Колонка 'message' успешно добавлена к таблице 'users'.\n";
+    } else {
+        echo "Ошибка при добавлении колонки: " . $mysqli->error;
+    }
 }
 
 // Закрытие соединения
