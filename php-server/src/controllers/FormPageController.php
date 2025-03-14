@@ -3,18 +3,39 @@ class FormPageController extends Controller
 {
     public function index()
     {
+        $errors = []; // Массив для хранения ошибок
         $page = 'FormPage.php';
         include __DIR__ . "/../views/Main.php";
     }
 
     public function createUser()
     {
+        $errors = []; // Массив для хранения ошибок
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = $_POST['name'] ?? '';
             $email = $_POST['email'] ?? '';
             $message = $_POST['message'] ?? '';
 
-            if (!empty($name) && !empty($email) && !empty($message)) {
+            // Валидация имени
+            if (empty($name)) {
+                $errors['name'] = 'Пожалуйста, введите ваше имя.';
+            }
+
+            // Валидация email
+            if (empty($email)) {
+                $errors['email'] = 'Пожалуйста, введите ваш email.';
+            } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $errors['email'] = 'Пожалуйста, введите корректный email.';
+            }
+
+            // Валидация сообщения
+            if (empty($message)) {
+                $errors['message'] = 'Пожалуйста, введите ваше сообщение.';
+            }
+
+            // Если ошибок нет, создаем пользователя
+            if (empty($errors)) {
                 $host = 'mysql';
                 $username = 'catshredia';
                 $password = 'password';
@@ -39,7 +60,9 @@ class FormPageController extends Controller
                 $stmt->close();
                 $mysqli->close();
             } else {
-                echo "Все поля формы должны быть заполнены!";
+                // Если есть ошибки, передаем их в представление
+                $page = 'FormPage.php';
+                include __DIR__ . "/../views/Main.php";
             }
         }
     }

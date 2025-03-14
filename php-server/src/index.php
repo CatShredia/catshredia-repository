@@ -4,26 +4,16 @@ require __DIR__ . '/controllers/HomePageController.php';
 require __DIR__ . '/controllers/FormPageController.php';
 require __DIR__ . '/controllers/DBController.php';
 
-// базовая маршрутизация 
-
-// Получаем URI (часть URL после имени домена)
 $uri = $_SERVER['REQUEST_URI'];
-
-// Удаляем параметры запроса (часть после "?")
 $uri = strtok($uri, '?');
-
-// Удаляем ведущий и замыкающий слэши
 $uri = trim($uri, '/');
 
-// Если URI пустой, устанавливаем значение по умолчанию
 if (empty($uri)) {
-    $uri = '/'; // Или любое другое значение по умолчанию
+    $uri = '/';
 }
 
-// первоначальная
 RedirectTo($uri);
 
-// дальнейшная
 function RedirectTo($uri)
 {
     switch ($uri) {

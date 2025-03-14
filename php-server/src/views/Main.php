@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Простая Страница</title>
-
     <link rel="stylesheet" href="/rec/styles.php">
 </head>
 
@@ -21,11 +20,9 @@
             <li><a href="#">Контакты</a></li>
         </ul>
     </nav>
-
     <?php
     include($page);
     ?>
-
     <footer>
         &copy; 2023 Моя Простая Страница
     </footer>
