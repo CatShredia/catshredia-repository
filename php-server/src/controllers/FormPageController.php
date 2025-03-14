@@ -1,5 +1,4 @@
 <?php
-require __DIR__ . '/Controller.php';
 
 class FormPageController extends Controller
 {

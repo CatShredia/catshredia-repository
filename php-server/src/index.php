@@ -1,5 +1,6 @@
 <!-- ! базовая маршрутизация -->
 <?php
+require __DIR__ . '/controllers/Controller.php';
 require __DIR__ . '/controllers/HomePageController.php';
 require __DIR__ . '/controllers/FormPageController.php';
 
@@ -17,12 +18,17 @@ if (empty($uri)) {
     $uri = '/'; // Или любое другое значение по умолчанию
 }
 
+// первоначальная
+RedirectTo($uri);
 
-switch ($uri) {
-    case '/':
-        $homeController = new HomePageController();
-        $homeController->index();
-    case 'form':
-        $formController = new formPageController();
-        $formController->index();
+function RedirectTo($uri)
+{
+    switch ($uri) {
+        case '/':
+            $homeController = new HomePageController();
+            $homeController->index();
+        case 'form':
+            $formController = new formPageController();
+            $formController->index();
+    }
 }
