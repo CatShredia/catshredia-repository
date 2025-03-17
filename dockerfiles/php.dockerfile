@@ -2,7 +2,7 @@ FROM php:8.2-fpm-alpine
 
 WORKDIR /var/www/laravel
 
-# npm for bootstrap
+# node js and npm for bootstrap
 RUN apk update && apk add --no-cache \
     git \
     zip \
