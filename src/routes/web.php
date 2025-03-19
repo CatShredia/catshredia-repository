@@ -36,7 +36,7 @@ Route::get('/about', [AboutController::class, '__invoke'])->name('about.index');
 
 
 // ? ---страницы связанные с постами
-Route::group(['namespace' => 'App\Http\Controllers\Post'], function () {
+Route::group(['namespace' => 'App\Http\Controllers\Post', 'middleware' => 'web'], function () {
 
     // получаем страницу с постами
     Route::get('/posts', [IndexController::class, '__invoke'])->name('post.index');
