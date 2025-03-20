@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-    <form action="{{ route('') }}" method="POST">
+    <form action="{{ route('create') }}" method="POST">
         @csrf
         <label for="text">Title:</label>
         <input type="text" name="title" id="title">

@@ -10,4 +10,10 @@ use Laravel\Sanctum\HasApiTokens;
 class Post extends Model
 {
     use HasFactory, Notifiable, HasApiTokens;
+
+    protected $fillable = [
+        'user_id',
+        'title',
+        'body',
+    ];
 }

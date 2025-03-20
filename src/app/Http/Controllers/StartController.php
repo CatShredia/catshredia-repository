@@ -8,6 +8,11 @@ class StartController extends Controller
 {
     public function __invoke()
     {
-        return view('main');
+        return view('welcome');
+    }
+
+    public function Create()
+    {
+        dd("return!");
     }
 }
