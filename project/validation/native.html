@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js validation</title>
+
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <section class="section section-1">
+        <div class="container">
+            <div class="section__inner">
+                <form id="myForm" action="#" method="POST">
+
+                    <div class="form-left">
+                        <fieldset>
+                            <legend>Основные данные</legend>
+
+                            <label for="text_input">Текстовое поле:</label><br>
+                            <input type="text" id="text_input" name="text_input"><br><br>
+
+                            <label for="email_input">Email:</label><br>
+                            <input type="email" id="email_input" name="email_input"><br><br>
+
+                            <label for="password_input">Пароль:</label><br>
+                            <input type="password" id="password_input" name="password_input"><br><br>
+
+                            <label for="url_input">URL:</label><br>
+                            <input type="url" id="url_input" name="url_input"><br><br>
+
+                            <label for="number_input">Число (от 1 до 100):</label><br>
+                            <input type="number" id="number_input" name="number_input"><br><br>
+
+                            <label for="range_input">Диапазон (от 0 до 10):</label><br>
+                            <input type="range" id="range_input" name="range_input"><br><br>
+
+                            <label for="date_input">Дата:</label><br>
+                            <input type="date" id="date_input" name="date_input"><br><br>
+
+                            <label for="time_input">Время:</label><br>
+                            <input type="time" id="time_input" name="time_input"><br><br>
+
+                            <label for="datetime_input">Дата и время:</label><br>
+                            <input type="datetime-local" id="datetime_input" name="datetime_input"><br><br>
+
+                            <label for="color_input">Цвет:</label><br>
+                            <input type="color" id="color_input" name="color_input"><br><br>
+
+                        </fieldset>
+                        <fieldset>
+                            <legend>Выбор опций</legend>
+
+                            <label>Пол:</label><br>
+                            <input type="radio" id="male_radio" name="gender" value="male">
+                            <label for="male_radio">Мужской</label><br>
+
+                            <input type="radio" id="female_radio" name="gender" value="female">
+                            <label for="female_radio">Женский</label><br><br>
+
+                            <label>Интересы:</label><br>
+                            <input type="checkbox" id="sports_checkbox" name="interests" value="sports">
+                            <label for="sports_checkbox">Спорт</label><br>
+
+                            <input type="checkbox" id="music_checkbox" name="interests" value="music">
+                            <label for="music_checkbox">Музыка</label><br>
+
+                            <input type="checkbox" id="travel_checkbox" name="interests" value="travel">
+                            <label for="travel_checkbox">Путешествия</label><br><br>
+
+                            <label for="select_input">Страна:</label><br>
+                            <select id="select_input" name="country">
+                                <option value="">-- Выберите страну --</option>
+                                <option value="usa">США</option>
+                                <option value="uk">Великобритания</option>
+                                <option value="germany">Германия</option>
+                                <option value="france">Франция</option>
+                            </select><br><br>
+
+                        </fieldset>
+                        <fieldset>
+                            <legend>Дополнительная информация</legend>
+
+                            <label for="textarea_input">Комментарий:</label><br>
+                            <textarea id="textarea_input" name="comment" rows="4" cols="50"></textarea><br><br>
+
+                            <label for="file_input">Файл:</label><br>
+                            <input type="file" id="file_input" name="file_input"><br><br>
+
+                            <input type="hidden" name="hidden_field" value="some_hidden_value">
+
+                        </fieldset>
+                    </div>
+
+                    <div class="form-right">
+                        <button type="submit">Отправить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script src="native.js"></script>
+</body>
+
+</html>
