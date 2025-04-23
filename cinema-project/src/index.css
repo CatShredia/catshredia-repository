@@ -1,0 +1,52 @@
+* {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  letter-spacing: 0.1em;
+
+  font-weight: 200;
+}
+
+.section {
+  background-color: cadetblue;
+}
+
+.container {
+  padding: 10px 20px;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+}
+
+.card {
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  /* border-top: 1px solid black; */
+  border-bottom: 1px solid black;
+}
+
+.confirm-button {
+  min-width: 200px;
+
+  background-color: black;
+  color: white;
+
+  border: none;
+
+  border-radius: 15px;
+
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 2em;
+
+  padding: 5px 20px;
+}
