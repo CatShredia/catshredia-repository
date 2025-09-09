@@ -1,0 +1,25 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:TheFirstExampleProject.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="TheFirstExampleProject.Views.MainWindow"
+        x:DataType="vm:UserWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="TheFirstExampleProject">
+
+    <Grid RowDefinitions="Auto Auto">
+        <DataGrid Grid.Row="0" ItemsSource="{Binding Users}" IsReadOnly="True" DoubleTapped="Show_User"
+                  Name="UserDataGrid">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="id" Binding="{Binding IdUser}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding SecondName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBlock Text="{Binding Users.Count}" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Grid>
+
+</Window>
