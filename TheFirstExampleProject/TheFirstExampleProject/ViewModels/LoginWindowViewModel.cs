@@ -19,6 +19,6 @@ public class LoginWindowViewModel : ViewModelBase
         var loginsFromDb = App.DbContext.Logins.ToList();
         Logins = loginsFromDb;
         OnPropertyChanged(nameof(Logins));
-        Console.WriteLine(Logins.Count + " users from database");
+        Console.WriteLine(Logins.Count + " logins from database");
     }
 }

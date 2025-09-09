@@ -1,0 +1,25 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:TheFirstExampleProject.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="TheFirstExampleProject.Views.UserEditWindow"
+        x:DataType="vm:UserWindowViewModel"
+        Title="UserEditWindow">
+    <Grid RowDefinitions="Auto Auto Auto">
+        <Grid Grid.Row="0" RowDefinitions="Auto Auto" Margin="10">
+            <TextBlock Grid.Row="0">Фамилия</TextBlock>
+            <TextBox Grid.Row="1" Name="FirstNameTextBox"></TextBox>
+        </Grid>
+        
+        <Grid Grid.Row="1" RowDefinitions="Auto Auto" Margin="10">
+            <TextBlock Grid.Row="0">Имя</TextBlock>
+            <TextBox Grid.Row="1" Name="SecondNameTextBox"></TextBox>
+        </Grid>
+        
+        <Grid Grid.Row="2" RowDefinitions="Auto Auto" Margin="10">
+            <Button Grid.Row="0" Click="Create_Button_OnClick">OK</Button>
+        </Grid>
+        </Grid>
+</Window>
