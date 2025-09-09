@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="TheFirstExampleProject.Views.MainWindow"
-        x:DataType="vm:UserWindowViewModel"
+        x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="TheFirstExampleProject">
 
@@ -16,10 +16,10 @@
                 <DataGridTextColumn Header="id" Binding="{Binding IdUser}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Фамилия" Binding="{Binding SecondName}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Дата рождения" Binding="{Binding DateOfBirth}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Дата регистрации" Binding="{Binding DateOfRegistration}"></DataGridTextColumn
             </DataGrid.Columns>
         </DataGrid>
-
-        <TextBlock Text="{Binding Users.Count}" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 
 </Window>

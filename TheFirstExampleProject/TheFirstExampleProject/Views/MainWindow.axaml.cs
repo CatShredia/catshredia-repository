@@ -12,7 +12,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         
-        DataContext = new UserWindowViewModel();
+        DataContext = new MainWindowViewModel();
     }
 
     private void Show_User(object? sender, TappedEventArgs e)
