@@ -20,4 +20,9 @@ public partial class MainWindow : Window
         var selectedUser = UserDataGrid.SelectedItem as User;
         Console.WriteLine("User need " + selectedUser.IdUser);
     }
+
+    private void Show_Login(object? sender, TappedEventArgs e)
+    {
+        
+    }
 }

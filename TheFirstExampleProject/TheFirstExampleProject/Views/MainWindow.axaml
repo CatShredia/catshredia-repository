@@ -9,17 +9,37 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="TheFirstExampleProject">
 
-    <Grid RowDefinitions="Auto Auto">
-        <DataGrid Grid.Row="0" ItemsSource="{Binding Users}" IsReadOnly="True" DoubleTapped="Show_User"
-                  Name="UserDataGrid">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="id" Binding="{Binding IdUser}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Фамилия" Binding="{Binding SecondName}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Дата рождения" Binding="{Binding DateOfBirth}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Дата регистрации" Binding="{Binding DateOfRegistration}"></DataGridTextColumn
-            </DataGrid.Columns>
-        </DataGrid>
+    <Window.Resources>
+        <vm:UserWindowViewModel x:Key="UserVM" />
+        <vm:LoginWindowViewModel x:Key="LoginVM" />
+    </Window.Resources>
+    
+    <Grid RowDefinitions="Auto">
+        <TabControl>
+            <TabItem Header="Users">
+                <DataGrid ItemsSource="{Binding Users}" IsReadOnly="True" DoubleTapped="Show_User"
+                          Name="UserDataGrid" DataContext="{StaticResource UserVM}" x:DataType="vm:UserWindowViewModel">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="id" Binding="{Binding IdUser}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Фамилия" Binding="{Binding SecondName}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Дата рождения" Binding="{Binding DateOfBirth}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Дата регистрации" Binding="{Binding DateOfRegistration}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            
+            <TabItem Header="Logins">
+                <DataGrid ItemsSource="{Binding Logins}" IsReadOnly="True" DoubleTapped="Show_Login"
+                          Name="LoginDataGrid" DataContext="{StaticResource LoginVM}" x:DataType="vm:LoginWindowViewModel">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="id" Binding="{Binding IdLogin}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Login" Binding="{Binding Login1}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Password" Binding="{Binding Password}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
     </Grid>
 
 </Window>
