@@ -12,6 +12,7 @@ namespace TheFirstExampleProject.Views;
 
 public partial class UserEditWindow : Window
 {
+    public UserWindowViewModel OwnerViewModel { get; set; }
     public UserEditWindow()
     {
         InitializeComponent();
@@ -51,6 +52,8 @@ public partial class UserEditWindow : Window
             App.DbContext.Users.Add(newUser);
         }
         App.DbContext.SaveChanges();
+        
+        OwnerViewModel?.RefreshData();
         Close();
     }
 }

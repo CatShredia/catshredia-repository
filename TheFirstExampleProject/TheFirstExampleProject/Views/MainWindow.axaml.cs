@@ -22,7 +22,8 @@ public partial class MainWindow : Window
         Console.WriteLine("User need " + selectedUser.IdUser);
         UserVariableData.selectedUserInMainWindow =  selectedUser;
         
-        var userEditWindow = new  UserEditWindow();
+        var userEditWindow = new UserEditWindow();
+        userEditWindow.OwnerViewModel = (UserWindowViewModel)this.Resources["UserVM"];;
         await userEditWindow.ShowDialog(this);
     }
 
