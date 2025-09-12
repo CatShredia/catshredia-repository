@@ -15,16 +15,18 @@ namespace TheFirstExampleProject.Views;
 public partial class UserEditWindow : Window
 {
     public UserWindowViewModel OwnerViewModel { get; set; }
+
     public UserEditWindow()
     {
         InitializeComponent();
-        
+
         DataContext = new UserWindowViewModel();
 
         if (UserVariableData.selectedUserInMainWindow != null)
         {
             FirstNameTextBox.Text = UserVariableData.selectedUserInMainWindow.FirstName;
             SecondNameTextBox.Text = UserVariableData.selectedUserInMainWindow.SecondName;
+            ComboBoxRoles.SelectedValue = App.DbContext.Roles.FirstOrDefault(x => x.IdRole == UserVariableData.selectedUserInMainWindow.IdRole);
         }
     }
 
@@ -32,8 +34,8 @@ public partial class UserEditWindow : Window
     {
         if (UserVariableData.selectedUserInMainWindow != null)
         {
-            Console.WriteLine("Edit user "  + UserVariableData.selectedUserInMainWindow.IdUser);
-            
+            Console.WriteLine("Edit user " + UserVariableData.selectedUserInMainWindow.IdUser);
+
             var idUser = UserVariableData.selectedUserInMainWindow.IdUser;
             var selectedUser = App.DbContext.Users.FirstOrDefault(x => x.IdUser == idUser);
 
@@ -41,20 +43,26 @@ public partial class UserEditWindow : Window
 
             selectedUser.FirstName = FirstNameTextBox.Text;
             selectedUser.SecondName = SecondNameTextBox.Text;
+            var selectedRole = ComboBoxRoles.SelectedValue as Role;
+            selectedUser.IdRole = selectedRole.IdRole;
         }
         else
         {
             Console.WriteLine("Create new user");
-            
+
+            var selectedRole = ComboBoxRoles.SelectedValue as Role;
+
             var newUser = new User()
             {
                 FirstName = FirstNameTextBox.Text,
                 SecondName = SecondNameTextBox.Text,
+                IdRole = selectedRole.IdRole
             };
             App.DbContext.Users.Add(newUser);
         }
+
         App.DbContext.SaveChanges();
-        
+
         OwnerViewModel?.RefreshData();
         Close();
     }

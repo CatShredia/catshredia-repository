@@ -9,27 +9,34 @@
         Title="UserEditWindow">
     
     <Window.Resources>
-        <vm:LoginWindowViewModel x:Key="LoginVM" />
+        <vm:RoleWindowViewModel x:Key="RoleVM" />
     </Window.Resources>
     
-    <TabControl>
-        <TabItem Header="Главная">
-            <Grid RowDefinitions="Auto Auto Auto">
-                <Grid Grid.Row="0" RowDefinitions="Auto Auto" Margin="10">
-                    <TextBlock Grid.Row="0">Фамилия</TextBlock>
-                    <TextBox Grid.Row="1" Name="FirstNameTextBox"></TextBox>
-                </Grid>
-
-                <Grid Grid.Row="1" RowDefinitions="Auto Auto" Margin="10">
-                    <TextBlock Grid.Row="0">Имя</TextBlock>
-                    <TextBox Grid.Row="1" Name="SecondNameTextBox"></TextBox>
-                </Grid>
-
-                <Grid Grid.Row="2" RowDefinitions="Auto Auto" Margin="10">
-                    <Button Grid.Row="0" Click="Create_Button_OnClick">OK</Button>
-                </Grid>
-            </Grid>
-        </TabItem>
-    </TabControl>
-
+    <Grid RowDefinitions="Auto Auto Auto Auto">
+        <Grid Grid.Row="0" RowDefinitions="Auto Auto" Margin="10">
+            <TextBlock Grid.Row="0">Фамилия</TextBlock>
+            <TextBox Grid.Row="1" Name="FirstNameTextBox"></TextBox>
+        </Grid>
+        
+        <Grid Grid.Row="1" RowDefinitions="Auto Auto" Margin="10">
+            <TextBlock Grid.Row="0">Имя</TextBlock>
+            <TextBox Grid.Row="1" Name="SecondNameTextBox"></TextBox>
+        </Grid>
+        
+        <Grid Grid.Row="2" Margin="10">
+            <ComboBox Width="500" ItemsSource="{Binding Roles}" DataContext="{StaticResource RoleVM}" Name="ComboBoxRoles" x:DataType="vm:RoleWindowViewModel">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                            <TextBlock Text="{Binding Title}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Grid>
+        
+        <Grid Grid.Row="3" RowDefinitions="Auto Auto" Margin="10">
+            <Button Grid.Row="0" Click="Create_Button_OnClick">OK</Button>
+        </Grid>
+        </Grid>
 </Window>
