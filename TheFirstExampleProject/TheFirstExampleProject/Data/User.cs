@@ -15,5 +15,9 @@ public partial class User
 
     public DateOnly? DateOfRegistration { get; set; }
 
+    public int IdRole { get; set; }
+
+    public virtual Role IdRoleNavigation { get; set; } = null!;
+
     public virtual ICollection<Login> Logins { get; set; } = new List<Login>();
 }

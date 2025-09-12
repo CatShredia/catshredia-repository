@@ -1,0 +1,1 @@
+dotnet ef dbcontext scaffold "Server=CATSHREDIASLAPT\SQLEXPRESS;Database=LogDB;Trusted_Connection=True;Encrypt=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -o Data -c AppDbContext

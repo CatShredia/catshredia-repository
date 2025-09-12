@@ -17,6 +17,8 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Login> Logins { get; set; }
 
+    public virtual DbSet<Role> Roles { get; set; }
+
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -47,6 +49,19 @@ public partial class AppDbContext : DbContext
                 .HasConstraintName("FK_Login_User");
         });
 
+        modelBuilder.Entity<Role>(entity =>
+        {
+            entity.HasKey(e => e.IdRole);
+
+            entity.ToTable("Role");
+
+            entity.Property(e => e.IdRole).HasColumnName("id_role");
+            entity.Property(e => e.Title)
+                .HasMaxLength(10)
+                .IsUnicode(false)
+                .HasColumnName("title");
+        });
+
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.IdUser);
@@ -59,9 +74,15 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.FirstName)
                 .HasColumnType("text")
                 .HasColumnName("first_name");
+            entity.Property(e => e.IdRole).HasColumnName("id_role");
             entity.Property(e => e.SecondName)
                 .HasColumnType("text")
                 .HasColumnName("second_name");
+
+            entity.HasOne(d => d.IdRoleNavigation).WithMany(p => p.Users)
+                .HasForeignKey(d => d.IdRole)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_User_Role");
         });
 
         OnModelCreatingPartial(modelBuilder);
