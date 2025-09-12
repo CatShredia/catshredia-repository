@@ -5,6 +5,7 @@ using Avalonia.Interactivity;
 using TheFirstExampleProject.Data;
 using TheFirstExampleProject.Models;
 using TheFirstExampleProject.ViewModels;
+using TheFirstExampleProject.Views.EditViews;
 
 namespace TheFirstExampleProject.Views;
 
@@ -28,9 +29,14 @@ public partial class MainWindow : Window
         await userEditWindow.ShowDialog(this);
     }
 
-    private void Show_Login(object? sender, TappedEventArgs e)
+    private async void Show_Login(object? sender, TappedEventArgs e)
     {
+        var selectedLogin = LoginDataGrid.SelectedItem as Login;
+        Console.WriteLine("Login need " + selectedLogin.IdLogin);
+        LoginVariableData.selectedLoginInMainWindow = selectedLogin;
         
+        var loginEditWindow = new LoginEditWindow();
+        await loginEditWindow.ShowDialog(this);
     }
 
     private async void Create_User_Button(object? sender, RoutedEventArgs e)

@@ -7,19 +7,29 @@
         x:Class="TheFirstExampleProject.Views.UserEditWindow"
         x:DataType="vm:UserWindowViewModel"
         Title="UserEditWindow">
-    <Grid RowDefinitions="Auto Auto Auto">
-        <Grid Grid.Row="0" RowDefinitions="Auto Auto" Margin="10">
-            <TextBlock Grid.Row="0">Фамилия</TextBlock>
-            <TextBox Grid.Row="1" Name="FirstNameTextBox"></TextBox>
-        </Grid>
-        
-        <Grid Grid.Row="1" RowDefinitions="Auto Auto" Margin="10">
-            <TextBlock Grid.Row="0">Имя</TextBlock>
-            <TextBox Grid.Row="1" Name="SecondNameTextBox"></TextBox>
-        </Grid>
-        
-        <Grid Grid.Row="2" RowDefinitions="Auto Auto" Margin="10">
-            <Button Grid.Row="0" Click="Create_Button_OnClick">OK</Button>
-        </Grid>
-        </Grid>
+    
+    <Window.Resources>
+        <vm:LoginWindowViewModel x:Key="LoginVM" />
+    </Window.Resources>
+    
+    <TabControl>
+        <TabItem Header="Главная">
+            <Grid RowDefinitions="Auto Auto Auto">
+                <Grid Grid.Row="0" RowDefinitions="Auto Auto" Margin="10">
+                    <TextBlock Grid.Row="0">Фамилия</TextBlock>
+                    <TextBox Grid.Row="1" Name="FirstNameTextBox"></TextBox>
+                </Grid>
+
+                <Grid Grid.Row="1" RowDefinitions="Auto Auto" Margin="10">
+                    <TextBlock Grid.Row="0">Имя</TextBlock>
+                    <TextBox Grid.Row="1" Name="SecondNameTextBox"></TextBox>
+                </Grid>
+
+                <Grid Grid.Row="2" RowDefinitions="Auto Auto" Margin="10">
+                    <Button Grid.Row="0" Click="Create_Button_OnClick">OK</Button>
+                </Grid>
+            </Grid>
+        </TabItem>
+    </TabControl>
+
 </Window>
