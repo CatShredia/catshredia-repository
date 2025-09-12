@@ -10,7 +10,7 @@ public class UserWindowViewModel : ViewModelBase
 {
     
     public ObservableCollection<User> Users { get; set; }
-
+    
     public UserWindowViewModel()
     {
         RefreshData();
