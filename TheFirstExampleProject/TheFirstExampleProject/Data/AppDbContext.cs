@@ -69,15 +69,17 @@ public partial class AppDbContext : DbContext
             entity.ToTable("User");
 
             entity.Property(e => e.IdUser).HasColumnName("id_user");
-            entity.Property(e => e.DateOfBirth).HasColumnName("date_of_birth");
-            entity.Property(e => e.DateOfRegistration).HasColumnName("date_of_registration");
-            entity.Property(e => e.FirstName)
+            entity.Property(e => e.Description)
                 .HasColumnType("text")
-                .HasColumnName("first_name");
+                .HasColumnName("description");
+            entity.Property(e => e.Fio)
+                .HasColumnType("text")
+                .HasColumnName("FIO");
             entity.Property(e => e.IdRole).HasColumnName("id_role");
-            entity.Property(e => e.SecondName)
-                .HasColumnType("text")
-                .HasColumnName("second_name");
+            entity.Property(e => e.PhoneNumber)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("phone_number");
 
             entity.HasOne(d => d.IdRoleNavigation).WithMany(p => p.Users)
                 .HasForeignKey(d => d.IdRole)

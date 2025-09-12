@@ -22,10 +22,9 @@
                               Name="UserDataGrid" DataContext="{StaticResource UserVM}" x:DataType="vm:UserWindowViewModel">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="id" Binding="{Binding IdUser}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Фамилия" Binding="{Binding SecondName}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Дата рождения" Binding="{Binding DateOfBirth}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Дата регистрации" Binding="{Binding DateOfRegistration}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="ФИО" Binding="{Binding Fio}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Телефон" Binding="{Binding PhoneNumber}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Описание" Binding="{Binding Description}"></DataGridTextColumn>
                             
                             <DataGridTemplateColumn Header="Delete" Width="50">
                                 <DataGridTemplateColumn.CellTemplate>

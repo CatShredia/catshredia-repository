@@ -24,46 +24,81 @@ public partial class UserEditWindow : Window
 
         if (UserVariableData.selectedUserInMainWindow != null)
         {
-            FirstNameTextBox.Text = UserVariableData.selectedUserInMainWindow.FirstName;
-            SecondNameTextBox.Text = UserVariableData.selectedUserInMainWindow.SecondName;
-            ComboBoxRoles.SelectedValue = App.DbContext.Roles.FirstOrDefault(x => x.IdRole == UserVariableData.selectedUserInMainWindow.IdRole);
+            var loginInSelectedUser =
+                App.DbContext.Logins.FirstOrDefault(x => x.IdUser == UserVariableData.selectedUserInMainWindow.IdUser);
+            FioTextBox.Text = UserVariableData.selectedUserInMainWindow.Fio;
+            PhoneNumberTextBox.Text = UserVariableData.selectedUserInMainWindow.PhoneNumber;
+            DescriptionTextBox.Text = UserVariableData.selectedUserInMainWindow.Description;
+            ComboBoxRoles.SelectedValue =
+                App.DbContext.Roles.FirstOrDefault(x => x.IdRole == UserVariableData.selectedUserInMainWindow.IdRole);
+            LoginTextBox.Text = loginInSelectedUser.Login1;
+            PasswordTextBox.Text = loginInSelectedUser.Password;
         }
     }
 
     private void Create_Button_OnClick(object? sender, RoutedEventArgs e)
     {
-        if (UserVariableData.selectedUserInMainWindow != null)
-        {
-            Console.WriteLine("Edit user " + UserVariableData.selectedUserInMainWindow.IdUser);
-
-            var idUser = UserVariableData.selectedUserInMainWindow.IdUser;
-            var selectedUser = App.DbContext.Users.FirstOrDefault(x => x.IdUser == idUser);
-
-            if (selectedUser == null) return;
-
-            selectedUser.FirstName = FirstNameTextBox.Text;
-            selectedUser.SecondName = SecondNameTextBox.Text;
-            var selectedRole = ComboBoxRoles.SelectedValue as Role;
-            selectedUser.IdRole = selectedRole.IdRole;
-        }
-        else
-        {
-            Console.WriteLine("Create new user");
-
-            var selectedRole = ComboBoxRoles.SelectedValue as Role;
-
-            var newUser = new User()
+        if (
+            string.IsNullOrEmpty(FioTextBox.Text) ||
+            string.IsNullOrEmpty(PhoneNumberTextBox.Text) ||
+                string.IsNullOrEmpty(DescriptionTextBox.Text) ||
+                string.IsNullOrEmpty(LoginTextBox.Text) ||
+                string.IsNullOrEmpty(PasswordTextBox.Text) ||
+                ComboBoxRoles.SelectedValue == null
+        ) return;
+        
+            if (UserVariableData.selectedUserInMainWindow != null)
             {
-                FirstName = FirstNameTextBox.Text,
-                SecondName = SecondNameTextBox.Text,
-                IdRole = selectedRole.IdRole
-            };
-            App.DbContext.Users.Add(newUser);
+                Console.WriteLine("Edit user " + UserVariableData.selectedUserInMainWindow.IdUser);
+
+                var idUser = UserVariableData.selectedUserInMainWindow.IdUser;
+                var selectedUser = App.DbContext.Users.FirstOrDefault(x => x.IdUser == idUser);
+                var selectedLogin =
+                    App.DbContext.Logins.FirstOrDefault(x =>
+                        x.IdUser == UserVariableData.selectedUserInMainWindow.IdUser);
+
+                if (selectedUser == null) return;
+
+                selectedUser.Fio = FioTextBox.Text;
+                selectedUser.PhoneNumber = PhoneNumberTextBox.Text;
+                selectedUser.Description = DescriptionTextBox.Text;
+
+                selectedLogin.Login1 = LoginTextBox.Text;
+                selectedLogin.Password = PasswordTextBox.Text;
+
+                var selectedRole = ComboBoxRoles.SelectedValue as Role;
+                selectedUser.IdRole = selectedRole.IdRole;
+            }
+            else
+            {
+                Console.WriteLine("Create new user");
+
+                var selectedRole = ComboBoxRoles.SelectedValue as Role;
+
+                var newUser = new User()
+                {
+                    Fio = FioTextBox.Text,
+                    PhoneNumber = PhoneNumberTextBox.Text,
+                    Description = DescriptionTextBox.Text,
+                    IdRole = selectedRole.IdRole
+                };
+
+                App.DbContext.Users.Add(newUser);
+                App.DbContext.SaveChanges();
+
+                var newLogin = new Login()
+                {
+                    IdUser = newUser.IdUser,
+                    Login1 = LoginTextBox.Text,
+                    Password = PasswordTextBox.Text
+                };
+
+                App.DbContext.Logins.Add(newLogin);
+                App.DbContext.SaveChanges();
+            }
+
+            OwnerViewModel?.RefreshData();
+            Close();
         }
-
-        App.DbContext.SaveChanges();
-
-        OwnerViewModel?.RefreshData();
-        Close();
-    }
+    
 }
