@@ -15,6 +15,8 @@ public partial class User
 
     public string? PhoneNumber { get; set; }
 
+    public virtual ICollection<Basket> Baskets { get; set; } = new List<Basket>();
+
     public virtual Role IdRoleNavigation { get; set; } = null!;
 
     public virtual ICollection<Login> Logins { get; set; } = new List<Login>();

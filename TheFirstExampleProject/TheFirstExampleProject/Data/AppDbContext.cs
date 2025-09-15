@@ -15,6 +15,8 @@ public partial class AppDbContext : DbContext
     {
     }
 
+    public virtual DbSet<Basket> Baskets { get; set; }
+
     public virtual DbSet<Item> Items { get; set; }
 
     public virtual DbSet<Login> Logins { get; set; }
@@ -29,6 +31,25 @@ public partial class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Basket>(entity =>
+        {
+            entity.HasKey(e => e.IdBasket);
+
+            entity.ToTable("Basket");
+
+            entity.Property(e => e.IdBasket).HasColumnName("id_basket");
+            entity.Property(e => e.IdItem).HasColumnName("id_item");
+            entity.Property(e => e.IdUser).HasColumnName("id_user");
+
+            entity.HasOne(d => d.IdItemNavigation).WithMany(p => p.Baskets)
+                .HasForeignKey(d => d.IdItem)
+                .HasConstraintName("FK_Basket_Item");
+
+            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.Baskets)
+                .HasForeignKey(d => d.IdUser)
+                .HasConstraintName("FK_Basket_User");
+        });
+
         modelBuilder.Entity<Item>(entity =>
         {
             entity.HasKey(e => e.IdItem);

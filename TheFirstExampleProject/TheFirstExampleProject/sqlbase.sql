@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [LogDB]    Script Date: 15.09.2025 11:07:25 ******/
+/****** Object:  Database [LogDB]    Script Date: 15.09.2025 12:56:34 ******/
 CREATE DATABASE [LogDB]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -77,19 +77,38 @@ ALTER DATABASE [LogDB] SET QUERY_STORE = OFF
 GO
 USE [LogDB]
 GO
-/****** Object:  Table [dbo].[Item]    Script Date: 15.09.2025 11:07:25 ******/
+/****** Object:  Table [dbo].[Basket]    Script Date: 15.09.2025 12:56:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Basket](
+	[id_basket] [int] IDENTITY(1,1) NOT NULL,
+	[id_user] [int] NULL,
+	[id_item] [int] NULL,
+ CONSTRAINT [PK_Basket] PRIMARY KEY CLUSTERED 
+(
+	[id_basket] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Item]    Script Date: 15.09.2025 12:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Item](
-	[id_item] [int] NOT NULL,
+	[id_item] [int] IDENTITY(1,1) NOT NULL,
 	[name] [varchar](50) NOT NULL,
 	[price] [int] NOT NULL,
-	[description] [text] NULL
+	[description] [text] NULL,
+ CONSTRAINT [PK_Item] PRIMARY KEY CLUSTERED 
+(
+	[id_item] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Login]    Script Date: 15.09.2025 11:07:25 ******/
+/****** Object:  Table [dbo].[Login]    Script Date: 15.09.2025 12:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -105,7 +124,7 @@ CREATE TABLE [dbo].[Login](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Role]    Script Date: 15.09.2025 11:07:25 ******/
+/****** Object:  Table [dbo].[Role]    Script Date: 15.09.2025 12:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -119,7 +138,7 @@ CREATE TABLE [dbo].[Role](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[User]    Script Date: 15.09.2025 11:07:25 ******/
+/****** Object:  Table [dbo].[User]    Script Date: 15.09.2025 12:56:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -135,6 +154,16 @@ CREATE TABLE [dbo].[User](
 	[id_user] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Basket]  WITH CHECK ADD  CONSTRAINT [FK_Basket_Item] FOREIGN KEY([id_item])
+REFERENCES [dbo].[Item] ([id_item])
+GO
+ALTER TABLE [dbo].[Basket] CHECK CONSTRAINT [FK_Basket_Item]
+GO
+ALTER TABLE [dbo].[Basket]  WITH CHECK ADD  CONSTRAINT [FK_Basket_User] FOREIGN KEY([id_user])
+REFERENCES [dbo].[User] ([id_user])
+GO
+ALTER TABLE [dbo].[Basket] CHECK CONSTRAINT [FK_Basket_User]
 GO
 ALTER TABLE [dbo].[Login]  WITH CHECK ADD  CONSTRAINT [FK_Login_User] FOREIGN KEY([id_user])
 REFERENCES [dbo].[User] ([id_user])

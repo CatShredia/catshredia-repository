@@ -12,4 +12,6 @@ public partial class Item
     public int Price { get; set; }
 
     public string? Description { get; set; }
+
+    public virtual ICollection<Basket> Baskets { get; set; } = new List<Basket>();
 }

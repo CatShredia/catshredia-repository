@@ -13,6 +13,7 @@
         <vm:UserWindowViewModel x:Key="UserVM" />
         <vm:LoginWindowViewModel x:Key="LoginVM" />
         <vm:ItemWindowViewModel x:Key="ItemVM" />
+        <vm:BasketWindowViewModel x:Key="BasketVM" />
     </Window.Resources>
 
     <Grid RowDefinitions="Auto">
@@ -77,6 +78,20 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button Grid.Row="1" Click="Create_Item_Button">Создать</Button>
+                </Grid>
+            </TabItem>
+            
+            <TabItem Header="Basket">
+                <Grid RowDefinitions="Auto Auto">
+                    <ComboBox Width="500" ItemsSource="{Binding Baskets}" Name="ComboBoxRoles" DataContext="{StaticResource BasketVM}" x:DataType="vm:BasketWindowViewModel">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Spacing="5">
+                                    <TextBlock Text="{Binding IdUserNavigation.Fio}"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                 </Grid>
             </TabItem>
         </TabControl>
