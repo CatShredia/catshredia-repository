@@ -31,14 +31,14 @@ public partial class AppDbContext : DbContext
     {
         modelBuilder.Entity<Item>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("Item");
+            entity.HasKey(e => e.IdItem);
 
+            entity.ToTable("Item");
+
+            entity.Property(e => e.IdItem).HasColumnName("id_item");
             entity.Property(e => e.Description)
                 .HasColumnType("text")
                 .HasColumnName("description");
-            entity.Property(e => e.IdItem).HasColumnName("id_item");
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .IsUnicode(false)

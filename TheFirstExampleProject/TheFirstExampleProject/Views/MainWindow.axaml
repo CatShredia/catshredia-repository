@@ -12,7 +12,7 @@
     <Window.Resources>
         <vm:UserWindowViewModel x:Key="UserVM" />
         <vm:LoginWindowViewModel x:Key="LoginVM" />
-        <vm:LoginWindowViewModel x:Key="ItemVM" />
+        <vm:ItemWindowViewModel x:Key="ItemVM" />
     </Window.Resources>
 
     <Grid RowDefinitions="Auto">
@@ -65,16 +65,19 @@
 
             <!-- TODO items table -->
             <TabItem Header="Items">
-                <DataGrid ItemsSource="{Binding Items}" IsReadOnly="True" DoubleTapped="Show_Login"
-                          Name="ItemDataGrid" DataContext="{StaticResource ItemVM}"
-                          x:DataType="vm:ItemWindowViewModel">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID item" Binding="{Binding IdItem}" />
-                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                        <DataGridTextColumn Header="Price" Binding="{Binding Price}" />
-                        <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
-                    </DataGrid.Columns>
-                </DataGrid>
+                <Grid RowDefinitions="Auto Auto">
+                    <DataGrid ItemsSource="{Binding Items}" IsReadOnly="True" DoubleTapped="Show_Item"
+                              Name="ItemDataGrid" DataContext="{StaticResource ItemVM}"
+                              x:DataType="vm:ItemWindowViewModel">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID item" Binding="{Binding IdItem}" />
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                            <DataGridTextColumn Header="Price" Binding="{Binding Price}" />
+                            <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Grid.Row="1" Click="Create_Item_Button">Создать</Button>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>
