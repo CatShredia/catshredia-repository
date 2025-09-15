@@ -33,7 +33,7 @@ public partial class MainWindow : Window
     {
         var selectedLogin = LoginDataGrid.SelectedItem as Login;
         Console.WriteLine("Login need " + selectedLogin.IdLogin);
-        LoginVariableData.selectedLoginInMainWindow = selectedLogin;
+        UserVariableData.selectedLoginInMainWindow = selectedLogin;
         
         var loginEditWindow = new LoginEditWindow();
         await loginEditWindow.ShowDialog(this);

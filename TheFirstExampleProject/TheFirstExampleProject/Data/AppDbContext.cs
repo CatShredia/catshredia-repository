@@ -43,7 +43,7 @@ public partial class AppDbContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("password");
 
-            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.Logins)
+            entity.HasOne(d => d.User).WithMany(p => p.Logins)
                 .HasForeignKey(d => d.IdUser)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Login_User");

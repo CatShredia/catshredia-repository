@@ -16,6 +16,7 @@
     
     <Grid RowDefinitions="Auto">
         <TabControl>
+            <!-- TODO users table -->
             <TabItem Header="Users">
                 <Grid RowDefinitions="Auto Auto">
                     <DataGrid Grid.Row="0" ItemsSource="{Binding Users}" IsReadOnly="True" DoubleTapped="Show_User"
@@ -43,6 +44,7 @@
                 </Grid>
             </TabItem>
             
+            <!-- TODO logins table -->
             <TabItem Header="Logins">
                 <DataGrid ItemsSource="{Binding Logins}" IsReadOnly="True" DoubleTapped="Show_Login"
                           Name="LoginDataGrid" DataContext="{StaticResource LoginVM}" x:DataType="vm:LoginWindowViewModel">
@@ -50,6 +52,9 @@
                         <DataGridTextColumn Header="id" Binding="{Binding IdLogin}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Login" Binding="{Binding Login1}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Password" Binding="{Binding Password}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Id User" Binding="{Binding IdUser}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Fio User" Binding="{Binding User.Fio}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Role of User" Binding="{Binding User.IdRoleNavigation.Title}"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>

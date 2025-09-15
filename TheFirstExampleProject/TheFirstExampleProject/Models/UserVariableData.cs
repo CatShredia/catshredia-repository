@@ -5,4 +5,6 @@ namespace TheFirstExampleProject.Models;
 public class UserVariableData
 {
     public static User selectedUserInMainWindow { get; set; }
+    
+    public static Login selectedLoginInMainWindow { get; set; }
 }
