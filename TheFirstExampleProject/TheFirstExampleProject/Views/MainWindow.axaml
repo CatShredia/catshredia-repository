@@ -12,28 +12,29 @@
     <Window.Resources>
         <vm:UserWindowViewModel x:Key="UserVM" />
         <vm:LoginWindowViewModel x:Key="LoginVM" />
+        <vm:LoginWindowViewModel x:Key="ItemVM" />
     </Window.Resources>
-    
+
     <Grid RowDefinitions="Auto">
         <TabControl>
             <!-- TODO users table -->
             <TabItem Header="Users">
                 <Grid RowDefinitions="Auto Auto">
                     <DataGrid Grid.Row="0" ItemsSource="{Binding Users}" IsReadOnly="True" DoubleTapped="Show_User"
-                              Name="UserDataGrid" DataContext="{StaticResource UserVM}" x:DataType="vm:UserWindowViewModel">
+                              Name="UserDataGrid" DataContext="{StaticResource UserVM}"
+                              x:DataType="vm:UserWindowViewModel">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="id" Binding="{Binding IdUser}"></DataGridTextColumn>
                             <DataGridTextColumn Header="ФИО" Binding="{Binding Fio}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Телефон" Binding="{Binding PhoneNumber}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Описание" Binding="{Binding Description}"></DataGridTextColumn>
-                            
+
                             <DataGridTemplateColumn Header="Delete" Width="50">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button Click="Button_User_Delete_OnClick">
                                             <Image Source="avares://TheFirstExampleProject/Assets/bin.png"
-                                                   Cursor="Hand"
-                                            /> 
+                                                   Cursor="Hand" />
                                         </Button>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -43,18 +44,35 @@
                     <Button Grid.Row="1" Click="Create_User_Button">Создать</Button>
                 </Grid>
             </TabItem>
-            
+
             <!-- TODO logins table -->
             <TabItem Header="Logins">
                 <DataGrid ItemsSource="{Binding Logins}" IsReadOnly="True" DoubleTapped="Show_Login"
-                          Name="LoginDataGrid" DataContext="{StaticResource LoginVM}" x:DataType="vm:LoginWindowViewModel">
+                          Name="LoginDataGrid" DataContext="{StaticResource LoginVM}"
+                          x:DataType="vm:LoginWindowViewModel">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="id" Binding="{Binding IdLogin}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Login" Binding="{Binding Login1}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Password" Binding="{Binding Password}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Id User" Binding="{Binding IdUser}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Fio User" Binding="{Binding User.Fio}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Role of User" Binding="{Binding User.IdRoleNavigation.Title}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Fio User" Binding="{Binding IdUserNavigation.Fio}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Role of User"
+                                            Binding="{Binding IdUserNavigation.IdRoleNavigation.Title}">
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <!-- TODO items table -->
+            <TabItem Header="Items">
+                <DataGrid ItemsSource="{Binding Items}" IsReadOnly="True" DoubleTapped="Show_Login"
+                          Name="ItemDataGrid" DataContext="{StaticResource ItemVM}"
+                          x:DataType="vm:ItemWindowViewModel">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID item" Binding="{Binding IdItem}" />
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                        <DataGridTextColumn Header="Price" Binding="{Binding Price}" />
+                        <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>

@@ -33,4 +33,11 @@
 
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1"/>
     </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Views\EditViews\ItemEditWindow.axaml.cs">
+        <DependentUpon>ItemEditWindow.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
 </Project>
