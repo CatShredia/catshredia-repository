@@ -104,7 +104,7 @@ public partial class MainWindow : Window
         
         var selectedUser = ComboBoxItemUser.SelectedValue as User;
         var selectedItem = ComboBoxItemItem.SelectedValue as Item;
-
+        
         if
         (
             selectedUser == null ||
@@ -114,24 +114,31 @@ public partial class MainWindow : Window
             return;
         }
 
-
-
+        
         bool rule = App.DbContext.Baskets
             .Any(b => b.IdUser == selectedUser.IdUser && b.IdItem == selectedItem.IdItem);
 
-        if (rule)
+        if (!rule)
         {
-            BasketMessageBox.Text = "Такая корзина уже есть";
-            return;
+            var newBasket = new Basket()
+            {
+                IdUser = selectedUser.IdUser,
+                IdItem = selectedItem.IdItem,
+                Count = BasketCount == null ? 0 : Convert.ToInt32(BasketCount.Text)
+            };
+
+            App.DbContext.Baskets.Add(newBasket);
+        }
+        else
+        {
+            var selectedBasket = App.DbContext.Baskets
+                .FirstOrDefault(b => 
+                    b.IdUser == selectedUser.IdUser && 
+                    b.IdItem == selectedItem.IdItem);
+
+            selectedBasket.Count = BasketCount == null ? 0 : Convert.ToInt32(BasketCount.Text);
         }
 
-        var newBasket = new Basket()
-        {
-            IdUser = selectedUser.IdUser,
-            IdItem = selectedItem.IdItem,
-        };
-
-        App.DbContext.Baskets.Add(newBasket);
         App.DbContext.SaveChanges();
 
         var viewModel = this.Resources["BasketVM"] as BasketWindowViewModel;

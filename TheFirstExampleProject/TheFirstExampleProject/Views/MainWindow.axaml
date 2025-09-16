@@ -108,7 +108,10 @@
                             </ComboBox.ItemTemplate>
                         </ComboBox>
 
-                        <TextBlock Grid.Row="2">Количество: </TextBlock>
+                        <Grid Grid.Row="2" RowDefinitions="Auto" ColumnDefinitions="Auto Auto">
+                            <TextBlock Grid.Row="0" Grid.Column="0">Количество: </TextBlock>
+                            <TextBox Grid.Row="0" Grid.Column="1" Name="BasketCount"></TextBox>
+                        </Grid>
 
                         <TextBlock Grid.Row="3" Name="BasketMessageBox"></TextBlock>
                         <Button Grid.Row="4" Click="Create_Basket">OK</Button>
@@ -121,6 +124,7 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="ID user" Binding="{Binding IdUserNavigation.Fio}" />
                                 <DataGridTextColumn Header="ID item" Binding="{Binding IdItemNavigation.Name}" />
+                                <DataGridTextColumn Header="Количество" Binding="{Binding Count}" />
                                 
                                 <DataGridTemplateColumn Header="" Width="50">
                                     <DataGridTemplateColumn.CellTemplate>
