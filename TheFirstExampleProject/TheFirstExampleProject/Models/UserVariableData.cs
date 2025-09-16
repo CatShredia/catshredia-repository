@@ -9,4 +9,5 @@ public class UserVariableData
     public static Login selectedLoginInMainWindow { get; set; }
     
     public static Item selectedItem { get; set; }
+    
 }

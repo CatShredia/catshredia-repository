@@ -101,21 +101,20 @@ public partial class MainWindow : Window
     {
         BasketMessageBox.Text = null;
         Console.WriteLine("Create basket");
+        
+        var selectedUser = ComboBoxItemUser.SelectedValue as User;
+        var selectedItem = ComboBoxItemItem.SelectedValue as Item;
 
         if
         (
-            string.IsNullOrEmpty(ComboBoxItemUser.SelectedValue.ToString()) ||
-            string.IsNullOrEmpty(ComboBoxItemItem.SelectedValue.ToString())
+            selectedUser == null ||
+            selectedItem == null
         )
         {
             return;
         }
 
-        var selectedUser = ComboBoxItemUser.SelectedValue as User;
-        var selectedItem = ComboBoxItemItem.SelectedValue as Item;
 
-        Console.WriteLine("user:" + selectedUser.IdUser);
-        Console.WriteLine("Item:" + selectedItem.IdItem);
 
         bool rule = App.DbContext.Baskets
             .Any(b => b.IdUser == selectedUser.IdUser && b.IdItem == selectedItem.IdItem);
@@ -133,6 +132,22 @@ public partial class MainWindow : Window
         };
 
         App.DbContext.Baskets.Add(newBasket);
+        App.DbContext.SaveChanges();
+
+        var viewModel = this.Resources["BasketVM"] as BasketWindowViewModel;
+        viewModel.RefreshData();
+    }
+
+    private void Button_Basket_Delete_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var button = sender as Button;
+        var selectedBasket = button?.DataContext as Basket;
+
+        Console.WriteLine((selectedBasket == null) ? "Basket not found" : "Basket founded");
+
+        if (selectedBasket == null) return;
+
+        App.DbContext.Baskets.Remove(selectedBasket);
         App.DbContext.SaveChanges();
 
         var viewModel = this.Resources["BasketVM"] as BasketWindowViewModel;
