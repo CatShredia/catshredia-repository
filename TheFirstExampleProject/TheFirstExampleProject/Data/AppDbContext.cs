@@ -44,10 +44,12 @@ public partial class AppDbContext : DbContext
 
             entity.HasOne(d => d.IdItemNavigation).WithMany(p => p.Baskets)
                 .HasForeignKey(d => d.IdItem)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Basket_Item");
 
             entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.Baskets)
                 .HasForeignKey(d => d.IdUser)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Basket_User");
         });
 
@@ -86,7 +88,6 @@ public partial class AppDbContext : DbContext
 
             entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.Logins)
                 .HasForeignKey(d => d.IdUser)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Login_User");
         });
 
@@ -124,7 +125,6 @@ public partial class AppDbContext : DbContext
 
             entity.HasOne(d => d.IdRoleNavigation).WithMany(p => p.Users)
                 .HasForeignKey(d => d.IdRole)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_User_Role");
         });
 

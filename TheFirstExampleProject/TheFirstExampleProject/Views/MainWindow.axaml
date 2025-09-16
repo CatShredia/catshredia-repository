@@ -3,143 +3,29 @@
         xmlns:vm="using:TheFirstExampleProject.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="clr-namespace:TheFirstExampleProject.UserControls"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="TheFirstExampleProject.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="TheFirstExampleProject">
 
-    <Window.Resources>
-        <vm:UserWindowViewModel x:Key="UserVM" />
-        <vm:LoginWindowViewModel x:Key="LoginVM" />
-        <vm:ItemWindowViewModel x:Key="ItemVM" />
-        <vm:BasketWindowViewModel x:Key="BasketVM" />
-    </Window.Resources>
-
     <Grid RowDefinitions="Auto">
         <TabControl>
-            <!-- TODO users table -->
             <TabItem Header="Users">
-                <Grid RowDefinitions="Auto Auto">
-                    <DataGrid Grid.Row="0" ItemsSource="{Binding Users}" IsReadOnly="True" DoubleTapped="Show_User"
-                              Name="UserDataGrid" DataContext="{StaticResource UserVM}"
-                              x:DataType="vm:UserWindowViewModel">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="id" Binding="{Binding IdUser}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="ФИО" Binding="{Binding Fio}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Телефон" Binding="{Binding PhoneNumber}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Описание" Binding="{Binding Description}"></DataGridTextColumn>
-
-                            <DataGridTemplateColumn Header="" Width="50">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Click="Button_User_Delete_OnClick">
-                                            <Image Source="avares://TheFirstExampleProject/Assets/bin.png"
-                                                   Cursor="Hand" />
-                                        </Button>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                    <Button Grid.Row="1" Click="Create_User_Button">Создать</Button>
-                </Grid>
+                <uc:MyUserControl/>
             </TabItem>
 
-            <!-- TODO logins table -->
             <TabItem Header="Logins">
-                <DataGrid ItemsSource="{Binding Logins}" IsReadOnly="True" DoubleTapped="Show_Login"
-                          Name="LoginDataGrid" DataContext="{StaticResource LoginVM}"
-                          x:DataType="vm:LoginWindowViewModel">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="id" Binding="{Binding IdLogin}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Login" Binding="{Binding Login1}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Password" Binding="{Binding Password}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Id User" Binding="{Binding IdUser}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Fio User" Binding="{Binding IdUserNavigation.Fio}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Role of User"
-                                            Binding="{Binding IdUserNavigation.IdRoleNavigation.Title}">
-                        </DataGridTextColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <uc:LoginControl/>
             </TabItem>
 
-            <!-- TODO items table -->
             <TabItem Header="Items">
-                <Grid RowDefinitions="Auto Auto">
-                    <DataGrid ItemsSource="{Binding Items}" IsReadOnly="True" DoubleTapped="Show_Item"
-                              Name="ItemDataGrid" DataContext="{StaticResource ItemVM}"
-                              x:DataType="vm:ItemWindowViewModel">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID item" Binding="{Binding IdItem}" />
-                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                            <DataGridTextColumn Header="Price" Binding="{Binding Price}" />
-                            <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                    <Button Grid.Row="1" Click="Create_Item_Button">Создать</Button>
-                </Grid>
+                <uc:ItemsControl/>
             </TabItem>
 
             <TabItem Header="Basket">
-                <Grid ColumnDefinitions="Auto Auto">
-                    <Grid RowDefinitions="Auto Auto Auto Auto Auto" Column="0">
-                        <ComboBox Margin="10" Grid.Row="0" Width="500" ItemsSource="{Binding Users}"
-                                  Name="ComboBoxItemUser" DataContext="{StaticResource UserVM}"
-                                  x:DataType="vm:UserWindowViewModel">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" Spacing="5">
-                                        <TextBlock Text="{Binding Fio}"></TextBlock>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-
-                        <ComboBox Margin="10" Grid.Row="1" Width="500" ItemsSource="{Binding Items}"
-                                  Name="ComboBoxItemItem" DataContext="{StaticResource ItemVM}"
-                                  x:DataType="vm:ItemWindowViewModel">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" Spacing="5">
-                                        <TextBlock Text="{Binding Name}"></TextBlock>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-
-                        <Grid Grid.Row="2" RowDefinitions="Auto" ColumnDefinitions="Auto Auto">
-                            <TextBlock Grid.Row="0" Grid.Column="0">Количество: </TextBlock>
-                            <TextBox Grid.Row="0" Grid.Column="1" Name="BasketCount"></TextBox>
-                        </Grid>
-
-                        <TextBlock Grid.Row="3" Name="BasketMessageBox"></TextBlock>
-                        <Button Grid.Row="4" Click="Create_Basket">OK</Button>
-                    </Grid>
-
-                    <Grid Column="1">
-                        <DataGrid ItemsSource="{Binding Baskets}" IsReadOnly="True"
-                                  Name="BasketDataGrid" DataContext="{StaticResource BasketVM}"
-                                  x:DataType="vm:BasketWindowViewModel">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="ID user" Binding="{Binding IdUserNavigation.Fio}" />
-                                <DataGridTextColumn Header="ID item" Binding="{Binding IdItemNavigation.Name}" />
-                                <DataGridTextColumn Header="Количество" Binding="{Binding Count}" />
-                                
-                                <DataGridTemplateColumn Header="" Width="50">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button Click="Button_Basket_Delete_OnClick">
-                                                <Image Source="avares://TheFirstExampleProject/Assets/bin.png"
-                                                       Cursor="Hand" />
-                                            </Button>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </Grid>
-                </Grid>
+                <uc:BasketControl/>
             </TabItem>
         </TabControl>
     </Grid>

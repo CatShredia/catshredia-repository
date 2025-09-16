@@ -1,0 +1,73 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:TheFirstExampleProject.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="TheFirstExampleProject.UserControls.BasketControl">
+    
+    <UserControl.Resources>
+        <vm:BasketWindowViewModel x:Key="BasketVM"></vm:BasketWindowViewModel>
+        <vm:UserWindowViewModel x:Key="UserVM"></vm:UserWindowViewModel>
+        <vm:ItemWindowViewModel x:Key="ItemVM"></vm:ItemWindowViewModel>
+    </UserControl.Resources>
+    
+    <Grid ColumnDefinitions="Auto Auto">
+        <Grid RowDefinitions="Auto Auto Auto Auto Auto" Column="0">
+            <ComboBox Margin="10" Grid.Row="0" Width="500" ItemsSource="{Binding Users}"
+                      Name="ComboBoxItemUser" DataContext="{StaticResource UserVM}"
+                      x:DataType="vm:UserWindowViewModel">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                            <TextBlock Text="{Binding Fio}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <ComboBox Margin="10" Grid.Row="1" Width="500" ItemsSource="{Binding Items}"
+                      Name="ComboBoxItemItem" DataContext="{StaticResource ItemVM}"
+                      x:DataType="vm:ItemWindowViewModel">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <Grid Grid.Row="2" RowDefinitions="Auto" ColumnDefinitions="Auto Auto">
+                <TextBlock Grid.Row="0" Grid.Column="0">Количество: </TextBlock>
+                <TextBox Grid.Row="0" Grid.Column="1" Name="BasketCount"></TextBox>
+            </Grid>
+
+            <TextBlock Grid.Row="3" Name="BasketMessageBox"></TextBlock>
+            <Button Grid.Row="4" Click="Create_Basket">OK</Button>
+        </Grid>
+
+        <Grid Column="1">
+            <DataGrid ItemsSource="{Binding Baskets}" IsReadOnly="True"
+                      Name="BasketDataGrid" DataContext="{StaticResource BasketVM}"
+                      x:DataType="vm:BasketWindowViewModel">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID user" Binding="{Binding IdUserNavigation.Fio}" />
+                    <DataGridTextColumn Header="ID item" Binding="{Binding IdItemNavigation.Name}" />
+                    <DataGridTextColumn Header="Количество" Binding="{Binding Count}" />
+
+                    <DataGridTemplateColumn Header="" Width="50">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="Button_Basket_Delete_OnClick">
+                                    <Image Source="avares://TheFirstExampleProject/Assets/bin.png"
+                                           Cursor="Hand" />
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</UserControl>
