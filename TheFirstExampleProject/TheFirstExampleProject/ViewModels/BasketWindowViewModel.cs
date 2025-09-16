@@ -17,7 +17,7 @@ public class BasketWindowViewModel : ViewModelBase
     public void RefreshData()
     {
         Baskets = new ObservableCollection<Basket>(App.DbContext.Baskets.ToList());
-        OnPropertyChanged(nameof(Basket));
+        OnPropertyChanged(nameof(Baskets));
         Console.WriteLine(Baskets.Count + " basket from database");
     }
 }

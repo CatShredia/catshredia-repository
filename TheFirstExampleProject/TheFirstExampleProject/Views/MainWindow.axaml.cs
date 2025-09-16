@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -14,7 +15,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        
+
         DataContext = new MainWindowViewModel();
     }
 
@@ -22,10 +23,11 @@ public partial class MainWindow : Window
     {
         var selectedUser = UserDataGrid.SelectedItem as User;
         Console.WriteLine("User need " + selectedUser.IdUser);
-        UserVariableData.selectedUserInMainWindow =  selectedUser;
-        
+        UserVariableData.selectedUserInMainWindow = selectedUser;
+
         var userEditWindow = new UserEditWindow();
-        userEditWindow.OwnerViewModel = (UserWindowViewModel)this.Resources["UserVM"];;
+        userEditWindow.OwnerViewModel = (UserWindowViewModel)this.Resources["UserVM"];
+        ;
         await userEditWindow.ShowDialog(this);
     }
 
@@ -34,7 +36,7 @@ public partial class MainWindow : Window
         var selectedLogin = LoginDataGrid.SelectedItem as Login;
         Console.WriteLine("Login need " + selectedLogin.IdLogin);
         UserVariableData.selectedLoginInMainWindow = selectedLogin;
-        
+
         var loginEditWindow = new LoginEditWindow();
         await loginEditWindow.ShowDialog(this);
     }
@@ -42,9 +44,10 @@ public partial class MainWindow : Window
     private async void Create_User_Button(object? sender, RoutedEventArgs e)
     {
         UserVariableData.selectedUserInMainWindow = null;
-        
+
         var userEditWindow = new UserEditWindow();
-        userEditWindow.OwnerViewModel = (UserWindowViewModel)this.Resources["UserVM"];;
+        userEditWindow.OwnerViewModel = (UserWindowViewModel)this.Resources["UserVM"];
+        ;
         await userEditWindow.ShowDialog(this);
     }
 
@@ -58,10 +61,10 @@ public partial class MainWindow : Window
         if (selectedUser == null) return;
 
         UserVariableData.selectedUserInMainWindow = selectedUser;
-        
+
         App.DbContext.Users.Remove(selectedUser);
         App.DbContext.SaveChanges();
-        
+
         var viewModel = this.Resources["UserVM"] as UserWindowViewModel;
         viewModel.RefreshData();
     }
@@ -70,12 +73,13 @@ public partial class MainWindow : Window
     {
         var selectedItem = ItemDataGrid.SelectedItem as Item;
         Console.WriteLine("Item need " + selectedItem.IdItem);
-        UserVariableData.selectedItem =  selectedItem;
-        
+        UserVariableData.selectedItem = selectedItem;
+
         var itemEditWindow = new ItemEditWindow();
-        itemEditWindow.OwnerViewModel = (ItemWindowViewModel)this.Resources["ItemVM"];;
+        itemEditWindow.OwnerViewModel = (ItemWindowViewModel)this.Resources["ItemVM"];
+        ;
         await itemEditWindow.ShowDialog(this);
-        
+
         var viewModel = this.Resources["ItemVM"] as ItemWindowViewModel;
         viewModel.RefreshData();
     }
@@ -83,12 +87,55 @@ public partial class MainWindow : Window
     private async void Create_Item_Button(object? sender, RoutedEventArgs e)
     {
         UserVariableData.selectedItem = null;
-        
+
         var itemEditWindow = new ItemEditWindow();
-        itemEditWindow.OwnerViewModel = (ItemWindowViewModel)this.Resources["ItemVM"];;
+        itemEditWindow.OwnerViewModel = (ItemWindowViewModel)this.Resources["ItemVM"];
+        ;
         await itemEditWindow.ShowDialog(this);
-        
+
         var viewModel = this.Resources["ItemVM"] as ItemWindowViewModel;
+        viewModel.RefreshData();
+    }
+
+    private void Create_Basket(object? sender, RoutedEventArgs e)
+    {
+        BasketMessageBox.Text = null;
+        Console.WriteLine("Create basket");
+
+        if
+        (
+            string.IsNullOrEmpty(ComboBoxItemUser.SelectedValue.ToString()) ||
+            string.IsNullOrEmpty(ComboBoxItemItem.SelectedValue.ToString())
+        )
+        {
+            return;
+        }
+
+        var selectedUser = ComboBoxItemUser.SelectedValue as User;
+        var selectedItem = ComboBoxItemItem.SelectedValue as Item;
+
+        Console.WriteLine("user:" + selectedUser.IdUser);
+        Console.WriteLine("Item:" + selectedItem.IdItem);
+
+        bool rule = App.DbContext.Baskets
+            .Any(b => b.IdUser == selectedUser.IdUser && b.IdItem == selectedItem.IdItem);
+
+        if (rule)
+        {
+            BasketMessageBox.Text = "Такая корзина уже есть";
+            return;
+        }
+
+        var newBasket = new Basket()
+        {
+            IdUser = selectedUser.IdUser,
+            IdItem = selectedItem.IdItem,
+        };
+
+        App.DbContext.Baskets.Add(newBasket);
+        App.DbContext.SaveChanges();
+
+        var viewModel = this.Resources["BasketVM"] as BasketWindowViewModel;
         viewModel.RefreshData();
     }
 }

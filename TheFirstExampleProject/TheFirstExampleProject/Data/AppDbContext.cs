@@ -38,6 +38,7 @@ public partial class AppDbContext : DbContext
             entity.ToTable("Basket");
 
             entity.Property(e => e.IdBasket).HasColumnName("id_basket");
+            entity.Property(e => e.Count).HasColumnName("count");
             entity.Property(e => e.IdItem).HasColumnName("id_item");
             entity.Property(e => e.IdUser).HasColumnName("id_user");
 
