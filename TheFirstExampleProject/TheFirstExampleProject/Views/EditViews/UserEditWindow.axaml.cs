@@ -22,15 +22,15 @@ public partial class UserEditWindow : Window
 
         DataContext = new UserWindowViewModel();
 
-        if (UserVariableData.selectedUserInMainWindow != null)
+        if (UserVariableData.selectedUser != null)
         {
             var loginInSelectedUser =
-                App.DbContext.Logins.FirstOrDefault(x => x.IdUser == UserVariableData.selectedUserInMainWindow.IdUser);
-            FioTextBox.Text = UserVariableData.selectedUserInMainWindow.Fio;
-            PhoneNumberTextBox.Text = UserVariableData.selectedUserInMainWindow.PhoneNumber;
-            DescriptionTextBox.Text = UserVariableData.selectedUserInMainWindow.Description;
+                App.DbContext.Logins.FirstOrDefault(x => x.IdUser == UserVariableData.selectedUser.IdUser);
+            FioTextBox.Text = UserVariableData.selectedUser.Fio;
+            PhoneNumberTextBox.Text = UserVariableData.selectedUser.PhoneNumber;
+            DescriptionTextBox.Text = UserVariableData.selectedUser.Description;
             ComboBoxRoles.SelectedValue =
-                App.DbContext.Roles.FirstOrDefault(x => x.IdRole == UserVariableData.selectedUserInMainWindow.IdRole);
+                App.DbContext.Roles.FirstOrDefault(x => x.IdRole == UserVariableData.selectedUser.IdRole);
             LoginTextBox.Text = loginInSelectedUser.Login1;
             PasswordTextBox.Text = loginInSelectedUser.Password;
         }
@@ -47,15 +47,15 @@ public partial class UserEditWindow : Window
                 ComboBoxRoles.SelectedValue == null
         ) return;
         
-            if (UserVariableData.selectedUserInMainWindow != null)
+            if (UserVariableData.selectedUser != null)
             {
-                Console.WriteLine("Edit user " + UserVariableData.selectedUserInMainWindow.IdUser);
+                Console.WriteLine("Edit user " + UserVariableData.selectedUser.IdUser);
 
-                var idUser = UserVariableData.selectedUserInMainWindow.IdUser;
+                var idUser = UserVariableData.selectedUser.IdUser;
                 var selectedUser = App.DbContext.Users.FirstOrDefault(x => x.IdUser == idUser);
                 var selectedLogin =
                     App.DbContext.Logins.FirstOrDefault(x =>
-                        x.IdUser == UserVariableData.selectedUserInMainWindow.IdUser);
+                        x.IdUser == UserVariableData.selectedUser.IdUser);
 
                 if (selectedUser == null) return;
 

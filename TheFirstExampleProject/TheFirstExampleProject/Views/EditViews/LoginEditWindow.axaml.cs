@@ -18,20 +18,20 @@ public partial class LoginEditWindow : Window
 
         DataContext = new LoginWindowViewModel();
 
-        if (UserVariableData.selectedLoginInMainWindow != null)
+        if (UserVariableData.selectedLogin != null)
         {
-            LoginTextBox.Text = UserVariableData.selectedLoginInMainWindow.Login1;
-            PasswordTextBox.Text = UserVariableData.selectedLoginInMainWindow.Password;
+            LoginTextBox.Text = UserVariableData.selectedLogin.Login1;
+            PasswordTextBox.Text = UserVariableData.selectedLogin.Password;
         }
     }
 
     private void Create_Button_OnClick(object? sender, RoutedEventArgs e)
     {
-        if (UserVariableData.selectedLoginInMainWindow != null)
+        if (UserVariableData.selectedLogin != null)
         {
-            Console.WriteLine("Edit login " + UserVariableData.selectedLoginInMainWindow.Login1);
+            Console.WriteLine("Edit login " + UserVariableData.selectedLogin.Login1);
 
-            var idLogin = UserVariableData.selectedLoginInMainWindow.IdLogin;
+            var idLogin = UserVariableData.selectedLogin.IdLogin;
             var selectedLogin = App.DbContext.Logins.FirstOrDefault(x => x.IdLogin == idLogin);
 
             if (selectedLogin == null) return;

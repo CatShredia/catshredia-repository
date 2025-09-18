@@ -29,7 +29,7 @@ public partial class MyUserControl : UserControl
     {
         var selectedUser = UserDataGrid.SelectedItem as User;
         Console.WriteLine("User need " + selectedUser.IdUser);
-        UserVariableData.selectedUserInMainWindow = selectedUser;
+        UserVariableData.selectedUser = selectedUser;
 
         var userEditWindow = new UserEditWindow();
         userEditWindow.OwnerViewModel = (UserWindowViewModel)this.Resources["UserVM"];
@@ -39,7 +39,7 @@ public partial class MyUserControl : UserControl
     
     private async void Create_User_Button(object? sender, RoutedEventArgs e)
     {
-        UserVariableData.selectedUserInMainWindow = null;
+        UserVariableData.selectedUser = null;
 
         var userEditWindow = new UserEditWindow();
         userEditWindow.OwnerViewModel = (UserWindowViewModel)this.Resources["UserVM"];
@@ -55,7 +55,7 @@ public partial class MyUserControl : UserControl
 
         if (selectedUser == null) return;
 
-        UserVariableData.selectedUserInMainWindow = selectedUser;
+        UserVariableData.selectedUser = selectedUser;
 
         App.DbContext.Users.Remove(selectedUser);
         App.DbContext.SaveChanges();

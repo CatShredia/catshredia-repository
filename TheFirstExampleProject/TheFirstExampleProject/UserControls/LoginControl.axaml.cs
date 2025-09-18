@@ -27,7 +27,7 @@ public partial class LoginControl : UserControl
     {
         var selectedLogin = LoginDataGrid.SelectedItem as Login;
         Console.WriteLine("Login need " + selectedLogin.IdLogin);
-        UserVariableData.selectedLoginInMainWindow = selectedLogin;
+        UserVariableData.selectedLogin = selectedLogin;
 
         var loginEditWindow = new LoginEditWindow();
         await loginEditWindow.ShowDialog(GetWindow());
