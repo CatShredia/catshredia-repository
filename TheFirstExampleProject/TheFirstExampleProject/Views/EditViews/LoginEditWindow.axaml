@@ -8,12 +8,12 @@
     <Grid RowDefinitions="Auto Auto Auto">
         <Grid Grid.Row="0" RowDefinitions="Auto Auto" Margin="10">
             <TextBlock Grid.Row="0">Логин</TextBlock>
-            <TextBox Grid.Row="1" Name="LoginTextBox"></TextBox>
+            <TextBox Grid.Row="1" Name="LoginTextBox" Text="{Binding Login1}"></TextBox>
         </Grid>
         
         <Grid Grid.Row="1" RowDefinitions="Auto Auto" Margin="10">
             <TextBlock Grid.Row="0">Пароль</TextBlock>
-            <TextBox Grid.Row="1" Name="PasswordTextBox"></TextBox>
+            <TextBox Grid.Row="1" Name="PasswordTextBox" Text="{Binding Password}"></TextBox>
         </Grid>
         
         <Grid Grid.Row="2" RowDefinitions="Auto" Margin="10">

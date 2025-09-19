@@ -8,7 +8,6 @@
         Title="UserEditWindow">
     
     <Window.Resources>
-        <vm:RoleWindowViewModel x:Key="RoleVM" />
     </Window.Resources>
     
     <Grid ColumnDefinitions="50* 50*">
@@ -42,7 +41,7 @@
                 </Grid>
             </Grid>
             <Grid Grid.Row="1" Margin="10">
-                <ComboBox Width="500" ItemsSource="{Binding Roles}" DataContext="{StaticResource RoleVM}" Name="ComboBoxRoles" x:DataType="vm:RoleWindowViewModel">
+                <ComboBox Width="500" Name="ComboBoxRoles">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Spacing="5">

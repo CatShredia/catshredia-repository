@@ -17,8 +17,20 @@ public partial class UserEditWindow : Window
     public UserEditWindow()
     {
         InitializeComponent();
+        
+        // Загружаем все роли
+        var allRoles = App.DbContext.Roles.ToList();
+        ComboBoxRoles.ItemsSource = allRoles;
 
+        if (UserVariableData.selectedUser != null)
+        {
+            DataContext = UserVariableData.selectedLogin;
 
+            // Устанавливаем выбранную роль
+            var selectedRole = allRoles.FirstOrDefault(r => r.IdRole == UserVariableData.selectedUser.IdRole);
+            ComboBoxRoles.SelectedItem = selectedRole;
+        }
+        
         if (UserVariableData.selectedUser != null)
         {
             // var loginInSelectedUser =
@@ -59,6 +71,8 @@ public partial class UserEditWindow : Window
 
             var idUser = UserVariableData.selectedUser.IdUser;
             var selectedUser = App.DbContext.Users.FirstOrDefault(x => x.IdUser == idUser);
+            var selectedRole = ComboBoxRoles.SelectedItem as Role;
+            selectedUser.IdRoleNavigation = selectedRole;
             var selectedLogin =
                 App.DbContext.Logins.FirstOrDefault(x =>
                     x.IdUser == UserVariableData.selectedUser.IdUser);
@@ -88,6 +102,7 @@ public partial class UserEditWindow : Window
             if (login == null) return;
 
             var user = login.IdUserNavigation;
+            user.IdRoleNavigation = selectedRole;
             if (user == null) return;
 
             App.DbContext.Add(login);

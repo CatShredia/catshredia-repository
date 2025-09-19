@@ -34,5 +34,7 @@ public partial class LoginControl : UserControl
 
         var loginEditWindow = new LoginEditWindow();
         await loginEditWindow.ShowDialog(GetWindow());
+        
+        LoginDataGrid.ItemsSource = App.DbContext.Logins.ToList();
     }
 }
