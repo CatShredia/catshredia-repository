@@ -14,25 +14,23 @@ namespace TheFirstExampleProject.Views;
 
 public partial class UserEditWindow : Window
 {
-    public UserWindowViewModel OwnerViewModel { get; set; }
-
     public UserEditWindow()
     {
         InitializeComponent();
 
-        DataContext = new UserWindowViewModel();
+        DataContext = UserVariableData.selectedUser;
 
         if (UserVariableData.selectedUser != null)
         {
-            var loginInSelectedUser =
-                App.DbContext.Logins.FirstOrDefault(x => x.IdUser == UserVariableData.selectedUser.IdUser);
-            FioTextBox.Text = UserVariableData.selectedUser.Fio;
-            PhoneNumberTextBox.Text = UserVariableData.selectedUser.PhoneNumber;
-            DescriptionTextBox.Text = UserVariableData.selectedUser.Description;
-            ComboBoxRoles.SelectedValue =
-                App.DbContext.Roles.FirstOrDefault(x => x.IdRole == UserVariableData.selectedUser.IdRole);
-            LoginTextBox.Text = loginInSelectedUser.Login1;
-            PasswordTextBox.Text = loginInSelectedUser.Password;
+            // var loginInSelectedUser =
+            //     App.DbContext.Logins.FirstOrDefault(x => x.IdUser == UserVariableData.selectedUser.IdUser);
+            // FioTextBox.Text = UserVariableData.selectedUser.Fio;
+            // PhoneNumberTextBox.Text = UserVariableData.selectedUser.PhoneNumber;
+            // DescriptionTextBox.Text = UserVariableData.selectedUser.Description;
+            // ComboBoxRoles.SelectedValue =
+            //     App.DbContext.Roles.FirstOrDefault(x => x.IdRole == UserVariableData.selectedUser.IdRole);
+            // LoginTextBox.Text = loginInSelectedUser.Login1;
+            // PasswordTextBox.Text = loginInSelectedUser.Password;
         }
     }
 
@@ -97,7 +95,6 @@ public partial class UserEditWindow : Window
                 App.DbContext.SaveChanges();
             }
 
-            OwnerViewModel?.RefreshData();
             Close();
         }
     

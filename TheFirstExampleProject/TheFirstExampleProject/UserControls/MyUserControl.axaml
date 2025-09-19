@@ -6,14 +6,9 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="TheFirstExampleProject.UserControls.MyUserControl">
     
-    <UserControl.Resources>
-        <vm:UserWindowViewModel x:Key="UserVM"></vm:UserWindowViewModel>
-    </UserControl.Resources>
-
     <Grid RowDefinitions="Auto Auto">
-        <DataGrid Grid.Row="0" ItemsSource="{Binding Users}" IsReadOnly="True" DoubleTapped="Show_User"
-                  Name="UserDataGrid" DataContext="{StaticResource UserVM}"
-                  x:DataType="vm:UserWindowViewModel">
+        <DataGrid Grid.Row="0" IsReadOnly="True" DoubleTapped="Show_User"
+                  Name="UserDataGrid">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="id" Binding="{Binding IdUser}"></DataGridTextColumn>
                 <DataGridTextColumn Header="ФИО" Binding="{Binding Fio}"></DataGridTextColumn>

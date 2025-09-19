@@ -8,15 +8,13 @@
     
     <UserControl.Resources>
         <vm:BasketWindowViewModel x:Key="BasketVM"></vm:BasketWindowViewModel>
-        <vm:UserWindowViewModel x:Key="UserVM"></vm:UserWindowViewModel>
         <vm:ItemWindowViewModel x:Key="ItemVM"></vm:ItemWindowViewModel>
     </UserControl.Resources>
     
     <Grid ColumnDefinitions="Auto Auto">
         <Grid RowDefinitions="Auto Auto Auto Auto Auto" Column="0">
-            <ComboBox Margin="10" Grid.Row="0" Width="500" ItemsSource="{Binding Users}"
-                      Name="ComboBoxItemUser" DataContext="{StaticResource UserVM}"
-                      x:DataType="vm:UserWindowViewModel">
+            <ComboBox Margin="10" Grid.Row="0" Width="500"
+                      Name="ComboBoxItemUser">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" Spacing="5">

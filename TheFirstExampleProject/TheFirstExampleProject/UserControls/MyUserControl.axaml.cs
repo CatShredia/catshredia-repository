@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -18,6 +19,8 @@ public partial class MyUserControl : UserControl
     public MyUserControl()
     {
         InitializeComponent();
+        
+        UserDataGrid.ItemsSource = App.DbContext.Users.ToList();
     }
     
     private Window? GetWindow()
@@ -32,7 +35,6 @@ public partial class MyUserControl : UserControl
         UserVariableData.selectedUser = selectedUser;
 
         var userEditWindow = new UserEditWindow();
-        userEditWindow.OwnerViewModel = (UserWindowViewModel)this.Resources["UserVM"];
         
         await userEditWindow.ShowDialog(GetWindow());
     }
@@ -42,7 +44,6 @@ public partial class MyUserControl : UserControl
         UserVariableData.selectedUser = null;
 
         var userEditWindow = new UserEditWindow();
-        userEditWindow.OwnerViewModel = (UserWindowViewModel)this.Resources["UserVM"];
         await userEditWindow.ShowDialog(GetWindow());
     }
 
@@ -60,7 +61,6 @@ public partial class MyUserControl : UserControl
         App.DbContext.Users.Remove(selectedUser);
         App.DbContext.SaveChanges();
 
-        var viewModel = this.Resources["UserVM"] as UserWindowViewModel;
-        viewModel.RefreshData();
+        UserDataGrid.ItemsSource = App.DbContext.Users.ToList();
     }
 }

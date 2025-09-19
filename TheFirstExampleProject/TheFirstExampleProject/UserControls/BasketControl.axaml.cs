@@ -14,6 +14,8 @@ public partial class BasketControl : UserControl
     public BasketControl()
     {
         InitializeComponent();
+        
+        ComboBoxItemUser.ItemsSource = App.DbContext.Users;
     }
     
     
