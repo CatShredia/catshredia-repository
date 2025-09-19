@@ -33,10 +33,13 @@ public partial class MyUserControl : UserControl
         var selectedUser = UserDataGrid.SelectedItem as User;
         Console.WriteLine("User need " + selectedUser.IdUser);
         UserVariableData.selectedUser = selectedUser;
+        UserVariableData.selectedLogin = App.DbContext.Logins.FirstOrDefault(l => l.IdUser == selectedUser.IdUser);
 
         var userEditWindow = new UserEditWindow();
         
         await userEditWindow.ShowDialog(GetWindow());
+        
+        UserDataGrid.ItemsSource = App.DbContext.Users.ToList();
     }
     
     private async void Create_User_Button(object? sender, RoutedEventArgs e)
@@ -45,6 +48,8 @@ public partial class MyUserControl : UserControl
 
         var userEditWindow = new UserEditWindow();
         await userEditWindow.ShowDialog(GetWindow());
+        
+        UserDataGrid.ItemsSource = App.DbContext.Users.ToList();
     }
 
     private void Button_User_Delete_OnClick(object? sender, RoutedEventArgs e)
