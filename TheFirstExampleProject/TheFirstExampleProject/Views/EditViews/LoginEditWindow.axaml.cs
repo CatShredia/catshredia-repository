@@ -16,7 +16,7 @@ public partial class LoginEditWindow : Window
     {
         InitializeComponent();
 
-        DataContext = new LoginWindowViewModel();
+        DataContext = UserVariableData.selectedLogin;
 
         if (UserVariableData.selectedLogin != null)
         {
@@ -52,9 +52,7 @@ public partial class LoginEditWindow : Window
         }
 
         App.DbContext.SaveChanges();
-
-        var viewModel = DataContext as LoginWindowViewModel; 
-        viewModel.RefreshData();
+        
         
         Close();
     }

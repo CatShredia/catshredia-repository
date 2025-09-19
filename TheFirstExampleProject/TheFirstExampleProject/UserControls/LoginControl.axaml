@@ -6,15 +6,8 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="TheFirstExampleProject.UserControls.LoginControl">
     
-    <UserControl.Resources>
-        <vm:LoginWindowViewModel x:Key="LoginVM"></vm:LoginWindowViewModel>
-    </UserControl.Resources>
-    
-    <DataGrid ItemsSource="{Binding Logins}" IsReadOnly="True" DoubleTapped="Show_Login"
-              Name="LoginDataGrid"
-              x:DataType="vm:LoginWindowViewModel"
-              DataContext="{StaticResource LoginVM}"
-              >
+    <DataGrid IsReadOnly="True" DoubleTapped="Show_Login"
+              Name="LoginDataGrid">
         <DataGrid.Columns>
             <DataGridTextColumn Header="id" Binding="{Binding IdLogin}"></DataGridTextColumn>
             <DataGridTextColumn Header="Login" Binding="{Binding Login1}"></DataGridTextColumn>

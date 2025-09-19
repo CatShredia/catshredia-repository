@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -16,6 +17,8 @@ public partial class LoginControl : UserControl
     public LoginControl()
     {
         InitializeComponent();
+        
+        LoginDataGrid.ItemsSource = App.DbContext.Logins.ToList();
     }
     
     private Window? GetWindow()
@@ -31,8 +34,5 @@ public partial class LoginControl : UserControl
 
         var loginEditWindow = new LoginEditWindow();
         await loginEditWindow.ShowDialog(GetWindow());
-        
-        var viewModel = this.Resources["LoginVM"] as LoginWindowViewModel;
-        viewModel.RefreshData();
     }
 }
