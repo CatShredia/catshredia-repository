@@ -8,7 +8,6 @@
     
     <UserControl.Resources>
         <vm:BasketWindowViewModel x:Key="BasketVM"></vm:BasketWindowViewModel>
-        <vm:ItemWindowViewModel x:Key="ItemVM"></vm:ItemWindowViewModel>
     </UserControl.Resources>
     
     <Grid ColumnDefinitions="Auto Auto">
@@ -25,8 +24,7 @@
             </ComboBox>
 
             <ComboBox Margin="10" Grid.Row="1" Width="500" ItemsSource="{Binding Items}"
-                      Name="ComboBoxItemItem" DataContext="{StaticResource ItemVM}"
-                      x:DataType="vm:ItemWindowViewModel">
+                      Name="ComboBoxItemItem">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" Spacing="5">

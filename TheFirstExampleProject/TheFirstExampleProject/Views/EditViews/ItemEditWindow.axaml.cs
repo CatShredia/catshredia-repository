@@ -13,13 +13,12 @@ namespace TheFirstExampleProject.Views.EditViews;
 public partial class ItemEditWindow : Window
 {
     
-    public ItemWindowViewModel OwnerViewModel { get; set; }
-    
     public ItemEditWindow()
     {
         InitializeComponent();
 
-        DataContext = new ItemWindowViewModel();
+        DataContext = UserVariableData.selectedItem;
+        
         
         if (UserVariableData.selectedItem != null)
         {
@@ -58,9 +57,7 @@ public partial class ItemEditWindow : Window
         }
 
         App.DbContext.SaveChanges();
-
-        var viewModel = DataContext as ItemWindowViewModel; 
-        viewModel.RefreshData();
+        
         
         Close();
     }

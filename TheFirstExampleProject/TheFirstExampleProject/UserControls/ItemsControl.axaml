@@ -6,14 +6,9 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="TheFirstExampleProject.UserControls.ItemsControl">
     
-    <UserControl.Resources>
-        <vm:ItemWindowViewModel x:Key="ItemVM"></vm:ItemWindowViewModel>
-    </UserControl.Resources>
-    
     <Grid RowDefinitions="Auto Auto">
-        <DataGrid ItemsSource="{Binding Items}" IsReadOnly="True" DoubleTapped="Show_Item"
-                  Name="ItemDataGrid" DataContext="{StaticResource ItemVM}"
-                  x:DataType="vm:ItemWindowViewModel">
+        <DataGrid IsReadOnly="True" DoubleTapped="Show_Item"
+                  Name="ItemDataGrid">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID item" Binding="{Binding IdItem}" />
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />

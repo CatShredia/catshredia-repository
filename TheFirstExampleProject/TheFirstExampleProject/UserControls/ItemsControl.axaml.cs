@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -17,6 +18,8 @@ public partial class ItemsControl : UserControl
     public ItemsControl()
     {
         InitializeComponent();
+        
+        ItemDataGrid.ItemsSource = App.DbContext.Items.ToList();
     }
     
     private Window? GetWindow()
@@ -31,12 +34,9 @@ public partial class ItemsControl : UserControl
         UserVariableData.selectedItem = selectedItem;
 
         var itemEditWindow = new ItemEditWindow();
-        itemEditWindow.OwnerViewModel = (ItemWindowViewModel)this.Resources["ItemVM"];
-        ;
         await itemEditWindow.ShowDialog(GetWindow());
 
-        var viewModel = this.Resources["ItemVM"] as ItemWindowViewModel;
-        viewModel.RefreshData();
+        ItemDataGrid.ItemsSource = App.DbContext.Items.ToList();
     }
 
     private async void Create_Item_Button(object? sender, RoutedEventArgs e)
@@ -44,11 +44,8 @@ public partial class ItemsControl : UserControl
         UserVariableData.selectedItem = null;
 
         var itemEditWindow = new ItemEditWindow();
-        itemEditWindow.OwnerViewModel = (ItemWindowViewModel)this.Resources["ItemVM"];
-        ;
         await itemEditWindow.ShowDialog(GetWindow());
 
-        var viewModel = this.Resources["ItemVM"] as ItemWindowViewModel;
-        viewModel.RefreshData();
+        ItemDataGrid.ItemsSource = App.DbContext.Items.ToList();
     }
 }
