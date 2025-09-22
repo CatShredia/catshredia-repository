@@ -31,19 +31,7 @@ public partial class UserEditWindow : Window
             ComboBoxRoles.SelectedItem = selectedRole;
         }
         
-        if (UserVariableData.selectedUser != null)
-        {
-            // var loginInSelectedUser =
-            //     App.DbContext.Logins.FirstOrDefault(x => x.IdUser == UserVariableData.selectedUser.IdUser);
-            // FioTextBox.Text = UserVariableData.selectedUser.Fio;
-            // PhoneNumberTextBox.Text = UserVariableData.selectedUser.PhoneNumber;
-            // DescriptionTextBox.Text = UserVariableData.selectedUser.Description;
-            // ComboBoxRoles.SelectedValue =
-            //     App.DbContext.Roles.FirstOrDefault(x => x.IdRole == UserVariableData.selectedUser.IdRole);
-            // LoginTextBox.Text = loginInSelectedUser.Login1;
-            // PasswordTextBox.Text = loginInSelectedUser.Password;
-        }
-        else
+        if (UserVariableData.selectedUser == null)
         {
             UserVariableData.selectedLogin = new Login()
             {
@@ -71,26 +59,9 @@ public partial class UserEditWindow : Window
 
             var idUser = UserVariableData.selectedUser.IdUser;
             var selectedUser = App.DbContext.Users.FirstOrDefault(x => x.IdUser == idUser);
-            var selectedRole = ComboBoxRoles.SelectedItem as Role;
-            selectedUser.IdRoleNavigation = selectedRole;
-            var selectedLogin =
-                App.DbContext.Logins.FirstOrDefault(x =>
-                    x.IdUser == UserVariableData.selectedUser.IdUser);
 
             var userChange = DataContext as User;
             selectedUser = userChange;
-
-            // if (selectedUser == null) return;
-            //
-            // selectedUser.Fio = FioTextBox.Text;
-            // selectedUser.PhoneNumber = PhoneNumberTextBox.Text;
-            // selectedUser.Description = DescriptionTextBox.Text;
-            //
-            // selectedLogin.Login1 = LoginTextBox.Text;
-            // selectedLogin.Password = PasswordTextBox.Text;
-            //
-            // var selectedRole = ComboBoxRoles.SelectedValue as Role;
-            // selectedUser.IdRole = selectedRole.IdRole;
         }
         else
         {
