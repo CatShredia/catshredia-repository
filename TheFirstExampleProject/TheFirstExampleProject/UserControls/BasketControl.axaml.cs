@@ -14,8 +14,12 @@ public partial class BasketControl : UserControl
     public BasketControl()
     {
         InitializeComponent();
+
+        DataContext = new Basket();
         
         ComboBoxItemUser.ItemsSource = App.DbContext.Users;
+        ComboBoxItemItem.ItemsSource = App.DbContext.Items;
+        BasketDataGrid.ItemsSource = App.DbContext.Baskets.ToList();
     }
     
     
@@ -42,11 +46,12 @@ public partial class BasketControl : UserControl
 
         if (!rule)
         {
+
             var newBasket = new Basket()
             {
                 IdUser = selectedUser.IdUser,
                 IdItem = selectedItem.IdItem,
-                Count = BasketCount == null ? 0 : Convert.ToInt32(BasketCount.Text)
+                Count = int.Parse(BasketCount.Text),
             };
 
             App.DbContext.Baskets.Add(newBasket);
@@ -63,8 +68,10 @@ public partial class BasketControl : UserControl
 
         App.DbContext.SaveChanges();
 
-        var viewModel = this.Resources["BasketVM"] as BasketWindowViewModel;
-        viewModel.RefreshData();
+        ComboBoxItemUser.ItemsSource = App.DbContext.Users;
+        ComboBoxItemItem.ItemsSource = App.DbContext.Items;
+        BasketDataGrid.ItemsSource = App.DbContext.Baskets.ToList();
+        
     }
 
     private void Button_Basket_Delete_OnClick(object? sender, RoutedEventArgs e)
@@ -79,7 +86,8 @@ public partial class BasketControl : UserControl
         App.DbContext.Baskets.Remove(selectedBasket);
         App.DbContext.SaveChanges();
 
-        var viewModel = this.Resources["BasketVM"] as BasketWindowViewModel;
-        viewModel.RefreshData();
+        ComboBoxItemUser.ItemsSource = App.DbContext.Users;
+        ComboBoxItemItem.ItemsSource = App.DbContext.Items;
+        BasketDataGrid.ItemsSource = App.DbContext.Baskets.ToList();
     }
 }

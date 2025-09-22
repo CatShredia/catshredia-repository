@@ -2,13 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:TheFirstExampleProject.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="TheFirstExampleProject.UserControls.BasketControl">
-    
-    <UserControl.Resources>
-        <vm:BasketWindowViewModel x:Key="BasketVM"></vm:BasketWindowViewModel>
-    </UserControl.Resources>
     
     <Grid ColumnDefinitions="Auto Auto">
         <Grid RowDefinitions="Auto Auto Auto Auto Auto" Column="0">
@@ -23,7 +18,7 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
 
-            <ComboBox Margin="10" Grid.Row="1" Width="500" ItemsSource="{Binding Items}"
+            <ComboBox Margin="10" Grid.Row="1" Width="500"
                       Name="ComboBoxItemItem">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -44,9 +39,8 @@
         </Grid>
 
         <Grid Column="1">
-            <DataGrid ItemsSource="{Binding Baskets}" IsReadOnly="True"
-                      Name="BasketDataGrid" DataContext="{StaticResource BasketVM}"
-                      x:DataType="vm:BasketWindowViewModel">
+            <DataGrid IsReadOnly="True"
+                      Name="BasketDataGrid">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID user" Binding="{Binding IdUserNavigation.Fio}" />
                     <DataGridTextColumn Header="ID item" Binding="{Binding IdItemNavigation.Name}" />
