@@ -19,7 +19,7 @@ public partial class ItemsControl : UserControl
     {
         InitializeComponent();
         
-        ItemDataGrid.ItemsSource = App.DbContext.Items.ToList();
+        RefreshData();
     }
     
     private Window? GetWindow()
@@ -36,7 +36,7 @@ public partial class ItemsControl : UserControl
         var itemEditWindow = new ItemEditWindow();
         await itemEditWindow.ShowDialog(GetWindow());
 
-        ItemDataGrid.ItemsSource = App.DbContext.Items.ToList();
+        RefreshData();
     }
 
     private async void Create_Item_Button(object? sender, RoutedEventArgs e)
@@ -46,6 +46,11 @@ public partial class ItemsControl : UserControl
         var itemEditWindow = new ItemEditWindow();
         await itemEditWindow.ShowDialog(GetWindow());
 
+        RefreshData();
+    }
+
+    private void RefreshData()
+    {
         ItemDataGrid.ItemsSource = App.DbContext.Items.ToList();
     }
 }

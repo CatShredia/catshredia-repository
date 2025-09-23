@@ -17,9 +17,7 @@ public partial class BasketControl : UserControl
 
         DataContext = new Basket();
         
-        ComboBoxItemUser.ItemsSource = App.DbContext.Users;
-        ComboBoxItemItem.ItemsSource = App.DbContext.Items;
-        BasketDataGrid.ItemsSource = App.DbContext.Baskets.ToList();
+        RefreshData();
     }
     
     
@@ -46,7 +44,6 @@ public partial class BasketControl : UserControl
 
         if (!rule)
         {
-
             var newBasket = new Basket()
             {
                 IdUser = selectedUser.IdUser,
@@ -68,9 +65,7 @@ public partial class BasketControl : UserControl
 
         App.DbContext.SaveChanges();
 
-        ComboBoxItemUser.ItemsSource = App.DbContext.Users;
-        ComboBoxItemItem.ItemsSource = App.DbContext.Items;
-        BasketDataGrid.ItemsSource = App.DbContext.Baskets.ToList();
+        RefreshData();
         
     }
 
@@ -86,6 +81,11 @@ public partial class BasketControl : UserControl
         App.DbContext.Baskets.Remove(selectedBasket);
         App.DbContext.SaveChanges();
 
+        RefreshData();
+    }
+
+    private void RefreshData()
+    {
         ComboBoxItemUser.ItemsSource = App.DbContext.Users;
         ComboBoxItemItem.ItemsSource = App.DbContext.Items;
         BasketDataGrid.ItemsSource = App.DbContext.Baskets.ToList();

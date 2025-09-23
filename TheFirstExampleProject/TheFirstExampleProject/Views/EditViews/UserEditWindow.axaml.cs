@@ -30,16 +30,12 @@ public partial class UserEditWindow : Window
             var selectedRole = allRoles.FirstOrDefault(r => r.IdRole == UserVariableData.selectedUser.IdRole);
             ComboBoxRoles.SelectedItem = selectedRole;
         }
-        
-        if (UserVariableData.selectedUser == null)
+        else
         {
-            UserVariableData.selectedLogin = new Login()
-            {
-                IdUserNavigation = new User()
-            };
+            DataContext = new Login();
+            
+            UserVariableData.selectedLogin = DataContext as Login;
         }
-        
-        DataContext = UserVariableData.selectedLogin;
     }
 
     private void Create_Button_OnClick(object? sender, RoutedEventArgs e)
@@ -60,8 +56,7 @@ public partial class UserEditWindow : Window
             var idUser = UserVariableData.selectedUser.IdUser;
             var selectedUser = App.DbContext.Users.FirstOrDefault(x => x.IdUser == idUser);
 
-            var userChange = DataContext as User;
-            selectedUser = userChange;
+            selectedUser = DataContext as User;
         }
         else
         {
