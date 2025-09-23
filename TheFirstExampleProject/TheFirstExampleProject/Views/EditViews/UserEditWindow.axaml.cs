@@ -51,29 +51,15 @@ public partial class UserEditWindow : Window
 
         if (UserVariableData.selectedUser != null)
         {
-            Console.WriteLine("Edit user " + UserVariableData.selectedUser.IdUser);
-
-            var idUser = UserVariableData.selectedUser.IdUser;
-            var selectedUser = App.DbContext.Users.FirstOrDefault(x => x.IdUser == idUser);
-
-            selectedUser = DataContext as User;
+            DataContext = UserVariableData.selectedUser; // <-- User, not Login
+        var allRoles = App.DbContext.Roles.ToList();
+            var selectedRole = allRoles.FirstOrDefault(r => r.IdRole == UserVariableData.selectedUser.IdRole);
+            ComboBoxRoles.SelectedItem = selectedRole;
         }
         else
         {
-            Console.WriteLine("Create new user");
-
-            var selectedRole = ComboBoxRoles.SelectedValue as Role;
-
-            var login = DataContext as Login;
-            if (login == null) return;
-
-            var user = login.IdUserNavigation;
-            user.IdRoleNavigation = selectedRole;
-            if (user == null) return;
-
-            App.DbContext.Add(login);
-            App.DbContext.Add(user);
-            
+            DataContext = new User(); // <-- Create new User, not Login
+            UserVariableData.selectedUser = DataContext as User; // <-- Store selectedUser, not selectedLogin
         }
 
         App.DbContext.SaveChanges();
