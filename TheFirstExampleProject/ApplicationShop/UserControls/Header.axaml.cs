@@ -1,3 +1,4 @@
+using ApplicationShop.UserControls.Objects;
 using ApplicationShop.Windows;
 using Avalonia;
 using Avalonia.Controls;
@@ -48,5 +49,11 @@ public partial class Header : UserControl
     public void UpdateDate()
     {
         SelectionUserButton.Content = VariablesData.AuthorizatedUser.Name;
+    }
+
+    private void ShowEmployees(object? sender, RoutedEventArgs e)
+    {
+        var parentWindow = GetWindow() as MainWindow;
+        parentWindow?.ReplaceControl(new EmployeeControl());
     }
 }

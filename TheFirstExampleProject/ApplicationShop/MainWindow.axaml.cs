@@ -13,4 +13,9 @@ public partial class MainWindow : Window
     public void UpdateDate()
     {
     }
+    
+    public void ReplaceControl(Control myControl)
+    {
+        MainContentArea.Content = myControl;
+    }
 }
