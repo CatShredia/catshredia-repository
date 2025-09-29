@@ -1,3 +1,4 @@
+using ApplicationShop.Data;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
@@ -6,6 +7,9 @@ namespace ApplicationShop;
 
 public partial class App : Application
 {
+    
+    public static AppDbContext DbContext { get; private set; } = new AppDbContext();
+    
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
