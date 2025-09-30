@@ -3,9 +3,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="ApplicationShop.UserControls.Objects.EmployeeControl">
+             x:Class="ApplicationShop.UserControls.Objects.UsersControl">
     <Grid RowDefinitions="Auto Auto">
-        <Button Grid.Row="0" Name="UserButtonCreate" Click="CreateEmployee">Create</Button>
+        <Button Grid.Row="0" Name="UserButtonCreate" Click="CreateEmployee" IsVisible="False">Create</Button>
         <DataGrid Grid.Row="1" IsReadOnly="True" DoubleTapped="Show_Employee"
                   Name="UserDataGrid">
             <DataGrid.Columns>

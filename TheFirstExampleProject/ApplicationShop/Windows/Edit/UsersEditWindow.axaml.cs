@@ -8,9 +8,9 @@ using Avalonia.Markup.Xaml;
 
 namespace ApplicationShop.Windows.Edit;
 
-public partial class EmployeeEditWindow : Window
+public partial class UsersEditWindow : Window
 {
-    public EmployeeEditWindow()
+    public UsersEditWindow()
     {
         InitializeComponent();
 

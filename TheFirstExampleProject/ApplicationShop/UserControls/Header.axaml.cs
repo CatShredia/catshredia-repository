@@ -51,11 +51,12 @@ public partial class Header : UserControl
     {
         if (VariablesData.AuthorizatedUser == null) return;
         SelectionUserButton.Content = VariablesData.AuthorizatedUser.Name;
-
+        
         if (VariablesData.AuthorizatedUser.IdRole == 1)
         {
             Console.WriteLine("Пользователь - админ");
             EmployeeButton.IsVisible = true;
+            UsersButton.IsVisible = true;
         }
         else
         {
@@ -66,6 +67,12 @@ public partial class Header : UserControl
     private void ShowEmployees(object? sender, RoutedEventArgs e)
     {
         var parentWindow = GetWindow() as MainWindow;
-        parentWindow?.ReplaceControl(new EmployeeControl());
+        parentWindow?.ReplaceControl(new UsersControl(3));
+    }
+
+    private void ShowUsers(object? sender, RoutedEventArgs e)
+    {
+        var parentWindow = GetWindow() as MainWindow;
+        parentWindow?.ReplaceControl(new UsersControl(2));
     }
 }

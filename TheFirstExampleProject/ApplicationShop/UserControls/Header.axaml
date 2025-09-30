@@ -4,8 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ApplicationShop.UserControls.Header">
-    <Grid ColumnDefinitions="Auto Auto" RowDefinitions="Auto">
-        <Button Grid.Column="0" Click="ShowEmployees" IsVisible="False" Name="EmployeeButton">Employees</Button>
-        <Button Grid.Column="1" Click="SelectUserButtonClick" Name="SelectionUserButton"></Button>
+    <Grid ColumnDefinitions="Auto Auto Auto" RowDefinitions="Auto">
+        <Button Grid.Column="0" Click="ShowEmployees" IsVisible="False" Name="EmployeeButton">Сотрудники</Button>
+        <Button Grid.Column="1" Click="ShowUsers" IsVisible="False" Name="UsersButton">Покупатели</Button>
+        <Button Grid.Column="2" Click="SelectUserButtonClick" Name="SelectionUserButton"></Button>
     </Grid>
 </UserControl>

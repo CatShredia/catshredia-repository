@@ -31,7 +31,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="UserControls\Objects\ShowDataGrid\EmployeeControl.axaml.cs">
+      <Compile Update="UserControls\Objects\ShowDataGrid\UsersControl.axaml.cs">
         <DependentUpon>EmployeeControl.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
