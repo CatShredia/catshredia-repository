@@ -29,4 +29,11 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
     </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="UserControls\Objects\ShowDataGrid\EmployeeControl.axaml.cs">
+        <DependentUpon>EmployeeControl.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
 </Project>

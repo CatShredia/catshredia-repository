@@ -48,6 +48,7 @@ public partial class Header : UserControl
 
     public void UpdateDate()
     {
+        if (VariablesData.AuthorizatedUser == null) return;
         SelectionUserButton.Content = VariablesData.AuthorizatedUser.Name;
     }
 
