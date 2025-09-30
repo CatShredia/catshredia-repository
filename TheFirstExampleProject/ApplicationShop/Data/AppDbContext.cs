@@ -15,6 +15,8 @@ public partial class AppDbContext : DbContext
     {
     }
 
+    public virtual DbSet<Basket> Baskets { get; set; }
+
     public virtual DbSet<City> Cities { get; set; }
 
     public virtual DbSet<Login> Logins { get; set; }
@@ -35,6 +37,27 @@ public partial class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Basket>(entity =>
+        {
+            entity.HasKey(e => e.IdBasket);
+
+            entity.ToTable("Basket");
+
+            entity.Property(e => e.IdBasket)
+                .ValueGeneratedNever()
+                .HasColumnName("id_basket");
+            entity.Property(e => e.IdProduct).HasColumnName("id_product");
+            entity.Property(e => e.IdUser).HasColumnName("id_user");
+
+            entity.HasOne(d => d.IdProductNavigation).WithMany(p => p.Baskets)
+                .HasForeignKey(d => d.IdProduct)
+                .HasConstraintName("FK_Basket_Product1");
+
+            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.Baskets)
+                .HasForeignKey(d => d.IdUser)
+                .HasConstraintName("FK_Basket_User");
+        });
+
         modelBuilder.Entity<City>(entity =>
         {
             entity.HasKey(e => e.IdCity);
@@ -67,7 +90,6 @@ public partial class AppDbContext : DbContext
 
             entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.Logins)
                 .HasForeignKey(d => d.IdUser)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Login_User");
         });
 
@@ -121,7 +143,6 @@ public partial class AppDbContext : DbContext
 
             entity.HasOne(d => d.IdCityNavigation).WithMany(p => p.Streets)
                 .HasForeignKey(d => d.IdCity)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Street_City");
         });
 
@@ -151,27 +172,7 @@ public partial class AppDbContext : DbContext
 
             entity.HasOne(d => d.IdRoleNavigation).WithMany(p => p.Users)
                 .HasForeignKey(d => d.IdRole)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_User_Role");
-
-            entity.HasMany(d => d.IdProducts).WithMany(p => p.IdUsers)
-                .UsingEntity<Dictionary<string, object>>(
-                    "Basket",
-                    r => r.HasOne<Product>().WithMany()
-                        .HasForeignKey("IdProduct")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK_Basket_Product1"),
-                    l => l.HasOne<User>().WithMany()
-                        .HasForeignKey("IdUser")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK_Basket_User"),
-                    j =>
-                    {
-                        j.HasKey("IdUser", "IdProduct").HasName("PK_Basket_1");
-                        j.ToTable("Basket");
-                        j.IndexerProperty<int>("IdUser").HasColumnName("id_user");
-                        j.IndexerProperty<int>("IdProduct").HasColumnName("id_product");
-                    });
         });
 
         modelBuilder.Entity<UserAdress>(entity =>
@@ -189,12 +190,10 @@ public partial class AppDbContext : DbContext
 
             entity.HasOne(d => d.IdStreetNavigation).WithMany(p => p.UserAdresses)
                 .HasForeignKey(d => d.IdStreet)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_UserAdresses_Street");
 
             entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.UserAdresses)
                 .HasForeignKey(d => d.IdUser)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_UserAdresses_User");
         });
 

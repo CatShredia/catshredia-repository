@@ -54,4 +54,21 @@ public partial class EmployeeControl : UserControl
                 .Where(login => login.IdUserNavigation.IdRole == 3)
                 .ToList();
     }
+
+    private void DeleteEmployee(object? sender, RoutedEventArgs e)
+    {
+        var button = sender as Button;
+        var selectedLogin = button?.DataContext as Login;
+        
+        Console.WriteLine((selectedLogin == null) ? "User not found" : "User founded");
+        
+        if (selectedLogin == null) return;
+        
+        VariablesData.SelectedLogin = selectedLogin;
+        
+        App.DbContext.Logins.Remove(selectedLogin);
+        App.DbContext.SaveChanges();
+        
+        RefreshDate();
+    }
 }

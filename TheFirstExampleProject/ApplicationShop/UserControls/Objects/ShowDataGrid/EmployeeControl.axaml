@@ -15,6 +15,17 @@
                 <DataGridTextColumn Header="Phone" Binding="{Binding IdUserNavigation.Phone}" />
                 <DataGridTextColumn Header="Login" Binding="{Binding Login1}" />
                 <DataGridTextColumn Header="Password" Binding="{Binding Password}" />
+                
+                <DataGridTemplateColumn Header="" Width="50">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="DeleteEmployee">
+                                <Image Source="avares://ApplicationShop/Assets/bin.png"
+                                       Cursor="Hand" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

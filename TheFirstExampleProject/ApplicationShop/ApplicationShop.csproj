@@ -36,4 +36,10 @@
         <SubType>Code</SubType>
       </Compile>
     </ItemGroup>
+
+    <ItemGroup>
+      <AvaloniaResource Include="Assets\bin.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
+    </ItemGroup>
 </Project>
