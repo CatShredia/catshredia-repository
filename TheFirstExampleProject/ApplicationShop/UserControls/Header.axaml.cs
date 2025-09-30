@@ -1,3 +1,4 @@
+using System;
 using ApplicationShop.UserControls.Objects;
 using ApplicationShop.Windows;
 using Avalonia;
@@ -50,6 +51,16 @@ public partial class Header : UserControl
     {
         if (VariablesData.AuthorizatedUser == null) return;
         SelectionUserButton.Content = VariablesData.AuthorizatedUser.Name;
+
+        if (VariablesData.AuthorizatedUser.IdRole == 1)
+        {
+            Console.WriteLine("Пользователь - админ");
+            EmployeeButton.IsVisible = true;
+        }
+        else
+        {
+            Console.WriteLine("Пользователь - не админ");
+        }
     }
 
     private void ShowEmployees(object? sender, RoutedEventArgs e)
