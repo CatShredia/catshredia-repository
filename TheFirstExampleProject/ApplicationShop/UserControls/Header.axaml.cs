@@ -86,6 +86,12 @@ public partial class Header : UserControl
         var productWindow = GetWindow() as MainWindow;
         productWindow?.ReplaceControl(new ProductControl());
     }
+    
+    private void ShowCatalog(object? sender, RoutedEventArgs e)
+    {
+        var catalogWindow = GetWindow() as MainWindow;
+        catalogWindow?.ReplaceControl(new CatalogControl());
+    }
 
     private void ShowDefault(object? sender, RoutedEventArgs e)
     {

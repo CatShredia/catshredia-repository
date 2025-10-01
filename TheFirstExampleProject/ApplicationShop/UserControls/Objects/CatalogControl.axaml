@@ -1,0 +1,43 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ApplicationShop.UserControls.Objects.CatalogControl">
+    <Grid RowDefinitions="Auto Auto">
+        <Button Grid.Row="0" Name="UserButtonCreate" Click="CreateCatalog" IsVisible="True">Create</Button>
+        <DataGrid Grid.Row="1" IsReadOnly="True" DoubleTapped="Show_Catalog"
+                  Name="CatalogDataGrid">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" />
+                <DataGridTextColumn Header="Provider" Binding="{Binding Provider}" />
+                <DataGridTextColumn Header="Count" Binding="{Binding BasketCount}" />
+                
+                <!-- Button - Buy -->
+                <DataGridTemplateColumn Header="" Width="70">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="Auto Auto">
+                                <Button Grid.Column="0" Click="DecreseProduct" Content="-" Width="25"/>
+                                <Button Grid.Column="1" Click="AddProduct" Content="+" Width="25"/>
+                            </Grid> 
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <!-- Button - Delete -->
+                <DataGridTemplateColumn Header="" Width="50">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="DeleteCatalog">
+                                <Image Source="avares://ApplicationShop/Assets/bin.png"
+                                       Cursor="Hand" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

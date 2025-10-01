@@ -43,6 +43,10 @@
         <DependentUpon>ProductEditWindow.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="UserControls\Objects\ShowDataGrid\DefaultControl.axaml.cs">
+        <DependentUpon>DefaultControl.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>
