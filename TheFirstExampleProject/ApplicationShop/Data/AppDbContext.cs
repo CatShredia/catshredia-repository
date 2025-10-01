@@ -43,9 +43,7 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("Basket");
 
-            entity.Property(e => e.IdBasket)
-                .ValueGeneratedNever()
-                .HasColumnName("id_basket");
+            entity.Property(e => e.IdBasket).HasColumnName("id_basket");
             entity.Property(e => e.IdProduct).HasColumnName("id_product");
             entity.Property(e => e.IdUser).HasColumnName("id_user");
 
