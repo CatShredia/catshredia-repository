@@ -31,6 +31,8 @@ public partial class Header : UserControl
             // user is authtorized
             SelectionUserButton.Content = VariablesData.AuthorizatedUser.Name; 
         }
+        
+        UpdateDate();
     }
 
     private async void SelectUserButtonClick(object? sender, RoutedEventArgs e)
@@ -74,5 +76,11 @@ public partial class Header : UserControl
     {
         var parentWindow = GetWindow() as MainWindow;
         parentWindow?.ReplaceControl(new UsersControl(2));
+    }
+
+    private void ShowProduct(object? sender, RoutedEventArgs e)
+    {
+        var productWindow = GetWindow() as MainWindow;
+        productWindow?.ReplaceControl(new ProductControl());
     }
 }

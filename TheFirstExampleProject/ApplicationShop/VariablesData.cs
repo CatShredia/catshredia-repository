@@ -1,10 +1,11 @@
+using System.Linq;
 using ApplicationShop.Data;
 
 namespace ApplicationShop;
 
 public class VariablesData
 {
-    public static User AuthorizatedUser { get; set; }
+    public static User AuthorizatedUser { get; set; } = App.DbContext.Users.FirstOrDefault(user => user.IdUser == 1);
     
     public static User SelectedUser { get; set; }
     

@@ -1,0 +1,45 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="ApplicationShop.Windows.Edit.ProductEditWindow"
+        Title="ProductEditWindow">
+    <Grid ColumnDefinitions="50* 50*">
+        <Grid Grid.Column="0" RowDefinitions="Auto Auto Auto Auto Auto">
+            <Grid Grid.Row="0" RowDefinitions="Auto Auto">
+                <TextBlock Grid.Row="0" Name="SurnameEmployeeTextBlock">Фамилия:</TextBlock>
+                <TextBox Grid.Row="1" Name="SurnameEmployeeTextBox" Text="{Binding IdUserNavigation.Surname}"></TextBox>
+            </Grid>
+        
+            <Grid Grid.Row="1"  RowDefinitions="Auto Auto">
+                <TextBlock Grid.Row="0" Name="NameEmployeeTextBlock">Имя:</TextBlock>
+                <TextBox Grid.Row="1" Name="NameEmployeeTextBox" Text="{Binding IdUserNavigation.Name}"></TextBox>
+            </Grid>
+        
+            <Grid Grid.Row="2"  RowDefinitions="Auto Auto">
+                <TextBlock Grid.Row="0" Name="DescriptionEmployeeTextBlock">Описание:</TextBlock>
+                <TextBox Grid.Row="1" Name="DescriptionEmployeeTextBox" Text="{Binding IdUserNavigation.Description}"></TextBox>
+            </Grid>
+        
+            <Grid Grid.Row="3" RowDefinitions="Auto Auto">
+                <TextBlock Grid.Row="0" Name="PhoneEmployeeTextBlock">Телефон:</TextBlock>
+                <TextBox Grid.Row="1" Name="PhoneEmployeeTextBox" Text="{Binding IdUserNavigation.Phone}"></TextBox>
+            </Grid>
+        
+            <Button Grid.Row="4" Click="CreateUser">OK</Button>
+        </Grid>
+        
+        <Grid Grid.Column="1" RowDefinitions="Auto Auto">
+            <Grid Grid.Row="0" RowDefinitions="Auto Auto">
+                <TextBlock Grid.Row="0" Name="LoginEmployeeTextBlock">Логин:</TextBlock>
+                <TextBox Grid.Row="1" Name="LoginEmployeeTextBox" Text="{Binding Login1}"></TextBox>
+            </Grid>
+            
+            <Grid Grid.Row="1" RowDefinitions="Auto Auto">
+                <TextBlock Grid.Row="0" Name="PasswordEmployeeTextBlock">Пароль:</TextBlock>
+                <TextBox Grid.Row="1" Name="PasswordEmployeeTextBox" Text="{Binding Password}"></TextBox>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
