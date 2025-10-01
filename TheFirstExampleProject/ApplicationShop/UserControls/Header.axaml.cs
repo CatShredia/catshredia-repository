@@ -1,6 +1,8 @@
 using System;
+using System.Linq;
 using ApplicationShop.UserControls.Objects;
 using ApplicationShop.Windows;
+using ApplicationShop.Windows.Edit;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -42,6 +44,18 @@ public partial class Header : UserControl
             // user is unauthtorized
             var authWindow = new AuthtorizationWindow();
             await authWindow.ShowDialog(GetWindow());
+
+            var parentWindow = GetWindow() as MainWindow;
+            parentWindow?.UpdateDate();
+            UpdateDate();
+        }
+        else
+        {
+            VariablesData.SelectedLogin = App.DbContext.Logins.FirstOrDefault(login => login.IdUser == VariablesData.AuthorizatedUser.IdUser);
+            
+            // user is authtorized
+            var userEditWindow = new UsersEditWindow();
+            await userEditWindow.ShowDialog(GetWindow());
 
             var parentWindow = GetWindow() as MainWindow;
             parentWindow?.UpdateDate();
