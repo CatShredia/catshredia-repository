@@ -5,13 +5,13 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ApplicationShop.UserControls.Objects.ProductControl">
     <Grid RowDefinitions="Auto Auto">
-        <Button Grid.Row="0" Name="UserButtonCreate" Click="CreateProduct" IsVisible="False">Create</Button>
+        <Button Grid.Row="0" Name="UserButtonCreate" Click="CreateProduct" IsVisible="True">Create</Button>
         <DataGrid Grid.Row="1" IsReadOnly="True" DoubleTapped="Show_Product"
-                  Name="UserDataGrid">
+                  Name="ProductDataGrid">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding name}" />
-                <DataGridTextColumn Header="Price" Binding="{Binding price}" />
-                <DataGridTextColumn Header="Provider" Binding="{Binding provider}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" />
+                <DataGridTextColumn Header="Provider" Binding="{Binding Provider}" />
                 
                 <DataGridTemplateColumn Header="" Width="50">
                     <DataGridTemplateColumn.CellTemplate>

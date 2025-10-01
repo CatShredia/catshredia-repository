@@ -6,40 +6,23 @@
         x:Class="ApplicationShop.Windows.Edit.ProductEditWindow"
         Title="ProductEditWindow">
     <Grid ColumnDefinitions="50* 50*">
-        <Grid Grid.Column="0" RowDefinitions="Auto Auto Auto Auto Auto">
+        <Grid Grid.Column="0" RowDefinitions="Auto Auto Auto Auto">
             <Grid Grid.Row="0" RowDefinitions="Auto Auto">
-                <TextBlock Grid.Row="0" Name="SurnameEmployeeTextBlock">Фамилия:</TextBlock>
-                <TextBox Grid.Row="1" Name="SurnameEmployeeTextBox" Text="{Binding IdUserNavigation.Surname}"></TextBox>
+                <TextBlock Grid.Row="0" Name="SurnameProductTextBlock">Название:</TextBlock>
+                <TextBox Grid.Row="1" Name="SurnameProductTextBox" Text="{Binding Name}"></TextBox>
             </Grid>
         
             <Grid Grid.Row="1"  RowDefinitions="Auto Auto">
-                <TextBlock Grid.Row="0" Name="NameEmployeeTextBlock">Имя:</TextBlock>
-                <TextBox Grid.Row="1" Name="NameEmployeeTextBox" Text="{Binding IdUserNavigation.Name}"></TextBox>
+                <TextBlock Grid.Row="0" Name="NameProductTextBlock">Цена:</TextBlock>
+                <TextBox Grid.Row="1" Name="NameProductTextBox" Text="{Binding Price}"></TextBox>
             </Grid>
         
             <Grid Grid.Row="2"  RowDefinitions="Auto Auto">
-                <TextBlock Grid.Row="0" Name="DescriptionEmployeeTextBlock">Описание:</TextBlock>
-                <TextBox Grid.Row="1" Name="DescriptionEmployeeTextBox" Text="{Binding IdUserNavigation.Description}"></TextBox>
+                <TextBlock Grid.Row="0" Name="DescriptionProductTextBlock">Поставщик:</TextBlock>
+                <TextBox Grid.Row="1" Name="DescriptionProductTextBox" Text="{Binding Provider}"></TextBox>
             </Grid>
         
-            <Grid Grid.Row="3" RowDefinitions="Auto Auto">
-                <TextBlock Grid.Row="0" Name="PhoneEmployeeTextBlock">Телефон:</TextBlock>
-                <TextBox Grid.Row="1" Name="PhoneEmployeeTextBox" Text="{Binding IdUserNavigation.Phone}"></TextBox>
-            </Grid>
-        
-            <Button Grid.Row="4" Click="CreateUser">OK</Button>
-        </Grid>
-        
-        <Grid Grid.Column="1" RowDefinitions="Auto Auto">
-            <Grid Grid.Row="0" RowDefinitions="Auto Auto">
-                <TextBlock Grid.Row="0" Name="LoginEmployeeTextBlock">Логин:</TextBlock>
-                <TextBox Grid.Row="1" Name="LoginEmployeeTextBox" Text="{Binding Login1}"></TextBox>
-            </Grid>
-            
-            <Grid Grid.Row="1" RowDefinitions="Auto Auto">
-                <TextBlock Grid.Row="0" Name="PasswordEmployeeTextBlock">Пароль:</TextBlock>
-                <TextBox Grid.Row="1" Name="PasswordEmployeeTextBox" Text="{Binding Password}"></TextBox>
-            </Grid>
+            <Button Grid.Row="3" Click="CreateUser">OK</Button>
         </Grid>
     </Grid>
 </Window>

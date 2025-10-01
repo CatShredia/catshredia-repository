@@ -29,7 +29,7 @@ public partial class ProductControl : UserControl
 
     private async void Show_Product(object? sender, TappedEventArgs e)
     {
-        VariablesData.SelectedLogin = UserDataGrid.SelectedItem as Login;
+        VariablesData.SelectedProduct = ProductDataGrid.SelectedItem as Product;
 
         var editWindow = new ProductEditWindow();
         await editWindow.ShowDialog(GetWindow());
@@ -41,6 +41,8 @@ public partial class ProductControl : UserControl
     {
         var editWindow = new ProductEditWindow();
         await editWindow.ShowDialog(GetWindow());
+        
+        VariablesData.SelectedProduct = null;
 
         RefreshDate();
     }
@@ -49,33 +51,21 @@ public partial class ProductControl : UserControl
     {
         DataContext = App.DbContext;
 
-        UserDataGrid.ItemsSource =
+        ProductDataGrid.ItemsSource =
             App.DbContext.Products
                 .ToList();
-
-        if (VariablesData.AuthorizatedUser.IdRole == 1)
-        {
-            Console.WriteLine("Пользователь - админ");
-            UserButtonCreate.IsVisible = true;
-        }
-        else
-        {
-            Console.WriteLine("Пользователь - не админ");
-        }
     }
 
     private void DeleteProduct(object? sender, RoutedEventArgs e)
     {
         var button = sender as Button;
-        var selectedLogin = button?.DataContext as Login;
+        var selectedProduct = button?.DataContext as Product;
 
-        Console.WriteLine((selectedLogin == null) ? "User not found" : "User founded");
+        if (selectedProduct == null) return;
 
-        if (selectedLogin == null) return;
+        VariablesData.SelectedProduct = selectedProduct;
 
-        VariablesData.SelectedLogin = selectedLogin;
-
-        App.DbContext.Logins.Remove(selectedLogin);
+        App.DbContext.Products.Remove(selectedProduct);
         App.DbContext.SaveChanges();
 
         RefreshDate();

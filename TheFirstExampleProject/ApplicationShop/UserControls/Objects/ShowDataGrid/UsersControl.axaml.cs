@@ -45,6 +45,8 @@ public partial class UsersControl : UserControl
         var editWindow = new UsersEditWindow();
         await editWindow.ShowDialog(GetWindow());
 
+        VariablesData.SelectedUser = null;
+
         RefreshDate();
     }
 
@@ -57,16 +59,6 @@ public partial class UsersControl : UserControl
                 .Include(login => login.IdUserNavigation)
                 .Where(login => login.IdUserNavigation.IdRole == IdCurrentRole)
                 .ToList();
-
-        if (VariablesData.AuthorizatedUser.IdRole == 1 && IdCurrentRole == 3)
-        {
-            Console.WriteLine("Пользователь - админ");
-            UserButtonCreate.IsVisible = true;
-        }
-        else
-        {
-            Console.WriteLine("Пользователь - не админ");
-        }
     }
 
     private void DeleteEmployee(object? sender, RoutedEventArgs e)

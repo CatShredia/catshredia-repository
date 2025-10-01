@@ -23,11 +23,7 @@ public partial class AuthtorizationWindow : Window
                 login.Login1 == LoginTextBox.Text &&
                 login.Password == PasswordTextBox.Text
             );
-            if (selectedLogin == null)
-            {
-                Console.WriteLine("Login not found");
-            }
-            else
+            if (selectedLogin != null)
             {
                 var selectedUser = App.DbContext.Users.FirstOrDefault(user => selectedLogin.IdUser == user.IdUser);
                 VariablesData.AuthorizatedUser = selectedUser;

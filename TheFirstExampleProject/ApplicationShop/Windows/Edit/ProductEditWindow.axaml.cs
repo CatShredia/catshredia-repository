@@ -14,37 +14,27 @@ public partial class ProductEditWindow : Window
     {
         InitializeComponent();
 
-        if (VariablesData.SelectedLogin == null)
+        if (VariablesData.SelectedProduct == null)
         {
-            DataContext = new Login()
-            {
-                IdUserNavigation = new User()
-            };
+            DataContext = new Product();
         }
         else
         {
-            DataContext = VariablesData.SelectedLogin;
+            DataContext = VariablesData.SelectedProduct;
         }
     }
 
     private void CreateUser(object? sender, RoutedEventArgs e)
     {
-        var loginDataContext = DataContext as Login;
-        loginDataContext.IdUserNavigation.IdRoleNavigation = App.DbContext.Roles.FirstOrDefault(role => role.Name == "employee");
-
-        if (loginDataContext.IdUserNavigation.IdRoleNavigation == null)
-        {
-            Console.WriteLine("Роли нет");
-            return;
-        }
+        var productDataContext = DataContext as Product;
         
-        if (VariablesData.SelectedLogin == null)
+        if (VariablesData.SelectedProduct == null)
         {
-            App.DbContext.Logins.Add(loginDataContext);
+            App.DbContext.Products.Add(productDataContext);
         }
         else
         {
-            App.DbContext.Update(loginDataContext);
+            App.DbContext.Update(productDataContext);
         }
         
         App.DbContext.SaveChanges();
