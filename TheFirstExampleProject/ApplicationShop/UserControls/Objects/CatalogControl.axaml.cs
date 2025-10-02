@@ -14,7 +14,6 @@ namespace ApplicationShop.UserControls.Objects;
 
 public partial class CatalogControl : UserControl
 {
-
     private Window? GetWindow()
     {
         return this.GetVisualRoot() as Window;
@@ -41,7 +40,7 @@ public partial class CatalogControl : UserControl
     {
         var editWindow = new ProductEditWindow();
         await editWindow.ShowDialog(GetWindow());
-        
+
         VariablesData.SelectedProduct = null;
 
         RefreshDate();
@@ -51,8 +50,9 @@ public partial class CatalogControl : UserControl
     {
         DataContext = App.DbContext;
 
-        var catalogItems =
-            App.DbContext.Products
+        if (VariablesData.AuthorizatedUser != null)
+        {
+            var catalogItems = App.DbContext.Products
                 .GroupJoin(
                     App.DbContext.Baskets.Where(b => b.IdUser == VariablesData.AuthorizatedUser.IdUser),
                     product => product.IdProduct,
@@ -71,8 +71,9 @@ public partial class CatalogControl : UserControl
                     BasketCount = x.Basket != null ? x.Basket.Count : 0
                 })
                 .ToList();
-        
-        CatalogDataGrid.ItemsSource = catalogItems;
+
+            CatalogDataGrid.ItemsSource = catalogItems;
+        }
     }
 
     private void DeleteCatalog(object? sender, RoutedEventArgs e)
@@ -89,15 +90,15 @@ public partial class CatalogControl : UserControl
 
         RefreshDate();
     }
-    
+
     private void DecreseProduct(object? sender, RoutedEventArgs e)
     {
         var selectedBasket = CatalogDataGrid.SelectedItem as Basket;
-        
+
         if (selectedBasket == null) return;
 
         selectedBasket.Count--;
-        
+
         App.DbContext.Update(selectedBasket);
 
         RefreshDate();
@@ -105,14 +106,34 @@ public partial class CatalogControl : UserControl
 
     private void AddProduct(object? sender, RoutedEventArgs e)
     {
-        var selectedBasket = CatalogDataGrid.SelectedItem as Basket;
-        
-        if (selectedBasket == null) return;
+        var button = sender as Button;
+        var catalogItem = button?.DataContext as CatalogItem;
 
-        selectedBasket.Count++;
-        
-        App.DbContext.Update(selectedBasket);
-        
+        var selectedBasket = App.DbContext.Baskets
+            .FirstOrDefault(x =>
+                x.IdUser == VariablesData.AuthorizatedUser.IdUser && x.IdProduct == catalogItem.ProductId);
+
+        if (selectedBasket == null)
+        {
+            // basket not created
+            selectedBasket = new Basket
+            {
+                IdUser = VariablesData.AuthorizatedUser.IdUser,
+                IdProduct = catalogItem.ProductId,
+                Count = 1
+            };
+
+            App.DbContext.Baskets.Add(selectedBasket);
+        }
+        else
+        {
+            selectedBasket.Count++;
+
+            App.DbContext.Update(selectedBasket);
+        }
+
+        App.DbContext.SaveChanges();
+
         RefreshDate();
     }
 }
@@ -122,6 +143,6 @@ public class CatalogItem
     public int ProductId { get; set; }
     public string Name { get; set; }
     public decimal Price { get; set; }
-    public string Provider { get; set; } 
+    public string Provider { get; set; }
     public int BasketCount { get; set; }
 }
