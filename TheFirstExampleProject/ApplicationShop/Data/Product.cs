@@ -16,4 +16,6 @@ public partial class Product
     public string? ImagePath { get; set; }
 
     public virtual ICollection<Basket> Baskets { get; set; } = new List<Basket>();
+
+    public virtual ICollection<OrderList> OrderLists { get; set; } = new List<OrderList>();
 }

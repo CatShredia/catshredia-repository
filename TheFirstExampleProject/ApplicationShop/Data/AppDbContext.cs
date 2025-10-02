@@ -21,6 +21,10 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Login> Logins { get; set; }
 
+    public virtual DbSet<Order> Orders { get; set; }
+
+    public virtual DbSet<OrderList> OrderLists { get; set; }
+
     public virtual DbSet<Product> Products { get; set; }
 
     public virtual DbSet<Role> Roles { get; set; }
@@ -90,6 +94,38 @@ public partial class AppDbContext : DbContext
             entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.Logins)
                 .HasForeignKey(d => d.IdUser)
                 .HasConstraintName("FK_Login_User");
+        });
+
+        modelBuilder.Entity<Order>(entity =>
+        {
+            entity.HasKey(e => e.IdOrder);
+
+            entity.ToTable("Order");
+
+            entity.Property(e => e.IdOrder).HasColumnName("id_order");
+            entity.Property(e => e.IsDelivered).HasColumnName("is_delivered");
+            entity.Property(e => e.IsPaided).HasColumnName("is_paided");
+        });
+
+        modelBuilder.Entity<OrderList>(entity =>
+        {
+            entity.HasKey(e => e.IdOrderList).HasName("PK_Order_list_1");
+
+            entity.ToTable("Order_list");
+
+            entity.Property(e => e.IdOrderList).HasColumnName("id_order_list");
+            entity.Property(e => e.IdOrder).HasColumnName("id_order");
+            entity.Property(e => e.IdProduct).HasColumnName("id_product");
+
+            entity.HasOne(d => d.IdOrderNavigation).WithMany(p => p.OrderLists)
+                .HasForeignKey(d => d.IdOrder)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Order_list_Order");
+
+            entity.HasOne(d => d.IdProductNavigation).WithMany(p => p.OrderLists)
+                .HasForeignKey(d => d.IdProduct)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Order_list_Product");
         });
 
         modelBuilder.Entity<Product>(entity =>
