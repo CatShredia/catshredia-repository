@@ -93,13 +93,28 @@ public partial class CatalogControl : UserControl
 
     private void DecreseProduct(object? sender, RoutedEventArgs e)
     {
-        var selectedBasket = CatalogDataGrid.SelectedItem as Basket;
+        var button = sender as Button;
+        var catalogItem = button?.DataContext as CatalogItem;
 
-        if (selectedBasket == null) return;
+        var selectedBasket = App.DbContext.Baskets
+            .FirstOrDefault(x =>
+                x.IdUser == VariablesData.AuthorizatedUser.IdUser && x.IdProduct == catalogItem.ProductId);
 
-        selectedBasket.Count--;
+        if (selectedBasket != null)
+        {
+            selectedBasket.Count--;
 
-        App.DbContext.Update(selectedBasket);
+            if (selectedBasket.Count == 0)
+            {
+                App.DbContext.Remove(selectedBasket);
+            }
+            else
+            {
+                App.DbContext.Update(selectedBasket);
+            }
+        }
+
+        App.DbContext.SaveChanges();
 
         RefreshDate();
     }

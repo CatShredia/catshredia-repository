@@ -5,7 +5,6 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ApplicationShop.UserControls.Objects.CatalogControl">
     <Grid RowDefinitions="Auto Auto">
-        <Button Grid.Row="0" Name="UserButtonCreate" Click="CreateCatalog" IsVisible="True">Create</Button>
         <DataGrid Grid.Row="1" IsReadOnly="True" DoubleTapped="Show_Catalog"
                   Name="CatalogDataGrid">
             <DataGrid.Columns>

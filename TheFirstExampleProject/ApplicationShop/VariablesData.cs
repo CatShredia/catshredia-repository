@@ -5,7 +5,7 @@ namespace ApplicationShop;
 
 public class VariablesData
 {
-    public static User AuthorizatedUser { get; set; } = App.DbContext.Users.FirstOrDefault(user => user.IdUser == 1);
+    public static User AuthorizatedUser { get; set; } = App.DbContext.Users.FirstOrDefault(user => user.IdUser == 1015);
     // public static User AuthorizatedUser { get; set; } 
 
     
