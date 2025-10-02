@@ -23,5 +23,7 @@ public partial class User
 
     public virtual ICollection<Login> Logins { get; set; } = new List<Login>();
 
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+
     public virtual ICollection<UserAdress> UserAdresses { get; set; } = new List<UserAdress>();
 }

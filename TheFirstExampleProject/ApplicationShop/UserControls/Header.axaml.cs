@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using ApplicationShop.UserControls.Objects;
+using ApplicationShop.UserControls.Objects.ShowDataGrid;
 using ApplicationShop.Windows;
 using ApplicationShop.Windows.Edit;
 using Avalonia;
@@ -97,5 +98,11 @@ public partial class Header : UserControl
     {
         var productWindow = GetWindow() as MainWindow;
         productWindow?.ReplaceControl(new DefaultControl());
+    }
+
+    private void ShowUserOrders(object? sender, RoutedEventArgs e)
+    {
+        var productWindow = GetWindow() as MainWindow;
+        productWindow?.ReplaceControl(new OrderControl());
     }
 }

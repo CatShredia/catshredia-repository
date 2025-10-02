@@ -73,6 +73,18 @@ public partial class CatalogControl : UserControl
                 .ToList();
 
             CatalogDataGrid.ItemsSource = catalogItems;
+
+            var basketItems =  App.DbContext.Baskets
+                .Where(b => b.IdUser == VariablesData.AuthorizatedUser.IdUser)
+                .ToList();
+
+            decimal summ = 0;
+            foreach (var basketItem in basketItems)
+            {
+                summ += basketItem.IdProductNavigation.Price * basketItem.Count;
+            }
+
+            SummTextBlock.Text = "Сумма: " + summ;
         }
     }
 
@@ -149,6 +161,42 @@ public partial class CatalogControl : UserControl
 
         App.DbContext.SaveChanges();
 
+        RefreshDate();
+    }
+
+    private void CreateOrder(object? sender, RoutedEventArgs e)
+    {
+        var basketItems = App.DbContext.Baskets
+            .Where(b => b.IdUser == VariablesData.AuthorizatedUser.IdUser)
+            .ToList();
+
+        if (basketItems == null) return;
+
+        var newOrder = new Order
+        {
+            IsPaided = false,
+            IsDelivered = false,
+            IdOwner = VariablesData.AuthorizatedUser.IdUser,
+        };
+
+        App.DbContext.Orders.Add(newOrder);
+
+        App.DbContext.SaveChanges();
+
+        foreach (var item in basketItems)
+        {
+            var orderListItem = new OrderList()
+            {
+                IdOrder = newOrder.IdOrder,
+                IdProduct = item.IdProduct
+            };
+
+            App.DbContext.OrderLists.Add(orderListItem);
+        }
+
+        App.DbContext.Baskets.RemoveRange(basketItems);
+
+        App.DbContext.SaveChanges();
         RefreshDate();
     }
 }

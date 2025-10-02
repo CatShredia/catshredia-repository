@@ -4,27 +4,27 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ApplicationShop.UserControls.Objects.CatalogControl">
-    <Grid RowDefinitions="Auto Auto">
-        <DataGrid Grid.Row="1" IsReadOnly="True" DoubleTapped="Show_Catalog"
+    <Grid RowDefinitions="Auto Auto Auto">
+        <DataGrid Grid.Row="0" IsReadOnly="True" DoubleTapped="Show_Catalog"
                   Name="CatalogDataGrid">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="Price" Binding="{Binding Price}" />
                 <DataGridTextColumn Header="Provider" Binding="{Binding Provider}" />
                 <DataGridTextColumn Header="Count" Binding="{Binding BasketCount}" />
-                
+
                 <!-- Button - Buy -->
                 <DataGridTemplateColumn Header="" Width="70">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Grid ColumnDefinitions="Auto Auto">
-                                <Button Grid.Column="0" Click="DecreseProduct" Content="-" Width="25"/>
-                                <Button Grid.Column="1" Click="AddProduct" Content="+" Width="25"/>
-                            </Grid> 
+                                <Button Grid.Column="0" Click="DecreseProduct" Content="-" Width="25" />
+                                <Button Grid.Column="1" Click="AddProduct" Content="+" Width="25" />
+                            </Grid>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                
+
                 <!-- Button - Delete -->
                 <DataGridTemplateColumn Header="" Width="50">
                     <DataGridTemplateColumn.CellTemplate>
@@ -38,5 +38,11 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+
+        <Grid Grid.Row="1">
+            <TextBlock Name="SummTextBlock"></TextBlock>
+        </Grid>
+
+        <Button Grid.Row="2" Click="CreateOrder" Name="CreateOrderButton">Заказать</Button>
     </Grid>
 </UserControl>

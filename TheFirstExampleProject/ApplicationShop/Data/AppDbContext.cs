@@ -103,8 +103,14 @@ public partial class AppDbContext : DbContext
             entity.ToTable("Order");
 
             entity.Property(e => e.IdOrder).HasColumnName("id_order");
+            entity.Property(e => e.IdOwner).HasColumnName("id_owner");
             entity.Property(e => e.IsDelivered).HasColumnName("is_delivered");
             entity.Property(e => e.IsPaided).HasColumnName("is_paided");
+
+            entity.HasOne(d => d.IdOwnerNavigation).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.IdOwner)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Order_User");
         });
 
         modelBuilder.Entity<OrderList>(entity =>

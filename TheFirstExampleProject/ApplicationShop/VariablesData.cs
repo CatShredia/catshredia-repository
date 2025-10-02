@@ -13,4 +13,6 @@ public class VariablesData
     
     public static Login SelectedLogin { get; set; }
     public static Product SelectedProduct { get; set; }
+    
+    public static Order SelectedOrder { get; set; }
 }
