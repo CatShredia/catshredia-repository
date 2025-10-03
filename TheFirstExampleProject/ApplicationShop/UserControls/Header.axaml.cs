@@ -24,15 +24,21 @@ public partial class Header : UserControl
         InitializeComponent();
 
         UpdateDate();
-
-        CheckPermissons();
     }
 
     private void CheckPermissons()
     {
+        EmployeeButton.IsVisible = false;
+        UsersButton.IsVisible = false;
+        ProductButton.IsVisible = false;
+        CatalogButton.IsVisible = false;
+        OrderListButton.IsVisible = false;
+        
         if (VariablesData.AuthorizatedUser != null)
         {
-            if (VariablesData.AuthorizatedUser.IdRoleNavigation.Name == "admin")
+            LogOutButton.IsVisible = true;
+            
+            if (VariablesData.AuthorizatedUser.IdRole == 1)
             {
                 EmployeeButton.IsVisible = true;
                 UsersButton.IsVisible = true;
@@ -41,7 +47,7 @@ public partial class Header : UserControl
                 OrderListButton.IsVisible = true;
             }
 
-            if (VariablesData.AuthorizatedUser.IdRoleNavigation.Name == "user")
+            if (VariablesData.AuthorizatedUser.IdRole == 2)
             {
                 EmployeeButton.IsVisible = true;
                 UsersButton.IsVisible = false;
@@ -50,7 +56,7 @@ public partial class Header : UserControl
                 OrderListButton.IsVisible = true;
             }
 
-            if (VariablesData.AuthorizatedUser.IdRoleNavigation.Name == "buyer")
+            if (VariablesData.AuthorizatedUser.IdRole == 4)
             {
                 EmployeeButton.IsVisible = false;
                 UsersButton.IsVisible = false;
@@ -100,6 +106,8 @@ public partial class Header : UserControl
             // user is authtorized
             SelectionUserButton.Content = VariablesData.AuthorizatedUser.Name;
         }
+        
+        CheckPermissons();
     }
 
     private void ShowEmployees(object? sender, RoutedEventArgs e)
@@ -136,5 +144,12 @@ public partial class Header : UserControl
     {
         var productWindow = GetWindow() as MainWindow;
         productWindow?.ReplaceControl(new OrderControl());
+    }
+
+    private void LogOutButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        VariablesData.AuthorizatedUser = null;
+
+        UpdateDate();
     }
 }

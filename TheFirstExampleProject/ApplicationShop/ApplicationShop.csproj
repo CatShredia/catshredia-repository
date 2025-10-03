@@ -57,8 +57,8 @@
 
     <ItemGroup>
       <None Remove="Assets\logout.png" />
-      <Resource Include="Assets\logout.png">
+      <AvaloniaResource Include="Assets\logout.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Resource>
+      </AvaloniaResource>
     </ItemGroup>
 </Project>

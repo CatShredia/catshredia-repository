@@ -4,13 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ApplicationShop.UserControls.Header">
-    <Grid ColumnDefinitions="Auto Auto Auto Auto Auto Auto Auto" RowDefinitions="Auto">
+    <Grid ColumnDefinitions="Auto Auto Auto Auto Auto Auto Auto Auto" RowDefinitions="Auto">
         <Button Grid.Column="0" Click="ShowEmployees" IsVisible="False" Name="EmployeeButton">Сотрудники</Button>
         <Button Grid.Column="1" Click="ShowUsers" IsVisible="False" Name="UsersButton">Покупатели</Button>
         <Button Grid.Column="2" Click="ShowProduct" IsVisible="False" Name="ProductButton">Продукты</Button>
         <Button Grid.Column="3" Click="ShowCatalog" IsVisible="False" Name="CatalogButton">Каталог</Button>
         <Button Grid.Column="4" Click="SelectUserButtonClick" Name="SelectionUserButton"></Button>
-        <Button Grid.Column="5" Click="ShowUserOrders" IsVisible="False" Name="OrderListButton">Заказы</Button>
-        <Button Grid.Column="6" Click="ShowDefault" Name="DefaultButton" Width="10"></Button>
+        <Button Grid.Column="5" 
+                Click="LogOutButton_OnClick" 
+                IsVisible="False" 
+                Name="LogOutButton"
+                Width="32" Height="32"
+                Padding="4">
+            <Image Source="avares://ApplicationShop/Assets/logout.png"
+                   Width="20" Height="20" />
+        </Button>
+        <Button Grid.Column="6" Click="ShowUserOrders" IsVisible="False" Name="OrderListButton">Заказы</Button>
+        <Button Grid.Column="7" Click="ShowDefault" Name="DefaultButton" Width="10"></Button>
     </Grid>
 </UserControl>
