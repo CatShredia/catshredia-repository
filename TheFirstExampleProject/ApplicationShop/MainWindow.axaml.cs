@@ -9,8 +9,6 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        
-        MainContentArea.Content = new DefaultControl();
     }
 
     public void UpdateDate()

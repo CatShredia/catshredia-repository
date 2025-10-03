@@ -14,28 +14,51 @@ namespace ApplicationShop.UserControls;
 
 public partial class Header : UserControl
 {
-    
     private Window? GetWindow()
     {
         return this.GetVisualRoot() as Window;
     }
-    
+
     public Header()
     {
         InitializeComponent();
 
-        if (VariablesData.AuthorizatedUser == null)
-        {
-            // user is unauthtorized
-            SelectionUserButton.Content = "Login";            
-        }
-        else
-        {
-            // user is authtorized
-            SelectionUserButton.Content = VariablesData.AuthorizatedUser.Name; 
-        }
-        
         UpdateDate();
+
+        CheckPermissons();
+    }
+
+    private void CheckPermissons()
+    {
+        if (VariablesData.AuthorizatedUser != null)
+        {
+            if (VariablesData.AuthorizatedUser.IdRoleNavigation.Name == "admin")
+            {
+                EmployeeButton.IsVisible = true;
+                UsersButton.IsVisible = true;
+                ProductButton.IsVisible = true;
+                CatalogButton.IsVisible = false;
+                OrderListButton.IsVisible = true;
+            }
+
+            if (VariablesData.AuthorizatedUser.IdRoleNavigation.Name == "user")
+            {
+                EmployeeButton.IsVisible = true;
+                UsersButton.IsVisible = false;
+                ProductButton.IsVisible = true;
+                CatalogButton.IsVisible = false;
+                OrderListButton.IsVisible = true;
+            }
+
+            if (VariablesData.AuthorizatedUser.IdRoleNavigation.Name == "buyer")
+            {
+                EmployeeButton.IsVisible = false;
+                UsersButton.IsVisible = false;
+                ProductButton.IsVisible = false;
+                CatalogButton.IsVisible = true;
+                OrderListButton.IsVisible = true;
+            }
+        }
     }
 
     private async void SelectUserButtonClick(object? sender, RoutedEventArgs e)
@@ -52,8 +75,9 @@ public partial class Header : UserControl
         }
         else
         {
-            VariablesData.SelectedLogin = App.DbContext.Logins.FirstOrDefault(login => login.IdUser == VariablesData.AuthorizatedUser.IdUser);
-            
+            VariablesData.SelectedLogin =
+                App.DbContext.Logins.FirstOrDefault(login => login.IdUser == VariablesData.AuthorizatedUser.IdUser);
+
             // user is authtorized
             var userEditWindow = new UsersEditWindow();
             await userEditWindow.ShowDialog(GetWindow());
@@ -66,8 +90,16 @@ public partial class Header : UserControl
 
     public void UpdateDate()
     {
-        if (VariablesData.AuthorizatedUser == null) return;
-        SelectionUserButton.Content = VariablesData.AuthorizatedUser.Name;
+        if (VariablesData.AuthorizatedUser == null)
+        {
+            // user is unauthtorized
+            SelectionUserButton.Content = "Login";
+        }
+        else
+        {
+            // user is authtorized
+            SelectionUserButton.Content = VariablesData.AuthorizatedUser.Name;
+        }
     }
 
     private void ShowEmployees(object? sender, RoutedEventArgs e)
@@ -87,7 +119,7 @@ public partial class Header : UserControl
         var productWindow = GetWindow() as MainWindow;
         productWindow?.ReplaceControl(new ProductControl());
     }
-    
+
     private void ShowCatalog(object? sender, RoutedEventArgs e)
     {
         var catalogWindow = GetWindow() as MainWindow;
@@ -97,7 +129,7 @@ public partial class Header : UserControl
     private void ShowDefault(object? sender, RoutedEventArgs e)
     {
         var productWindow = GetWindow() as MainWindow;
-        productWindow?.ReplaceControl(new DefaultControl());
+        productWindow?.ReplaceControl(new DefaultControl(this));
     }
 
     private void ShowUserOrders(object? sender, RoutedEventArgs e)

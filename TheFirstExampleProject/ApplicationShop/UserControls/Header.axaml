@@ -5,12 +5,12 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ApplicationShop.UserControls.Header">
     <Grid ColumnDefinitions="Auto Auto Auto Auto Auto Auto Auto" RowDefinitions="Auto">
-        <Button Grid.Column="0" Click="ShowEmployees" IsVisible="True" Name="EmployeeButton">Сотрудники</Button>
-        <Button Grid.Column="1" Click="ShowUsers" IsVisible="True" Name="UsersButton">Покупатели</Button>
-        <Button Grid.Column="2" Click="ShowProduct" IsVisible="True" Name="ProductButton">Продукты</Button>
-        <Button Grid.Column="3" Click="ShowCatalog" IsVisible="True" Name="CatalogButton">Каталог</Button>
+        <Button Grid.Column="0" Click="ShowEmployees" IsVisible="False" Name="EmployeeButton">Сотрудники</Button>
+        <Button Grid.Column="1" Click="ShowUsers" IsVisible="False" Name="UsersButton">Покупатели</Button>
+        <Button Grid.Column="2" Click="ShowProduct" IsVisible="False" Name="ProductButton">Продукты</Button>
+        <Button Grid.Column="3" Click="ShowCatalog" IsVisible="False" Name="CatalogButton">Каталог</Button>
         <Button Grid.Column="4" Click="SelectUserButtonClick" Name="SelectionUserButton"></Button>
-        <Button Grid.Column="5" Click="ShowUserOrders" IsVisible="True" Name="OrderListButton">Заказы</Button>
+        <Button Grid.Column="5" Click="ShowUserOrders" IsVisible="False" Name="OrderListButton">Заказы</Button>
         <Button Grid.Column="6" Click="ShowDefault" Name="DefaultButton" Width="10"></Button>
     </Grid>
 </UserControl>

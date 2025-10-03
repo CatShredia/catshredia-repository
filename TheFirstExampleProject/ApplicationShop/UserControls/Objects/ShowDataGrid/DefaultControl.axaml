@@ -5,16 +5,5 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ApplicationShop.UserControls.DefaultControl">
     <Grid ColumnDefinitions="50* 50*">
-        <Grid Grid.Column="0">
-            <DataGrid Name="BasketTableDataGrid" IsReadOnly="True">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="idProduct" Binding="{Binding IdProductNavigation.IdProduct}" />
-                    <DataGridTextColumn Header="Product" Binding="{Binding IdProductNavigation.Name}" />
-                    <DataGridTextColumn Header="Price" Binding="{Binding IdProductNavigation.Price}" />
-                    <DataGridTextColumn Header="idUser" Binding="{Binding IdUserNavigation.IdUser}" />
-                    <DataGridTextColumn Header="User" Binding="{Binding IdUserNavigation.Name}" />
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
     </Grid>
 </UserControl>
