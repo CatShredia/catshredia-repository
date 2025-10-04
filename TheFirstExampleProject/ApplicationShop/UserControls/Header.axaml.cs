@@ -50,8 +50,8 @@ public partial class Header : UserControl
 
             if (VariablesData.AuthorizatedUser.IdRole == 2)
             {
-                EmployeeButton.IsVisible = true;
-                UsersButton.IsVisible = false;
+                EmployeeButton.IsVisible = false;
+                UsersButton.IsVisible = true;
                 ProductButton.IsVisible = true;
                 CatalogButton.IsVisible = false;
                 OrderListButton.IsVisible = true;
@@ -97,6 +97,7 @@ public partial class Header : UserControl
             var parentWindow = GetWindow() as MainWindow;
             parentWindow?.UpdateDate();
             UpdateDate();
+            VariablesData.SelectedLogin = null;
         }
     }
 
@@ -119,13 +120,15 @@ public partial class Header : UserControl
     private void ShowEmployees(object? sender, RoutedEventArgs e)
     {
         var parentWindow = GetWindow() as MainWindow;
-        parentWindow?.ReplaceControl(new UsersControl(3));
+        VariablesData.SelectedRoleId = 2;
+        parentWindow?.ReplaceControl(new UsersControl());
     }
 
     private void ShowUsers(object? sender, RoutedEventArgs e)
     {
         var parentWindow = GetWindow() as MainWindow;
-        parentWindow?.ReplaceControl(new UsersControl(2));
+        VariablesData.SelectedRoleId = 3;
+        parentWindow?.ReplaceControl(new UsersControl());
     }
 
     private void ShowProduct(object? sender, RoutedEventArgs e)

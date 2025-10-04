@@ -14,18 +14,14 @@ namespace ApplicationShop.UserControls.Objects;
 
 public partial class UsersControl : UserControl
 {
-    public static int IdCurrentRole;
-
     private Window? GetWindow()
     {
         return this.GetVisualRoot() as Window;
     }
 
-    public UsersControl(int idCurrentRole)
+    public UsersControl()
     {
         InitializeComponent();
-
-        IdCurrentRole = idCurrentRole;
 
         RefreshDate();
     }
@@ -57,7 +53,7 @@ public partial class UsersControl : UserControl
         UserDataGrid.ItemsSource =
             App.DbContext.Logins
                 .Include(login => login.IdUserNavigation)
-                .Where(login => login.IdUserNavigation.IdRole == IdCurrentRole)
+                .Where(login => login.IdUserNavigation.IdRole == VariablesData.SelectedRoleId)
                 .ToList();
     }
 
