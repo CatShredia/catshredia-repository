@@ -65,6 +65,11 @@ public partial class Header : UserControl
                 CatalogButton.IsVisible = true;
                 OrderListButton.IsVisible = true;
             }
+
+            if (VariablesData.AuthorizatedUser.Orders.Count == 0)
+            {
+                OrderListButton.IsVisible = false;
+            }
         }
     }
 

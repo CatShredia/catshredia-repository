@@ -11,36 +11,48 @@
                 <TextBlock Grid.Row="0" Name="SurnameEmployeeTextBlock">Фамилия:</TextBlock>
                 <TextBox Grid.Row="1" Name="SurnameEmployeeTextBox" Text="{Binding IdUserNavigation.Surname}"></TextBox>
             </Grid>
-        
-            <Grid Grid.Row="1"  RowDefinitions="Auto Auto" Margin="5">
+
+            <Grid Grid.Row="1" RowDefinitions="Auto Auto" Margin="5">
                 <TextBlock Grid.Row="0" Name="NameEmployeeTextBlock">Имя:</TextBlock>
                 <TextBox Grid.Row="1" Name="NameEmployeeTextBox" Text="{Binding IdUserNavigation.Name}"></TextBox>
             </Grid>
-        
-            <Grid Grid.Row="2"  RowDefinitions="Auto Auto" Margin="5">
+
+            <Grid Grid.Row="2" RowDefinitions="Auto Auto" Margin="5">
                 <TextBlock Grid.Row="0" Name="DescriptionEmployeeTextBlock">Описание:</TextBlock>
                 <TextBox Grid.Row="1" Name="DescriptionEmployeeTextBox" Text="{Binding IdUserNavigation.Desciption}"></TextBox>
             </Grid>
-        
+
             <Grid Grid.Row="3" RowDefinitions="Auto Auto" Margin="5">
                 <TextBlock Grid.Row="0" Name="PhoneEmployeeTextBlock">Телефон:</TextBlock>
                 <TextBox Grid.Row="1" Name="PhoneEmployeeTextBox" Text="{Binding IdUserNavigation.Phone}"></TextBox>
             </Grid>
-        
+
         </Grid>
-        
-        <Grid Grid.Column="1" RowDefinitions="Auto Auto">
+
+        <Grid Grid.Column="1" RowDefinitions="Auto Auto Auto">
             <Grid Grid.Row="0" RowDefinitions="Auto Auto" Margin="5">
                 <TextBlock Grid.Row="0" Name="LoginEmployeeTextBlock">Логин:</TextBlock>
                 <TextBox Grid.Row="1" Name="LoginEmployeeTextBox" Text="{Binding Login1}"></TextBox>
             </Grid>
-            
+
             <Grid Grid.Row="1" RowDefinitions="Auto Auto" Margin="5">
                 <TextBlock Grid.Row="0" Name="PasswordEmployeeTextBlock">Пароль:</TextBlock>
                 <TextBox Grid.Row="1" Name="PasswordEmployeeTextBox" Text="{Binding Password}"></TextBox>
             </Grid>
+
+            <Grid Grid.Row="2">
+                <ComboBox Name="RoleComboBox" Margin="5" IsEnabled="False">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                <TextBlock Text="{Binding Name}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Grid>
         </Grid>
-        
+
         <Grid Grid.Column="0" Grid.Row="1">
             <Button Grid.Row="0" Click="CreateUser" Margin="5">OK</Button>
         </Grid>

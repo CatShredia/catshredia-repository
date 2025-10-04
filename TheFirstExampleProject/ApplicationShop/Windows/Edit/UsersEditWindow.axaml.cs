@@ -13,6 +13,9 @@ public partial class UsersEditWindow : Window
     public UsersEditWindow()
     {
         InitializeComponent();
+        
+        RoleComboBox.ItemsSource = App.DbContext.Roles.ToList();
+        RoleComboBox.SelectedItem = VariablesData.SelectedLogin.IdUserNavigation.IdRoleNavigation;
 
         if (VariablesData.SelectedLogin == null)
         {
@@ -20,6 +23,7 @@ public partial class UsersEditWindow : Window
             {
                 IdUserNavigation = new User()
             };
+            RoleComboBox.IsEnabled = true;
         }
         else
         {
