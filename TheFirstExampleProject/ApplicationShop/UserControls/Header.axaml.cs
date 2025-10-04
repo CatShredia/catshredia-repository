@@ -33,11 +33,12 @@ public partial class Header : UserControl
         ProductButton.IsVisible = false;
         CatalogButton.IsVisible = false;
         OrderListButton.IsVisible = false;
-        
+        LogOutButton.IsVisible = false;
+
         if (VariablesData.AuthorizatedUser != null)
         {
             LogOutButton.IsVisible = true;
-            
+
             if (VariablesData.AuthorizatedUser.IdRole == 1)
             {
                 EmployeeButton.IsVisible = true;
@@ -106,7 +107,7 @@ public partial class Header : UserControl
             // user is authtorized
             SelectionUserButton.Content = VariablesData.AuthorizatedUser.Name;
         }
-        
+
         CheckPermissons();
     }
 
@@ -149,6 +150,9 @@ public partial class Header : UserControl
     private void LogOutButton_OnClick(object? sender, RoutedEventArgs e)
     {
         VariablesData.AuthorizatedUser = null;
+        
+        var parentWindow = GetWindow() as MainWindow;
+        parentWindow?.ReplaceControl(new DefaultControl(this));
 
         UpdateDate();
     }

@@ -5,16 +5,16 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="ApplicationShop.Windows.AuthtorizationWindow"
         Title="AuthtorizationWindow">
-    <Grid ColumnDefinitions="Auto" RowDefinitions="Auto Auto Auto">
-        <Grid RowDefinitions="Auto Auto" Grid.Row="0">
+    <Grid ColumnDefinitions="Auto" RowDefinitions="Auto Auto Auto" Margin="5">
+        <Grid RowDefinitions="Auto Auto" Grid.Row="0" Margin="5">
             <TextBlock Grid.Row="0">Логин</TextBlock>
-            <TextBox Grid.Row="1" Name="LoginTextBox"></TextBox>
+            <TextBox Grid.Row="1" Name="LoginTextBox" Width="400"></TextBox>
         </Grid>
-        <Grid RowDefinitions="Auto Auto" Grid.Row="1">
+        <Grid RowDefinitions="Auto Auto" Grid.Row="1" Margin="5">
             <TextBlock Grid.Row="0">Пароль</TextBlock>
-            <TextBox Grid.Row="1" Name="PasswordTextBox"></TextBox>
+            <TextBox Grid.Row="1" Name="PasswordTextBox" Width="400"></TextBox>
         </Grid>
         
-        <Button Grid.Row="2" Click="AuthUser">OK</Button>
+        <Button Grid.Row="2" Click="AuthUser" Margin="5">OK</Button>
     </Grid>
 </Window>

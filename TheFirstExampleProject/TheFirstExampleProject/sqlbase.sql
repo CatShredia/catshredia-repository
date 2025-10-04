@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [ShopDB]    Script Date: 02.10.2025 22:39:55 ******/
+/****** Object:  Database [ShopDB]    Script Date: 04.10.2025 12:04:12 ******/
 CREATE DATABASE [ShopDB]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -77,10 +77,10 @@ ALTER DATABASE [ShopDB] SET QUERY_STORE = OFF
 GO
 USE [ShopDB]
 GO
-/****** Object:  User [catshredia]    Script Date: 02.10.2025 22:39:55 ******/
+/****** Object:  User [catshredia]    Script Date: 04.10.2025 12:04:12 ******/
 CREATE USER [catshredia] WITHOUT LOGIN WITH DEFAULT_SCHEMA=[dbo]
 GO
-/****** Object:  Table [dbo].[Basket]    Script Date: 02.10.2025 22:39:55 ******/
+/****** Object:  Table [dbo].[Basket]    Script Date: 04.10.2025 12:04:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -96,7 +96,7 @@ CREATE TABLE [dbo].[Basket](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[City]    Script Date: 02.10.2025 22:39:55 ******/
+/****** Object:  Table [dbo].[City]    Script Date: 04.10.2025 12:04:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -110,7 +110,7 @@ CREATE TABLE [dbo].[City](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Login]    Script Date: 02.10.2025 22:39:55 ******/
+/****** Object:  Table [dbo].[Login]    Script Date: 04.10.2025 12:04:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -126,7 +126,7 @@ CREATE TABLE [dbo].[Login](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Order]    Script Date: 02.10.2025 22:39:55 ******/
+/****** Object:  Table [dbo].[Order]    Script Date: 04.10.2025 12:04:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -142,7 +142,7 @@ CREATE TABLE [dbo].[Order](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Order_list]    Script Date: 02.10.2025 22:39:55 ******/
+/****** Object:  Table [dbo].[Order_list]    Script Date: 04.10.2025 12:04:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -157,7 +157,7 @@ CREATE TABLE [dbo].[Order_list](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Product]    Script Date: 02.10.2025 22:39:55 ******/
+/****** Object:  Table [dbo].[Product]    Script Date: 04.10.2025 12:04:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -174,7 +174,7 @@ CREATE TABLE [dbo].[Product](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Role]    Script Date: 02.10.2025 22:39:55 ******/
+/****** Object:  Table [dbo].[Role]    Script Date: 04.10.2025 12:04:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -188,7 +188,7 @@ CREATE TABLE [dbo].[Role](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Street]    Script Date: 02.10.2025 22:39:55 ******/
+/****** Object:  Table [dbo].[Street]    Script Date: 04.10.2025 12:04:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -203,7 +203,7 @@ CREATE TABLE [dbo].[Street](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[User]    Script Date: 02.10.2025 22:39:55 ******/
+/****** Object:  Table [dbo].[User]    Script Date: 04.10.2025 12:04:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -221,7 +221,7 @@ CREATE TABLE [dbo].[User](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserAdresses]    Script Date: 02.10.2025 22:39:55 ******/
+/****** Object:  Table [dbo].[UserAdresses]    Script Date: 04.10.2025 12:04:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -267,6 +267,8 @@ ALTER TABLE [dbo].[Login] CHECK CONSTRAINT [FK_Login_User]
 GO
 ALTER TABLE [dbo].[Order]  WITH CHECK ADD  CONSTRAINT [FK_Order_User] FOREIGN KEY([id_owner])
 REFERENCES [dbo].[User] ([id_user])
+ON UPDATE CASCADE
+ON DELETE CASCADE
 GO
 ALTER TABLE [dbo].[Order] CHECK CONSTRAINT [FK_Order_User]
 GO
