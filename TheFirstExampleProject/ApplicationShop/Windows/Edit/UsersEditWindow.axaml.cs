@@ -38,7 +38,7 @@ public partial class UsersEditWindow : Window
         loginDataContext.IdUserNavigation.IdRoleNavigation =
             App.DbContext.Roles.FirstOrDefault(role => role.IdRole == VariablesData.SelectedRoleId);
 
-        if (loginDataContext.IdUserNavigation.IdRoleNavigation == null)
+        if (loginDataContext.IdUserNavigation.IdRoleNavigation == null && RoleComboBox.IsEnabled != false)
         {
             Console.WriteLine("Роли нет");
             return;
@@ -47,6 +47,7 @@ public partial class UsersEditWindow : Window
         if (VariablesData.SelectedLogin == null)
         {
             App.DbContext.Logins.Add(loginDataContext);
+            VariablesData.SelectedLogin = null;
         }
         else
         {
@@ -54,8 +55,6 @@ public partial class UsersEditWindow : Window
         }
 
         App.DbContext.SaveChanges();
-        
-        VariablesData.SelectedLogin = null;
         
         Close();
     }

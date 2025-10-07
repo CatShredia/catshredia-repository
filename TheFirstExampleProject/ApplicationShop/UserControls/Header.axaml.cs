@@ -80,9 +80,7 @@ public partial class Header : UserControl
             // user is unauthtorized
             var authWindow = new AuthtorizationWindow();
             await authWindow.ShowDialog(GetWindow());
-
-            var parentWindow = GetWindow() as MainWindow;
-            parentWindow?.UpdateDate();
+            
             UpdateDate();
         }
         else
@@ -93,9 +91,7 @@ public partial class Header : UserControl
             // user is authtorized
             var userEditWindow = new UsersEditWindow();
             await userEditWindow.ShowDialog(GetWindow());
-
-            var parentWindow = GetWindow() as MainWindow;
-            parentWindow?.UpdateDate();
+            
             UpdateDate();
             VariablesData.SelectedLogin = null;
         }

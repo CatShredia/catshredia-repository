@@ -5,6 +5,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ApplicationShop.Windows;
 
@@ -15,8 +16,37 @@ public partial class AuthtorizationWindow : Window
         InitializeComponent();
     }
 
+    private bool ValidateData()
+    {
+        LoginValidationErrorBlock.Text = string.Empty;
+        PasswordValidationErrorBlock.Text = string.Empty;
+
+        bool isValid = true;
+
+        if (string.IsNullOrWhiteSpace(LoginTextBox?.Text))
+        {
+            LoginValidationErrorBlock.Text = "Please enter a username.";
+            isValid = false;
+        }
+
+        if (string.IsNullOrWhiteSpace(PasswordTextBox?.Text))
+        {
+            PasswordValidationErrorBlock.Text = "Please enter a password.";
+            isValid = false;
+        }
+        // ! explore code
+        // else if (PasswordTextBox.Text.Length < 8)
+        // {
+        //     PasswordValidationErrorBlock.Text = "Password must be at least 8 characters long.";
+        //     isValid = false;
+        // }
+
+        return isValid;
+    }
     private void AuthUser(object? sender, RoutedEventArgs e)
     {
+        if(!ValidateData()) return;
+
         if (VariablesData.AuthorizatedUser == null)
         {
             var selectedLogin = App.DbContext.Logins.FirstOrDefault(login =>
