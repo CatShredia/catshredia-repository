@@ -1,6 +1,4 @@
-USE [ShopDB]
-GO
-
+use [ShopDB]
 -- Drop foreign key constraints first
 ALTER TABLE [dbo].[Basket] DROP CONSTRAINT [FK_Basket_Product1]
 GO

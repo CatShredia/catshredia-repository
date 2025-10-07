@@ -28,49 +28,7 @@ public partial class Header : UserControl
 
     private void CheckPermissons()
     {
-        EmployeeButton.IsVisible = false;
-        UsersButton.IsVisible = false;
-        ProductButton.IsVisible = false;
-        CatalogButton.IsVisible = false;
-        OrderListButton.IsVisible = false;
-        LogOutButton.IsVisible = false;
 
-        if (VariablesData.AuthorizatedUser != null)
-        {
-            LogOutButton.IsVisible = true;
-
-            if (VariablesData.AuthorizatedUser.IdRole == 1)
-            {
-                EmployeeButton.IsVisible = true;
-                UsersButton.IsVisible = true;
-                ProductButton.IsVisible = true;
-                CatalogButton.IsVisible = false;
-                OrderListButton.IsVisible = true;
-            }
-
-            if (VariablesData.AuthorizatedUser.IdRole == 2)
-            {
-                EmployeeButton.IsVisible = false;
-                UsersButton.IsVisible = true;
-                ProductButton.IsVisible = true;
-                CatalogButton.IsVisible = false;
-                OrderListButton.IsVisible = true;
-            }
-
-            if (VariablesData.AuthorizatedUser.IdRole == 4)
-            {
-                EmployeeButton.IsVisible = false;
-                UsersButton.IsVisible = false;
-                ProductButton.IsVisible = false;
-                CatalogButton.IsVisible = true;
-                OrderListButton.IsVisible = true;
-            }
-
-            if (VariablesData.AuthorizatedUser.Orders.Count == 0)
-            {
-                OrderListButton.IsVisible = false;
-            }
-        }
     }
 
     private async void SelectUserButtonClick(object? sender, RoutedEventArgs e)

@@ -118,6 +118,16 @@ CREATE TABLE [dbo].[UserAdresses](
 ) ON [PRIMARY]
 GO
 
+GO
+
+CREATE TABLE [dbo].[RolePermission](
+    [id_role] INT NOT NULL,
+    [permission_name] VARCHAR(50) NOT NULL, 
+    CONSTRAINT [PK_RolePermission] PRIMARY KEY ([id_role], [permission_name]),
+    CONSTRAINT [FK_RolePermission_Role] FOREIGN KEY ([id_role]) REFERENCES [dbo].[Role]([id_role]) ON DELETE CASCADE
+)
+GO
+
 ALTER TABLE [dbo].[Basket] ADD CONSTRAINT [DF_Basket_count] DEFAULT ((0)) FOR [count]
 GO
 

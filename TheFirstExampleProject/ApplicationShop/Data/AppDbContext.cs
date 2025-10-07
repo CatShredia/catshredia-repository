@@ -29,6 +29,8 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Role> Roles { get; set; }
 
+    public virtual DbSet<RolePermission> RolePermissions { get; set; }
+
     public virtual DbSet<Street> Streets { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
@@ -103,14 +105,8 @@ public partial class AppDbContext : DbContext
             entity.ToTable("Order");
 
             entity.Property(e => e.IdOrder).HasColumnName("id_order");
-            entity.Property(e => e.IdOwner).HasColumnName("id_owner");
             entity.Property(e => e.IsDelivered).HasColumnName("is_delivered");
             entity.Property(e => e.IsPaided).HasColumnName("is_paided");
-
-            entity.HasOne(d => d.IdOwnerNavigation).WithMany(p => p.Orders)
-                .HasForeignKey(d => d.IdOwner)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Order_User");
         });
 
         modelBuilder.Entity<OrderList>(entity =>
@@ -167,6 +163,23 @@ public partial class AppDbContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("name");
+        });
+
+        modelBuilder.Entity<RolePermission>(entity =>
+        {
+            entity.HasKey(e => new { e.IdRole, e.PermissionName });
+
+            entity.ToTable("RolePermission");
+
+            entity.Property(e => e.IdRole).HasColumnName("id_role");
+            entity.Property(e => e.PermissionName)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("permission_name");
+
+            entity.HasOne(d => d.IdRoleNavigation).WithMany(p => p.RolePermissions)
+                .HasForeignKey(d => d.IdRole)
+                .HasConstraintName("FK_RolePermission_Role");
         });
 
         modelBuilder.Entity<Street>(entity =>
