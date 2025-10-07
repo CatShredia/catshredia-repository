@@ -1,69 +1,166 @@
 USE [ShopDB]
+GO
 
--- город (уже есть в вашем скрипте)
-INSERT INTO City (name)
-VALUES 
-('Казань'),
-('Усть-Урюпинск'),
-('Москва'),
-('Липецк');
+-- Roles (6 roles)
+SET IDENTITY_INSERT [dbo].[Role] ON
+INSERT [dbo].[Role] ([id_role], [name]) VALUES (1, N'Admin')
+INSERT [dbo].[Role] ([id_role], [name]) VALUES (2, N'Manager')
+INSERT [dbo].[Role] ([id_role], [name]) VALUES (3, N'Employee')
+INSERT [dbo].[Role] ([id_role], [name]) VALUES (4, N'Customer')
+INSERT [dbo].[Role] ([id_role], [name]) VALUES (5, N'Support')
+INSERT [dbo].[Role] ([id_role], [name]) VALUES (6, N'Guest')
+SET IDENTITY_INSERT [dbo].[Role] OFF
+GO
 
--- улица (уже есть в вашем скрипте)
-INSERT INTO Street (name, id_city)
-VALUES 
-('Ленина', 1),
-('Амирхана', 1),
-('Большой Арбат', 3),  -- Москва имеет id = 3
-('Малый Арбат', 3),   -- Москва имеет id = 3
-('УУУ', 1),
-('ЫЫЫ', 1),
-('Название 1', 4),    -- Липецк имеет id = 4
-('Название 2', 2);    -- Усть-Урюпинск имеет id = 2
+-- Role Permissions
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (1, N'Employee')
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (1, N'Users')
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (1, N'Product')
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (1, N'OrderList')
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (1, N'Catalog')
 
--- таблица роли (уже есть в вашем скрипте)
-INSERT INTO Role (name)
-VALUES 
-('admin'),
-('employee'),
-('user'),
-('buyer');
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (2, N'Users')
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (2, N'Product')
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (2, N'OrderList')
 
--- таблица пользователь
-INSERT INTO [User] (surname, name, desciption, phone, id_role)
-VALUES 
-('Иванов', 'Иван', 'Администратор магазина', '+7(999)111-11-11', 1),      -- admin
-('Петров', 'Петр', 'Сотрудник склада', '+7(999)222-22-22', 2),           -- employee  
-('Сидоров', 'Сергей', 'Постоянный покупатель', '+7(999)333-33-33', 4),    -- buyer
-('Кузнецова', 'Анна', 'Новый пользователь', '+7(999)444-44-44', 3),       -- user
-('Смирнов', 'Алексей', 'VIP клиент', '+7(999)555-55-55', 4);             -- buyer
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (3, N'Product')
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (3, N'OrderList')
 
--- таблица пользователь - адрес (UserAdresses)
-INSERT INTO UserAdresses (id_user, id_street, home, apartment)
-VALUES 
-(1, 1, '10', 15),    -- Иванов, ул. Ленина, д.10, кв.15
-(1, 2, '25', 33),    -- Иванов, ул. Амирхана, д.25, кв.33
-(2, 3, '50', 12),    -- Петров, Большой Арбат, д.50, кв.12
-(3, 4, '75', 8),     -- Сидоров, Малый Арбат, д.75, кв.8
-(4, 5, '5', 22),     -- Кузнецова, ул. УУУ, д.5, кв.22
-(5, 6, '15', NULL);  -- Смирнов, ул. ЫЫЫ, д.15, без квартиры
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (4, N'Catalog')
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (4, N'OrderList')
 
--- таблица логин
-INSERT INTO Login ([login], [password], id_user)
-VALUES 
-('admin', 'admin123', 1),
-('worker', 'worker123', 2),
-('sergey', 'password123', 3),
-('anna', 'mypassword', 4),
-('alex', 'securepass', 5);
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (5, N'Users')
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (5, N'OrderList')
 
--- таблица продукта
-INSERT INTO Product (name, price, provider, image_path)
-VALUES 
-('Смартфон iPhone 15', 85000, 'Apple Inc.', 'images/iphone15.jpg'),
-('Ноутбук MacBook Air', 120000, 'Apple Inc.', 'images/macbook.jpg'),
-('Наушники AirPods Pro', 25000, 'Apple Inc.', 'images/airpods.jpg'),
-('Фитнес-браслет Mi Band 8', 3500, 'Xiaomi Corp.', 'images/miband8.jpg'),
-('Электросамокат Xiaomi', 45000, 'Xiaomi Corp.', 'images/scooter.jpg'),
-('Кофемашина DeLonghi', 32000, 'DeLonghi Group', 'images/coffee.jpg'),
-('Беспроводная мышь Logitech', 2800, 'Logitech Inc.', 'images/mouse.jpg'),
-('Механическая клавиатура', 7500, 'Razer Corp.', 'images/keyboard.jpg');
+-- Guest has no permissions
+GO
+
+-- Cities (6 cities)
+SET IDENTITY_INSERT [dbo].[City] ON
+INSERT [dbo].[City] ([id_city], [name]) VALUES (1, N'Moscow')
+INSERT [dbo].[City] ([id_city], [name]) VALUES (2, N'Saint Petersburg')
+INSERT [dbo].[City] ([id_city], [name]) VALUES (3, N'Novosibirsk')
+INSERT [dbo].[City] ([id_city], [name]) VALUES (4, N'Yekaterinburg')
+INSERT [dbo].[City] ([id_city], [name]) VALUES (5, N'Kazan')
+INSERT [dbo].[City] ([id_city], [name]) VALUES (6, N'Nizhny Novgorod')
+SET IDENTITY_INSERT [dbo].[City] OFF
+GO
+
+-- Streets (6 streets вЂ” 1 per city)
+SET IDENTITY_INSERT [dbo].[Street] ON
+INSERT [dbo].[Street] ([id_street], [name], [id_city]) VALUES (1, N'Tverskaya', 1)
+INSERT [dbo].[Street] ([id_street], [name], [id_city]) VALUES (2, N'Nevsky Prospect', 2)
+INSERT [dbo].[Street] ([id_street], [name], [id_city]) VALUES (3, N'Krasny Avenue', 3)
+INSERT [dbo].[Street] ([id_street], [name], [id_city]) VALUES (4, N'Lenina Street', 4)
+INSERT [dbo].[Street] ([id_street], [name], [id_city]) VALUES (5, N'Bauman Street', 5)
+INSERT [dbo].[Street] ([id_street], [name], [id_city]) VALUES (6, N'Bolshaya Pokrovskaya', 6)
+SET IDENTITY_INSERT [dbo].[Street] OFF
+GO
+
+-- Users (6 users вЂ” one per role)
+SET IDENTITY_INSERT [dbo].[User] ON
+INSERT [dbo].[User] ([id_user], [surname], [name], [description], [phone], [id_role]) 
+VALUES (1, N'Ivanov', N'Ivan', N'System admin', N'+79001111111', 1)
+
+INSERT [dbo].[User] ([id_user], [surname], [name], [description], [phone], [id_role]) 
+VALUES (2, N'Petrov', N'Petr', N'Store manager', N'+79002222222', 2)
+
+INSERT [dbo].[User] ([id_user], [surname], [name], [description], [phone], [id_role]) 
+VALUES (3, N'Sidorov', N'Sergey', N'Warehouse employee', N'+79003333333', 3)
+
+INSERT [dbo].[User] ([id_user], [surname], [name], [description], [phone], [id_role]) 
+VALUES (4, N'Kuznetsova', N'Anna', N'Regular customer', N'+79004444444', 4)
+
+INSERT [dbo].[User] ([id_user], [surname], [name], [description], [phone], [id_role]) 
+VALUES (5, N'Morozov', N'Dmitry', N'Support specialist', N'+79005555555', 5)
+
+INSERT [dbo].[User] ([id_user], [surname], [name], [description], [phone], [id_role]) 
+VALUES (6, N'Guest', N'User', N'Guest account', NULL, 6)
+SET IDENTITY_INSERT [dbo].[User] OFF
+GO
+
+-- User Addresses (6 addresses вЂ” one per user)
+SET IDENTITY_INSERT [dbo].[UserAdresses] ON
+INSERT [dbo].[UserAdresses] ([id_user_adress], [id_user], [id_street], [home], [apartment]) 
+VALUES (1, 1, 1, N'10', 5)
+INSERT [dbo].[UserAdresses] ([id_user_adress], [id_user], [id_street], [home], [apartment]) 
+VALUES (2, 2, 2, N'25', 12)
+INSERT [dbo].[UserAdresses] ([id_user_adress], [id_user], [id_street], [home], [apartment]) 
+VALUES (3, 3, 3, N'50', 3)
+INSERT [dbo].[UserAdresses] ([id_user_adress], [id_user], [id_street], [home], [apartment]) 
+VALUES (4, 4, 4, N'77', 21)
+INSERT [dbo].[UserAdresses] ([id_user_adress], [id_user], [id_street], [home], [apartment]) 
+VALUES (5, 5, 5, N'33', 8)
+INSERT [dbo].[UserAdresses] ([id_user_adress], [id_user], [id_street], [home], [apartment]) 
+VALUES (6, 6, 6, N'1', NULL) -- Guest has no apartment
+SET IDENTITY_INSERT [dbo].[UserAdresses] OFF
+GO
+
+-- Logins (6 logins вЂ” one per user)
+SET IDENTITY_INSERT [dbo].[Login] ON
+INSERT [dbo].[Login] ([id_login], [login], [password], [id_user]) 
+VALUES (1, N'admin', N'admin123', 1)
+INSERT [dbo].[Login] ([id_login], [login], [password], [id_user]) 
+VALUES (2, N'manager', N'manager123', 2)
+INSERT [dbo].[Login] ([id_login], [login], [password], [id_user]) 
+VALUES (3, N'employee', N'emp123', 3)
+INSERT [dbo].[Login] ([id_login], [login], [password], [id_user]) 
+VALUES (4, N'customer', N'cust123', 4)
+INSERT [dbo].[Login] ([id_login], [login], [password], [id_user]) 
+VALUES (5, N'support', N'supp123', 5)
+INSERT [dbo].[Login] ([id_login], [login], [password], [id_user]) 
+VALUES (6, N'guest', N'guest123', 6)
+SET IDENTITY_INSERT [dbo].[Login] OFF
+GO
+
+-- Products (6 products)
+SET IDENTITY_INSERT [dbo].[Product] ON
+INSERT [dbo].[Product] ([id_product], [name], [price], [provider], [image_path]) 
+VALUES (1, N'Laptop', 50000, N'Dell', N'/images/laptop.jpg')
+INSERT [dbo].[Product] ([id_product], [name], [price], [provider], [image_path]) 
+VALUES (2, N'Mouse', 1500, N'Logitech', N'/images/mouse.jpg')
+INSERT [dbo].[Product] ([id_product], [name], [price], [provider], [image_path]) 
+VALUES (3, N'Keyboard', 2500, N'Razer', N'/images/keyboard.jpg')
+INSERT [dbo].[Product] ([id_product], [name], [price], [provider], [image_path]) 
+VALUES (4, N'Monitor', 12000, N'Samsung', N'/images/monitor.jpg')
+INSERT [dbo].[Product] ([id_product], [name], [price], [provider], [image_path]) 
+VALUES (5, N'Headphones', 3500, N'Sony', N'/images/headphones.jpg')
+INSERT [dbo].[Product] ([id_product], [name], [price], [provider], [image_path]) 
+VALUES (6, N'Webcam', 4000, N'Logitech', N'/images/webcam.jpg')
+SET IDENTITY_INSERT [dbo].[Product] OFF
+GO
+
+-- Orders (6 orders вЂ” mostly for customer & manager)
+SET IDENTITY_INSERT [dbo].[Order] ON
+INSERT [dbo].[Order] ([id_order], [id_user], [is_paided], [is_delivered]) VALUES (1, 4, 1, 1) -- Customer
+INSERT [dbo].[Order] ([id_order], [id_user], [is_paided], [is_delivered]) VALUES (2, 4, 1, 0)
+INSERT [dbo].[Order] ([id_order], [id_user], [is_paided], [is_delivered]) VALUES (3, 2, 1, 1) -- Manager
+INSERT [dbo].[Order] ([id_order], [id_user], [is_paided], [is_delivered]) VALUES (4, 2, 0, 0)
+INSERT [dbo].[Order] ([id_order], [id_user], [is_paided], [is_delivered]) VALUES (5, 3, 1, 1) -- Employee
+INSERT [dbo].[Order] ([id_order], [id_user], [is_paided], [is_delivered]) VALUES (6, 5, 1, 0) -- Support
+SET IDENTITY_INSERT [dbo].[Order] OFF
+GO
+
+-- Order Items (at least 1 per order в†’ 6+ rows)
+SET IDENTITY_INSERT [dbo].[Order_list] ON
+INSERT [dbo].[Order_list] ([id_order_list], [id_order], [id_product]) VALUES (1, 1, 1)
+INSERT [dbo].[Order_list] ([id_order_list], [id_order], [id_product]) VALUES (2, 1, 2)
+INSERT [dbo].[Order_list] ([id_order_list], [id_order], [id_product]) VALUES (3, 2, 3)
+INSERT [dbo].[Order_list] ([id_order_list], [id_order], [id_product]) VALUES (4, 3, 4)
+INSERT [dbo].[Order_list] ([id_order_list], [id_order], [id_product]) VALUES (5, 4, 5)
+INSERT [dbo].[Order_list] ([id_order_list], [id_order], [id_product]) VALUES (6, 5, 6)
+INSERT [dbo].[Order_list] ([id_order_list], [id_order], [id_product]) VALUES (7, 6, 1)
+INSERT [dbo].[Order_list] ([id_order_list], [id_order], [id_product]) VALUES (8, 6, 2)
+SET IDENTITY_INSERT [dbo].[Order_list] OFF
+GO
+
+-- Basket (6 basket items вЂ” mix of users)
+SET IDENTITY_INSERT [dbo].[Basket] ON
+INSERT [dbo].[Basket] ([id_basket], [id_user], [id_product], [count]) VALUES (1, 4, 1, 1)
+INSERT [dbo].[Basket] ([id_basket], [id_user], [id_product], [count]) VALUES (2, 4, 3, 2)
+INSERT [dbo].[Basket] ([id_basket], [id_user], [id_product], [count]) VALUES (3, 2, 4, 1)
+INSERT [dbo].[Basket] ([id_basket], [id_user], [id_product], [count]) VALUES (4, 3, 5, 1)
+INSERT [dbo].[Basket] ([id_basket], [id_user], [id_product], [count]) VALUES (5, 5, 6, 1)
+INSERT [dbo].[Basket] ([id_basket], [id_user], [id_product], [count]) VALUES (6, 1, 2, 3) -- Admin testing
+SET IDENTITY_INSERT [dbo].[Basket] OFF
+GO

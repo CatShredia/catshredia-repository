@@ -176,7 +176,7 @@ public partial class CatalogControl : UserControl
         {
             IsPaided = false,
             IsDelivered = false,
-            IdOwner = VariablesData.AuthorizatedUser.IdUser,
+            IdUser = VariablesData.AuthorizatedUser.IdUser,
         };
 
         App.DbContext.Orders.Add(newOrder);

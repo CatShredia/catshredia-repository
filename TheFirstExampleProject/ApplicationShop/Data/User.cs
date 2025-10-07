@@ -11,7 +11,7 @@ public partial class User
 
     public string Name { get; set; } = null!;
 
-    public string? Desciption { get; set; }
+    public string? Description { get; set; }
 
     public string? Phone { get; set; }
 
@@ -22,6 +22,8 @@ public partial class User
     public virtual Role IdRoleNavigation { get; set; } = null!;
 
     public virtual ICollection<Login> Logins { get; set; } = new List<Login>();
+
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
     public virtual ICollection<UserAdress> UserAdresses { get; set; } = new List<UserAdress>();
 }

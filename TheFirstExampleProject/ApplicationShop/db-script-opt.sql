@@ -1,82 +1,37 @@
+USE [master]
+GO
+
+-- Create database
+-- CREATE DATABASE [ShopDB]
+--  CONTAINMENT = NONE
+--  ON PRIMARY 
+-- ( NAME = N'ShopDB', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL14.SQLEXPRESS\MSSQL\DATA\ShopDB.mdf', SIZE = 8192KB, MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+--  LOG ON 
+-- ( NAME = N'ShopDB_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL14.SQLEXPRESS\MSSQL\DATA\ShopDB_log.ldf', SIZE = 8192KB, MAXSIZE = 2048GB, FILEGROWTH = 65536KB )
+-- GO
+
+-- ALTER DATABASE [ShopDB] SET COMPATIBILITY_LEVEL = 140
+-- GO
+-- ALTER DATABASE [ShopDB] SET RECOVERY SIMPLE
+-- GO
+-- ALTER DATABASE [ShopDB] SET READ_WRITE
+-- GO
+
 USE [ShopDB]
 GO
 
-CREATE TABLE [dbo].[Basket](
-	[id_basket] [int] IDENTITY(1,1) NOT NULL,
-	[id_user] [int] NOT NULL,
-	[id_product] [int] NOT NULL,
-	[count] [int] NOT NULL,
- CONSTRAINT [PK_Basket] PRIMARY KEY CLUSTERED 
-(
-	[id_basket] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+-- Tables
+CREATE TABLE [dbo].[Role](
+	[id_role] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Role] PRIMARY KEY CLUSTERED ([id_role])
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[City](
 	[id_city] [int] IDENTITY(1,1) NOT NULL,
 	[name] [varchar](50) NOT NULL,
- CONSTRAINT [PK_City] PRIMARY KEY CLUSTERED 
-(
-	[id_city] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-
-CREATE TABLE [dbo].[Login](
-	[id_login] [int] IDENTITY(1,1) NOT NULL,
-	[login] [varchar](50) NOT NULL,
-	[password] [varchar](50) NOT NULL,
-	[id_user] [int] NOT NULL,
- CONSTRAINT [PK_Login] PRIMARY KEY CLUSTERED 
-(
-	[id_login] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-
-CREATE TABLE [dbo].[Order](
-	[id_order] [int] IDENTITY(1,1) NOT NULL,
-	[is_paided] [bit] NOT NULL,
-	[is_delivered] [bit] NOT NULL,
- CONSTRAINT [PK_Order] PRIMARY KEY CLUSTERED 
-(
-	[id_order] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-
-CREATE TABLE [dbo].[Order_list](
-	[id_order_list] [int] IDENTITY(1,1) NOT NULL,
-	[id_order] [int] NOT NULL,
-	[id_product] [int] NOT NULL,
- CONSTRAINT [PK_Order_list_1] PRIMARY KEY CLUSTERED 
-(
-	[id_order_list] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-
-CREATE TABLE [dbo].[Product](
-	[id_product] [int] IDENTITY(1,1) NOT NULL,
-	[name] [varchar](50) NOT NULL,
-	[price] [int] NOT NULL,
-	[provider] [varchar](50) NULL,
-	[image_path] [varchar](50) NULL,
- CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED 
-(
-	[id_product] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-
-CREATE TABLE [dbo].[Role](
-	[id_role] [int] IDENTITY(1,1) NOT NULL,
-	[name] [varchar](50) NOT NULL,
- CONSTRAINT [PK_Role] PRIMARY KEY CLUSTERED 
-(
-	[id_role] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+ CONSTRAINT [PK_City] PRIMARY KEY CLUSTERED ([id_city])
 ) ON [PRIMARY]
 GO
 
@@ -84,10 +39,7 @@ CREATE TABLE [dbo].[Street](
 	[id_street] [int] IDENTITY(1,1) NOT NULL,
 	[name] [varchar](50) NOT NULL,
 	[id_city] [int] NOT NULL,
- CONSTRAINT [PK_Street] PRIMARY KEY CLUSTERED 
-(
-	[id_street] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+ CONSTRAINT [PK_Street] PRIMARY KEY CLUSTERED ([id_street])
 ) ON [PRIMARY]
 GO
 
@@ -95,13 +47,10 @@ CREATE TABLE [dbo].[User](
 	[id_user] [int] IDENTITY(1,1) NOT NULL,
 	[surname] [varchar](50) NULL,
 	[name] [varchar](50) NOT NULL,
-	[desciption] [text] NULL,
+	[description] [text] NULL,
 	[phone] [varchar](50) NULL,
 	[id_role] [int] NOT NULL,
- CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
-(
-	[id_user] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+ CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED ([id_user])
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
@@ -111,67 +60,90 @@ CREATE TABLE [dbo].[UserAdresses](
 	[id_street] [int] NOT NULL,
 	[home] [varchar](3) NOT NULL,
 	[apartment] [int] NULL,
- CONSTRAINT [PK_UserAdresses] PRIMARY KEY CLUSTERED 
-(
-	[id_user_adress] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+ CONSTRAINT [PK_UserAdresses] PRIMARY KEY CLUSTERED ([id_user_adress])
 ) ON [PRIMARY]
 GO
 
+CREATE TABLE [dbo].[Login](
+	[id_login] [int] IDENTITY(1,1) NOT NULL,
+	[login] [varchar](50) NOT NULL,
+	[password] [varchar](50) NOT NULL,
+	[id_user] [int] NOT NULL,
+ CONSTRAINT [PK_Login] PRIMARY KEY CLUSTERED ([id_login])
+) ON [PRIMARY]
 GO
 
+CREATE TABLE [dbo].[Product](
+	[id_product] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](50) NOT NULL,
+	[price] [int] NOT NULL,
+	[provider] [varchar](50) NULL,
+	[image_path] [varchar](50) NULL,
+ CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED ([id_product])
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[Basket](
+	[id_basket] [int] IDENTITY(1,1) NOT NULL,
+	[id_user] [int] NOT NULL,
+	[id_product] [int] NOT NULL,
+	[count] [int] NOT NULL CONSTRAINT [DF_Basket_count] DEFAULT ((0)),
+ CONSTRAINT [PK_Basket] PRIMARY KEY CLUSTERED ([id_basket])
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[Order](
+	[id_order] [int] IDENTITY(1,1) NOT NULL,
+	[id_user] [int] NOT NULL,          -- ✅ FIXED: Added missing user reference
+	[is_paided] [bit] NOT NULL,
+	[is_delivered] [bit] NOT NULL,
+ CONSTRAINT [PK_Order] PRIMARY KEY CLUSTERED ([id_order])
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[Order_list](
+	[id_order_list] [int] IDENTITY(1,1) NOT NULL,
+	[id_order] [int] NOT NULL,
+	[id_product] [int] NOT NULL,
+ CONSTRAINT [PK_Order_list_1] PRIMARY KEY CLUSTERED ([id_order_list])
+) ON [PRIMARY]
+GO
+
+-- Role-based permissions table (for dynamic UI control)
 CREATE TABLE [dbo].[RolePermission](
-    [id_role] INT NOT NULL,
-    [permission_name] VARCHAR(50) NOT NULL, 
-    CONSTRAINT [PK_RolePermission] PRIMARY KEY ([id_role], [permission_name]),
-    CONSTRAINT [FK_RolePermission_Role] FOREIGN KEY ([id_role]) REFERENCES [dbo].[Role]([id_role]) ON DELETE CASCADE
-)
+	[id_role] [int] NOT NULL,
+	[permission_name] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_RolePermission] PRIMARY KEY ([id_role], [permission_name])
+) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Basket] ADD CONSTRAINT [DF_Basket_count] DEFAULT ((0)) FOR [count]
+-- Foreign Keys
+ALTER TABLE [dbo].[Street] ADD CONSTRAINT [FK_Street_City] FOREIGN KEY([id_city]) REFERENCES [dbo].[City]([id_city]) ON UPDATE CASCADE ON DELETE CASCADE
 GO
 
-ALTER TABLE [dbo].[Basket] WITH CHECK ADD CONSTRAINT [FK_Basket_Product1] FOREIGN KEY([id_product]) REFERENCES [dbo].[Product] ([id_product]) ON UPDATE CASCADE ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[Basket] CHECK CONSTRAINT [FK_Basket_Product1]
+ALTER TABLE [dbo].[User] ADD CONSTRAINT [FK_User_Role] FOREIGN KEY([id_role]) REFERENCES [dbo].[Role]([id_role]) ON UPDATE CASCADE ON DELETE CASCADE
 GO
 
-ALTER TABLE [dbo].[Basket] WITH CHECK ADD CONSTRAINT [FK_Basket_User] FOREIGN KEY([id_user]) REFERENCES [dbo].[User] ([id_user]) ON UPDATE CASCADE ON DELETE CASCADE
+ALTER TABLE [dbo].[UserAdresses] ADD CONSTRAINT [FK_UserAdresses_Street] FOREIGN KEY([id_street]) REFERENCES [dbo].[Street]([id_street]) ON UPDATE CASCADE ON DELETE CASCADE
 GO
-ALTER TABLE [dbo].[Basket] CHECK CONSTRAINT [FK_Basket_User]
-GO
-
-ALTER TABLE [dbo].[Login] WITH CHECK ADD CONSTRAINT [FK_Login_User] FOREIGN KEY([id_user]) REFERENCES [dbo].[User] ([id_user]) ON UPDATE CASCADE ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[Login] CHECK CONSTRAINT [FK_Login_User]
+ALTER TABLE [dbo].[UserAdresses] ADD CONSTRAINT [FK_UserAdresses_User] FOREIGN KEY([id_user]) REFERENCES [dbo].[User]([id_user]) ON UPDATE CASCADE ON DELETE CASCADE
 GO
 
-ALTER TABLE [dbo].[Order_list] WITH CHECK ADD CONSTRAINT [FK_Order_list_Order] FOREIGN KEY([id_order]) REFERENCES [dbo].[Order] ([id_order])
-GO
-ALTER TABLE [dbo].[Order_list] CHECK CONSTRAINT [FK_Order_list_Order]
+ALTER TABLE [dbo].[Login] ADD CONSTRAINT [FK_Login_User] FOREIGN KEY([id_user]) REFERENCES [dbo].[User]([id_user]) ON UPDATE CASCADE ON DELETE CASCADE
 GO
 
-ALTER TABLE [dbo].[Order_list] WITH CHECK ADD CONSTRAINT [FK_Order_list_Product] FOREIGN KEY([id_product]) REFERENCES [dbo].[Product] ([id_product])
+ALTER TABLE [dbo].[Basket] ADD CONSTRAINT [FK_Basket_User] FOREIGN KEY([id_user]) REFERENCES [dbo].[User]([id_user]) ON UPDATE CASCADE ON DELETE CASCADE
 GO
-ALTER TABLE [dbo].[Order_list] CHECK CONSTRAINT [FK_Order_list_Product]
-GO
-
-ALTER TABLE [dbo].[Street] WITH CHECK ADD CONSTRAINT [FK_Street_City] FOREIGN KEY([id_city]) REFERENCES [dbo].[City] ([id_city]) ON UPDATE CASCADE ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[Street] CHECK CONSTRAINT [FK_Street_City]
+ALTER TABLE [dbo].[Basket] ADD CONSTRAINT [FK_Basket_Product1] FOREIGN KEY([id_product]) REFERENCES [dbo].[Product]([id_product]) ON UPDATE CASCADE ON DELETE CASCADE
 GO
 
-ALTER TABLE [dbo].[User] WITH CHECK ADD CONSTRAINT [FK_User_Role] FOREIGN KEY([id_role]) REFERENCES [dbo].[Role] ([id_role]) ON UPDATE CASCADE ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[User] CHECK CONSTRAINT [FK_User_Role]
+ALTER TABLE [dbo].[Order] ADD CONSTRAINT [FK_Order_User] FOREIGN KEY([id_user]) REFERENCES [dbo].[User]([id_user]) ON UPDATE CASCADE ON DELETE CASCADE
 GO
 
-ALTER TABLE [dbo].[UserAdresses] WITH CHECK ADD CONSTRAINT [FK_UserAdresses_Street] FOREIGN KEY([id_street]) REFERENCES [dbo].[Street] ([id_street]) ON UPDATE CASCADE ON DELETE CASCADE
+ALTER TABLE [dbo].[Order_list] ADD CONSTRAINT [FK_Order_list_Order] FOREIGN KEY([id_order]) REFERENCES [dbo].[Order]([id_order])
 GO
-ALTER TABLE [dbo].[UserAdresses] CHECK CONSTRAINT [FK_UserAdresses_Street]
+ALTER TABLE [dbo].[Order_list] ADD CONSTRAINT [FK_Order_list_Product] FOREIGN KEY([id_product]) REFERENCES [dbo].[Product]([id_product])
 GO
 
-ALTER TABLE [dbo].[UserAdresses] WITH CHECK ADD CONSTRAINT [FK_UserAdresses_User] FOREIGN KEY([id_user]) REFERENCES [dbo].[User] ([id_user]) ON UPDATE CASCADE ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[UserAdresses] CHECK CONSTRAINT [FK_UserAdresses_User]
+ALTER TABLE [dbo].[RolePermission] ADD CONSTRAINT [FK_RolePermission_Role] FOREIGN KEY([id_role]) REFERENCES [dbo].[Role]([id_role]) ON DELETE CASCADE
 GO

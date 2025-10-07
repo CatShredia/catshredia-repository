@@ -18,7 +18,7 @@ public partial class OrderShowWindow : Window
     public void RefreshData()
     {
         OrderListDataGrid.ItemsSource = App.DbContext.OrderLists
-            .Where(list => list.IdOrderNavigation.IdOwner == VariablesData.AuthorizatedUser.IdUser)
+            .Where(list => list.IdOrderNavigation.IdUser == VariablesData.AuthorizatedUser.IdUser)
             .ToList();
     }
 }

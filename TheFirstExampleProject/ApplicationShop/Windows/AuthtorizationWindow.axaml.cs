@@ -5,6 +5,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 namespace ApplicationShop.Windows;
@@ -20,7 +21,8 @@ public partial class AuthtorizationWindow : Window
     {
         LoginValidationErrorBlock.Text = string.Empty;
         PasswordValidationErrorBlock.Text = string.Empty;
-
+        ValidationErrorBlock.Text = string.Empty;
+        
         bool isValid = true;
 
         if (string.IsNullOrWhiteSpace(LoginTextBox?.Text))
@@ -43,21 +45,31 @@ public partial class AuthtorizationWindow : Window
 
         return isValid;
     }
+
     private void AuthUser(object? sender, RoutedEventArgs e)
     {
-        if(!ValidateData()) return;
+        if (!ValidateData()) return;
 
         if (VariablesData.AuthorizatedUser == null)
         {
-            var selectedLogin = App.DbContext.Logins.FirstOrDefault(login =>
-                login.Login1 == LoginTextBox.Text &&
-                login.Password == PasswordTextBox.Text
-            );
+            var selectedLogin = App.DbContext.Logins
+                .FirstOrDefault(login =>
+                    login.Login1 == LoginTextBox.Text &&
+                    login.Password == PasswordTextBox.Text
+                );
             if (selectedLogin != null)
             {
-                var selectedUser = App.DbContext.Users.FirstOrDefault(user => selectedLogin.IdUser == user.IdUser);
+                var selectedUser = App.DbContext.Users
+                    .Include(user => user.IdRoleNavigation)
+                    .ThenInclude(r => r.RolePermissions)
+                    .FirstOrDefault(user => selectedLogin.IdUser == user.IdUser);
                 VariablesData.AuthorizatedUser = selectedUser;
             }
+        }
+
+        if (VariablesData.AuthorizatedUser == null)
+        {
+            ValidationErrorBlock.Text = "Incorrect username or password.";
         }
 
         Close();

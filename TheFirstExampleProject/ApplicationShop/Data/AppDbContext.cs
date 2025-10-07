@@ -105,8 +105,13 @@ public partial class AppDbContext : DbContext
             entity.ToTable("Order");
 
             entity.Property(e => e.IdOrder).HasColumnName("id_order");
+            entity.Property(e => e.IdUser).HasColumnName("id_user");
             entity.Property(e => e.IsDelivered).HasColumnName("is_delivered");
             entity.Property(e => e.IsPaided).HasColumnName("is_paided");
+
+            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.IdUser)
+                .HasConstraintName("FK_Order_User");
         });
 
         modelBuilder.Entity<OrderList>(entity =>
@@ -207,9 +212,9 @@ public partial class AppDbContext : DbContext
             entity.ToTable("User");
 
             entity.Property(e => e.IdUser).HasColumnName("id_user");
-            entity.Property(e => e.Desciption)
+            entity.Property(e => e.Description)
                 .HasColumnType("text")
-                .HasColumnName("desciption");
+                .HasColumnName("description");
             entity.Property(e => e.IdRole).HasColumnName("id_role");
             entity.Property(e => e.Name)
                 .HasMaxLength(50)

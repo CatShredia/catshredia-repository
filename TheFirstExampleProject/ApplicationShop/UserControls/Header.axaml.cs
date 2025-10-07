@@ -28,7 +28,28 @@ public partial class Header : UserControl
 
     private void CheckPermissons()
     {
+        EmployeeButton.IsVisible = false;
+        UsersButton.IsVisible = false;
+        ProductButton.IsVisible = false;
+        CatalogButton.IsVisible = false;
+        OrderListButton.IsVisible = false;
+        LogOutButton.IsVisible = VariablesData.AuthorizatedUser != null;
+        
+        // If no user or no role data → exit
+        if (VariablesData.AuthorizatedUser?.IdRoleNavigation?.RolePermissions == null)
+            return;
 
+        var permissions = VariablesData.AuthorizatedUser.IdRoleNavigation.RolePermissions
+            .Select(p => p.PermissionName)
+            .ToHashSet(); // Fast lookup
+
+        // Set visibility based on permissions
+        EmployeeButton.IsVisible = permissions.Contains("Employee");
+        UsersButton.IsVisible = permissions.Contains("Users");
+        ProductButton.IsVisible = permissions.Contains("Product");
+        CatalogButton.IsVisible = permissions.Contains("Catalog");
+        OrderListButton.IsVisible = permissions.Contains("OrderList") && 
+                                    VariablesData.AuthorizatedUser.Orders?.Count > 0;
     }
 
     private async void SelectUserButtonClick(object? sender, RoutedEventArgs e)
@@ -38,21 +59,21 @@ public partial class Header : UserControl
             // user is unauthtorized
             var authWindow = new AuthtorizationWindow();
             await authWindow.ShowDialog(GetWindow());
-            
-            UpdateDate();
         }
         else
         {
             VariablesData.SelectedLogin =
-                App.DbContext.Logins.FirstOrDefault(login => login.IdUser == VariablesData.AuthorizatedUser.IdUser);
+                App.DbContext.Logins
+                    .FirstOrDefault(login => login.IdUser == VariablesData.AuthorizatedUser.IdUser);
 
             // user is authtorized
             var userEditWindow = new UsersEditWindow();
             await userEditWindow.ShowDialog(GetWindow());
-            
-            UpdateDate();
+
             VariablesData.SelectedLogin = null;
         }
+
+        UpdateDate();
     }
 
     public void UpdateDate()
@@ -66,9 +87,9 @@ public partial class Header : UserControl
         {
             // user is authtorized
             SelectionUserButton.Content = VariablesData.AuthorizatedUser.Name;
-        }
 
-        CheckPermissons();
+            CheckPermissons();
+        }
     }
 
     private void ShowEmployees(object? sender, RoutedEventArgs e)
@@ -112,9 +133,11 @@ public partial class Header : UserControl
     private void LogOutButton_OnClick(object? sender, RoutedEventArgs e)
     {
         VariablesData.AuthorizatedUser = null;
-        
+
         var parentWindow = GetWindow() as MainWindow;
         parentWindow?.ReplaceControl(new DefaultControl(this));
+        
+        CheckPermissons();
 
         UpdateDate();
     }

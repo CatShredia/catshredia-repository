@@ -18,5 +18,6 @@
         </Grid>
         
         <Button Grid.Row="2" Click="AuthUser" Margin="5">OK</Button>
+            <TextBlock Grid.Row="2" Name="ValidationErrorBlock" Foreground="Red"></TextBlock>
     </Grid>
 </Window>

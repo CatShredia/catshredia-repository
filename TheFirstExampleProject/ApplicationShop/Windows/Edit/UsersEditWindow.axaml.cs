@@ -1,10 +1,9 @@
 using System;
 using System.Linq;
 using ApplicationShop.Data;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApplicationShop.Windows.Edit;
 
@@ -14,48 +13,66 @@ public partial class UsersEditWindow : Window
     {
         InitializeComponent();
 
-        RoleComboBox.ItemsSource = App.DbContext.Roles.ToList();
-        RoleComboBox.SelectedItem = VariablesData.SelectedRoleId;
+        var roles = App.DbContext.Roles.ToList();
+        RoleComboBox.ItemsSource = roles;
 
         if (VariablesData.SelectedLogin == null)
         {
-            DataContext = new Login()
+            DataContext = new Login
             {
                 IdUserNavigation = new User()
             };
-            RoleComboBox.SelectedItem = App.DbContext.Roles.FirstOrDefault(role => role.IdRole == VariablesData.SelectedRoleId);
+
+            var defaultRole = roles.FirstOrDefault(r => r.IdRole == VariablesData.SelectedRoleId);
+            RoleComboBox.SelectedItem = defaultRole;
         }
         else
         {
-            DataContext = VariablesData.SelectedLogin;
-            RoleComboBox.SelectedItem = VariablesData.SelectedLogin.IdUserNavigation.IdRoleNavigation;
+            var existingLogin = App.DbContext.Logins
+                .Include(l => l.IdUserNavigation)
+                .FirstOrDefault(l => l.IdLogin == VariablesData.SelectedLogin.IdLogin);
+
+            if (existingLogin == null)
+            {
+                Close();
+                return;
+            }
+
+            DataContext = existingLogin;
+
+            var currentRole = roles.FirstOrDefault(r => r.IdRole == existingLogin.IdUserNavigation.IdRole);
+            RoleComboBox.SelectedItem = currentRole;
         }
     }
 
     private void CreateUser(object? sender, RoutedEventArgs e)
     {
-        var loginDataContext = DataContext as Login;
-        loginDataContext.IdUserNavigation.IdRoleNavigation =
-            App.DbContext.Roles.FirstOrDefault(role => role.IdRole == VariablesData.SelectedRoleId);
+        var login = DataContext as Login;
+        var selectedRole = RoleComboBox.SelectedItem as Role;
 
-        if (loginDataContext.IdUserNavigation.IdRoleNavigation == null && RoleComboBox.IsEnabled != false)
+        if (selectedRole == null && RoleComboBox.IsEnabled)
         {
-            Console.WriteLine("Роли нет");
             return;
         }
 
-        if (VariablesData.SelectedLogin == null)
+        login.IdUserNavigation.IdRole = selectedRole?.IdRole ?? VariablesData.SelectedRoleId;
+
+        try
         {
-            App.DbContext.Logins.Add(loginDataContext);
+            if (VariablesData.SelectedLogin == null)
+            {
+                App.DbContext.Logins.Add(login);
+            }
+
+            App.DbContext.SaveChanges();
             VariablesData.SelectedLogin = null;
+            Close();
         }
-        else
+        catch (Exception ex)
         {
-            App.DbContext.Update(loginDataContext);
+            System.Diagnostics.Debug.WriteLine($"Ошибка сохранения: {ex.Message}");
         }
 
-        App.DbContext.SaveChanges();
-        
-        Close();
+        VariablesData.SelectedLogin = null;
     }
 }

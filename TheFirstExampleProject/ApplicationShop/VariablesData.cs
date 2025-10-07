@@ -6,8 +6,8 @@ namespace ApplicationShop;
 public class VariablesData
 {
     // Авторизаванный пользователь
-    public static User AuthorizatedUser { get; set; } = App.DbContext.Users.FirstOrDefault(user => user.IdUser == 1);
-    // public static User AuthorizatedUser { get; set; } 
+    // public static User AuthorizatedUser { get; set; } = App.DbContext.Users.FirstOrDefault(user => user.IdUser == 1);
+    public static User AuthorizatedUser { get; set; } 
 
     
     // Выбранные элементы
