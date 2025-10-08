@@ -38,17 +38,13 @@ public partial class Header : UserControl
         // If no user or no role data → exit
         if (VariablesData.AuthorizatedUser?.IdRoleNavigation?.RolePermissions == null)
             return;
-
-        var permissions = VariablesData.AuthorizatedUser.IdRoleNavigation.RolePermissions
-            .Select(p => p.PermissionName)
-            .ToHashSet(); // Fast lookup
-
+        
         // Set visibility based on permissions
-        EmployeeButton.IsVisible = permissions.Contains("Employee");
-        UsersButton.IsVisible = permissions.Contains("Users");
-        ProductButton.IsVisible = permissions.Contains("Product");
-        CatalogButton.IsVisible = permissions.Contains("Catalog");
-        OrderListButton.IsVisible = permissions.Contains("OrderList") && 
+        EmployeeButton.IsVisible = VariablesData.PermissionsAuthorizatedUser.Any(p => p.StartsWith("Employee"));
+        UsersButton.IsVisible = VariablesData.PermissionsAuthorizatedUser.Any(p => p.StartsWith(("Users")));
+        ProductButton.IsVisible = VariablesData.PermissionsAuthorizatedUser.Any(p => p.StartsWith(("Product")));
+        CatalogButton.IsVisible = VariablesData.PermissionsAuthorizatedUser.Any(p => p.StartsWith(("Catalog")));
+        OrderListButton.IsVisible = VariablesData.PermissionsAuthorizatedUser.Any(p => p.StartsWith(("OrderList"))) && 
                                     VariablesData.AuthorizatedUser.Orders?.Count > 0;
     }
 

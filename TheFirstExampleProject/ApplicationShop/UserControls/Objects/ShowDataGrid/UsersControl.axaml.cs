@@ -22,6 +22,12 @@ public partial class UsersControl : UserControl
     public UsersControl()
     {
         InitializeComponent();
+        
+        UserButtonCreate.IsVisible = VariablesData.PermissionsAuthorizatedUser.
+            Any(p => 
+                p.Split('.') is var parts && 
+                parts[1].Contains('C')
+            );
 
         RefreshDate();
     }

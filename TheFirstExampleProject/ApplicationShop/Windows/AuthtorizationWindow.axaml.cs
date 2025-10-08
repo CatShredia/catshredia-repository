@@ -64,6 +64,12 @@ public partial class AuthtorizationWindow : Window
                     .ThenInclude(r => r.RolePermissions)
                     .FirstOrDefault(user => selectedLogin.IdUser == user.IdUser);
                 VariablesData.AuthorizatedUser = selectedUser;
+                
+                VariablesData.PermissionsAuthorizatedUser = VariablesData.AuthorizatedUser.IdRoleNavigation.RolePermissions
+                    .Select(p => p.PermissionName)
+                    .ToHashSet(); // Fast lookup
+                
+                Close();
             }
         }
 
@@ -71,7 +77,5 @@ public partial class AuthtorizationWindow : Window
         {
             ValidationErrorBlock.Text = "Incorrect username or password.";
         }
-
-        Close();
     }
 }

@@ -5,7 +5,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="ApplicationShop.Windows.AuthtorizationWindow"
         Title="AuthtorizationWindow">
-    <Grid ColumnDefinitions="Auto" RowDefinitions="Auto Auto Auto" Margin="5">
+    <Grid ColumnDefinitions="Auto" RowDefinitions="Auto Auto Auto Auto" Margin="5">
         <Grid RowDefinitions="Auto Auto Auto" Grid.Row="0" Margin="5">
             <TextBlock Grid.Row="0">Логин</TextBlock>
             <TextBox Grid.Row="1" Name="LoginTextBox" Width="400"></TextBox>
@@ -16,8 +16,8 @@
             <TextBox Grid.Row="1" Name="PasswordTextBox" Width="400"></TextBox>
             <TextBlock Grid.Row="2" Name="PasswordValidationErrorBlock" Foreground="Red"></TextBlock>
         </Grid>
-        
+
         <Button Grid.Row="2" Click="AuthUser" Margin="5">OK</Button>
-            <TextBlock Grid.Row="2" Name="ValidationErrorBlock" Foreground="Red"></TextBlock>
+        <TextBlock Grid.Row="3" Name="ValidationErrorBlock" Foreground="Red"></TextBlock>
     </Grid>
 </Window>

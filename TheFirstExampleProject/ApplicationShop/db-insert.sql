@@ -13,24 +13,24 @@ SET IDENTITY_INSERT [dbo].[Role] OFF
 GO
 
 -- Role Permissions
-INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (1, N'Employee')
-INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (1, N'Users')
-INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (1, N'Product')
-INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (1, N'OrderList')
-INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (1, N'Catalog')
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (1, N'Employee.CRUD')
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (1, N'Users.CRUD')
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (1, N'Product.CRUD')
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (1, N'OrderList.CRUD')
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (1, N'Catalog.CRUD')
 
-INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (2, N'Users')
-INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (2, N'Product')
-INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (2, N'OrderList')
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (2, N'Users.RUD')
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (2, N'Product.CRUD')
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (2, N'OrderList.R')
 
-INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (3, N'Product')
-INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (3, N'OrderList')
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (3, N'Product.R')
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (3, N'OrderList.R')
 
-INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (4, N'Catalog')
-INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (4, N'OrderList')
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (4, N'Catalog.CRUD')
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (4, N'OrderList.CRUD')
 
-INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (5, N'Users')
-INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (5, N'OrderList')
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (5, N'Users.R')
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (5, N'OrderList.R')
 
 -- Guest has no permissions
 GO
