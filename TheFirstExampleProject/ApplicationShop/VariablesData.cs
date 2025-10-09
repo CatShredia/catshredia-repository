@@ -8,6 +8,7 @@ public class VariablesData
 {
     // Авторизаванный пользователь
     public static User AuthorizatedUser { get; set; }
+
     // Разрешения авторизаванного пользователя
     public static HashSet<string> PermissionsAuthorizatedUser { get; set; }
 

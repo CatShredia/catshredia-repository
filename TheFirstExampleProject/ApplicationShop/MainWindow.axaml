@@ -8,7 +8,7 @@
         WindowState = "Maximized"
         Title="ApplicationShop">
     <Grid RowDefinitions="Auto *">
-        <uc:Header Grid.Row="0"/>
+        <uc:Header Grid.Row="0" Name="Header"/>
         
         <Grid Grid.Row="1" Margin="10">
             <ContentControl Name="MainContentArea"/>
