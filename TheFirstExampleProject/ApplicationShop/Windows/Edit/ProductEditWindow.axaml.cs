@@ -24,7 +24,7 @@ public partial class ProductEditWindow : Window
         }
     }
 
-    private void CreateUser(object? sender, RoutedEventArgs e)
+    private void CreateProduct(object? sender, RoutedEventArgs e)
     {
         var productDataContext = DataContext as Product;
         

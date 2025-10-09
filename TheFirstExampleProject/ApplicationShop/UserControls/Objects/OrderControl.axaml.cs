@@ -15,7 +15,6 @@ namespace ApplicationShop.UserControls.Objects.ShowDataGrid;
 
 public partial class OrderControl : UserControl
 {
-
     private Window? GetWindow()
     {
         return this.GetVisualRoot() as Window;
@@ -30,20 +29,15 @@ public partial class OrderControl : UserControl
 
     private async void Show_Order(object? sender, TappedEventArgs e)
     {
-        VariablesData.SelectedOrder = OrderDataGrid.SelectedItem as Order;
-        
-        var editWindow = new OrderShowWindow();
-        await editWindow.ShowDialog(GetWindow());
-
         RefreshDate();
     }
 
     private void RefreshDate()
     {
-        DataContext = App.DbContext;
+        var orders = App.DbContext.Orders
+            .Where(o => o.IdUser == VariablesData.AuthorizatedUser.IdUser)
+            .ToList();
 
-        OrderDataGrid.ItemsSource =
-            App.DbContext.Orders
-                .ToList();
+        OrdersItemsControl.ItemsSource = orders;
     }
 }

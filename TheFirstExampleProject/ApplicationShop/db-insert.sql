@@ -16,8 +16,7 @@ GO
 INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (1, N'Employee.CRUD')
 INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (1, N'Users.CRUD')
 INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (1, N'Product.CRUD')
-INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (1, N'OrderList.CRUD')
-INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (1, N'Catalog.CRUD')
+INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (1, N'AllOrder')
 
 INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (2, N'Users.RUD')
 INSERT [dbo].[RolePermission] ([id_role], [permission_name]) VALUES (2, N'Product.CRUD')

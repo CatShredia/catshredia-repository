@@ -44,8 +44,8 @@ public partial class Header : UserControl
         UsersButton.IsVisible = VariablesData.PermissionsAuthorizatedUser.Any(p => p.StartsWith(("Users")));
         ProductButton.IsVisible = VariablesData.PermissionsAuthorizatedUser.Any(p => p.StartsWith(("Product")));
         CatalogButton.IsVisible = VariablesData.PermissionsAuthorizatedUser.Any(p => p.StartsWith(("Catalog")));
-        OrderListButton.IsVisible = VariablesData.PermissionsAuthorizatedUser.Any(p => p.StartsWith(("OrderList"))) && 
-                                    VariablesData.AuthorizatedUser.Orders?.Count > 0;
+        OrderListButton.IsVisible = VariablesData.PermissionsAuthorizatedUser.Any(p => p.StartsWith(("OrderList")));
+        AllOrdersButton.IsVisible = VariablesData.PermissionsAuthorizatedUser.Any(p => p.StartsWith(("AllOrder")));
     }
 
     private async void SelectUserButtonClick(object? sender, RoutedEventArgs e)
@@ -136,5 +136,11 @@ public partial class Header : UserControl
         CheckPermissons();
 
         UpdateDate();
+    }
+
+    private void ShowAllOrders(object? sender, RoutedEventArgs e)
+    {
+        var productWindow = GetWindow() as MainWindow;
+        productWindow?.ReplaceControl(new AllOrderControl());
     }
 }

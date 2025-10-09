@@ -47,6 +47,10 @@
         <DependentUpon>DefaultControl.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="UserControls\Objects\OrderControl.axaml.cs">
+        <DependentUpon>OrderControl.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>

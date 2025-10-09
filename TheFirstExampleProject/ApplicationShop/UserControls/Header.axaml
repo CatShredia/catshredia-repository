@@ -5,11 +5,12 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ApplicationShop.UserControls.Header">
     <Grid ColumnDefinitions="50* 50*" Margin="2">
-        <Grid ColumnDefinitions="Auto Auto Auto Auto" RowDefinitions="Auto">
+        <Grid ColumnDefinitions="Auto Auto Auto Auto Auto" RowDefinitions="Auto">
             <Button Margin="5" Grid.Column="0" Click="ShowEmployees" IsVisible="False" Name="EmployeeButton">Сотрудники</Button>
             <Button Margin="5" Grid.Column="1" Click="ShowUsers" IsVisible="False" Name="UsersButton">Покупатели</Button>
             <Button Margin="5" Grid.Column="2" Click="ShowProduct" IsVisible="False" Name="ProductButton">Продукты</Button>
             <Button Margin="5" Grid.Column="3" Click="ShowCatalog" IsVisible="False" Name="CatalogButton">Каталог</Button>
+            <Button Margin="5" Grid.Column="4" Click="ShowAllOrders" IsVisible="False" Name="AllOrdersButton">Заказы клиентов</Button>
         </Grid>
         
         <Grid ColumnDefinitions="Auto Auto Auto Auto" Column="1">

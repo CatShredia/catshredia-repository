@@ -6,7 +6,7 @@
         x:Class="ApplicationShop.Windows.Edit.UsersEditWindow"
         Title="EmployeeEditWindow">
     <Grid ColumnDefinitions="50* 50*" Margin="5" RowDefinitions="Auto Auto">
-        <Grid Grid.Column="0" RowDefinitions="Auto Auto Auto Auto Auto">
+        <Grid Grid.Row="0"  Grid.Column="0" RowDefinitions="Auto Auto Auto Auto Auto">
             <Grid Grid.Row="0" RowDefinitions="Auto Auto" Margin="5">
                 <TextBlock Grid.Row="0" Name="SurnameEmployeeTextBlock">Фамилия:</TextBlock>
                 <TextBox Grid.Row="1" Name="SurnameEmployeeTextBox" Text="{Binding IdUserNavigation.Surname}"></TextBox>
@@ -29,7 +29,7 @@
 
         </Grid>
 
-        <Grid Grid.Column="1" RowDefinitions="Auto Auto Auto">
+        <Grid Grid.Row="0" Grid.Column="1" RowDefinitions="Auto Auto Auto">
             <Grid Grid.Row="0" RowDefinitions="Auto Auto" Margin="5">
                 <TextBlock Grid.Row="0" Name="LoginEmployeeTextBlock">Логин:</TextBlock>
                 <TextBox Grid.Row="1" Name="LoginEmployeeTextBox" Text="{Binding Login1}"></TextBox>

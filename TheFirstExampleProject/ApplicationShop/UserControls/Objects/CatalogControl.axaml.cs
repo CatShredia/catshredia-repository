@@ -75,6 +75,7 @@ public partial class CatalogControl : UserControl
             CatalogDataGrid.ItemsSource = catalogItems;
 
             var basketItems =  App.DbContext.Baskets
+                .Include(basketItem => basketItem.IdProductNavigation)
                 .Where(b => b.IdUser == VariablesData.AuthorizatedUser.IdUser)
                 .ToList();
 

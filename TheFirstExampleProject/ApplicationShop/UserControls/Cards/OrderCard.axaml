@@ -1,0 +1,45 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ApplicationShop.UserControls.Cards.OrderCard">
+    <Border Background="White"
+            BorderBrush="#E0E0E0"
+            BorderThickness="1"
+            Padding="12"
+            Margin="5">
+        <StackPanel Spacing="6">
+            <TextBlock FontWeight="Bold" FontSize="16">
+                <Run Text="Заказ №" />
+                <Run Text="{Binding IdOrder}" />
+            </TextBlock>
+
+            <TextBlock>
+                <Run Text="Оплачен: " />
+                <Run Text="{Binding IsPaided, StringFormat='{}{0}'}" />
+            </TextBlock>
+
+            <TextBlock>
+                <Run Text="Доставлен: " />
+                <Run Text="{Binding IsDelivered, StringFormat='{}{0}'}" />
+            </TextBlock>
+
+            <ScrollViewer MaxHeight="150" 
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled">
+                <DataGrid Name="ProductDataGrid"
+                          IsReadOnly="True"
+                          AutoGenerateColumns="False"
+                          HeadersVisibility="Column">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding IdProductNavigation.Name}" />
+                        <DataGridTextColumn Header="Price" Binding="{Binding IdProductNavigation.Price}" />
+                        <DataGridTextColumn Header="Provider" Binding="{Binding IdProductNavigation.Provider}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </ScrollViewer>
+        </StackPanel>
+
+    </Border>
+</UserControl>

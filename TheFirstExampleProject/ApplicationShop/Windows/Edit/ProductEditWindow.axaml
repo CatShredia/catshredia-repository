@@ -22,7 +22,7 @@
                 <TextBox Grid.Row="1" Name="DescriptionProductTextBox" Text="{Binding Provider}"></TextBox>
             </Grid>
         
-            <Button Grid.Row="3" Click="CreateUser">OK</Button>
+            <Button Grid.Row="3" Click="CreateProduct">OK</Button>
         </Grid>
     </Grid>
 </Window>

@@ -12,6 +12,8 @@ public partial class UsersEditWindow : Window
     public UsersEditWindow()
     {
         InitializeComponent();
+        
+        Closing += OnWindowClosing;
 
         var roles = App.DbContext.Roles.ToList();
         RoleComboBox.ItemsSource = roles;
@@ -43,6 +45,11 @@ public partial class UsersEditWindow : Window
             var currentRole = roles.FirstOrDefault(r => r.IdRole == existingLogin.IdUserNavigation.IdRole);
             RoleComboBox.SelectedItem = currentRole;
         }
+    }
+    
+    private void OnWindowClosing(object? sender, WindowClosingEventArgs e)
+    {
+        VariablesData.SelectedLogin = null;
     }
 
     private void CreateUser(object? sender, RoutedEventArgs e)
