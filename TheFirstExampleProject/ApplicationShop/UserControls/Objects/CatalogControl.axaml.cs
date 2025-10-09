@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using ApplicationShop.Data;
 using ApplicationShop.Windows.Edit;
@@ -14,6 +15,8 @@ namespace ApplicationShop.UserControls.Objects;
 
 public partial class CatalogControl : UserControl
 {
+    private static List<CatalogItem> allCatalogProducts;
+
     private Window? GetWindow()
     {
         return this.GetVisualRoot() as Window;
@@ -36,23 +39,13 @@ public partial class CatalogControl : UserControl
         RefreshDate();
     }
 
-    private async void CreateCatalog(object? sender, RoutedEventArgs e)
-    {
-        var editWindow = new ProductEditWindow();
-        await editWindow.ShowDialog(GetWindow());
-
-        VariablesData.SelectedProduct = null;
-
-        RefreshDate();
-    }
-
     private void RefreshDate()
     {
         DataContext = App.DbContext;
 
         if (VariablesData.AuthorizatedUser != null)
         {
-            var catalogItems = App.DbContext.Products
+            allCatalogProducts = App.DbContext.Products
                 .GroupJoin(
                     App.DbContext.Baskets.Where(b => b.IdUser == VariablesData.AuthorizatedUser.IdUser),
                     product => product.IdProduct,
@@ -72,21 +65,26 @@ public partial class CatalogControl : UserControl
                 })
                 .ToList();
 
-            CatalogDataGrid.ItemsSource = catalogItems;
+            CatalogDataGrid.ItemsSource = allCatalogProducts;
 
-            var basketItems =  App.DbContext.Baskets
-                .Include(basketItem => basketItem.IdProductNavigation)
-                .Where(b => b.IdUser == VariablesData.AuthorizatedUser.IdUser)
-                .ToList();
-
-            decimal summ = 0;
-            foreach (var basketItem in basketItems)
-            {
-                summ += basketItem.IdProductNavigation.Price * basketItem.Count;
-            }
-
-            SummTextBlock.Text = "Сумма: " + summ;
+            GetCount();
         }
+    }
+
+    private void GetCount()
+    {
+        var basketItems = App.DbContext.Baskets
+            .Include(basketItem => basketItem.IdProductNavigation)
+            .Where(b => b.IdUser == VariablesData.AuthorizatedUser.IdUser)
+            .ToList();
+
+        decimal summ = 0;
+        foreach (var basketItem in basketItems)
+        {
+            summ += basketItem.IdProductNavigation.Price * basketItem.Count;
+        }
+
+        SummTextBlock.Text = "Сумма: " + summ;
     }
 
     private void DeleteCatalog(object? sender, RoutedEventArgs e)
