@@ -23,6 +23,13 @@ public partial class ProductControl : UserControl
     public ProductControl()
     {
         InitializeComponent();
+        
+        UserButtonCreate.IsVisible = VariablesData.PermissionsAuthorizatedUser.
+            Any(p => 
+                p.Split('.') is var parts &&
+                parts[0].StartsWith("Product") &&
+                parts[1].Contains('C')
+            );
 
         RefreshDate();
     }

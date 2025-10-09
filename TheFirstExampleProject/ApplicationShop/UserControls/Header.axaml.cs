@@ -33,6 +33,7 @@ public partial class Header : UserControl
         ProductButton.IsVisible = false;
         CatalogButton.IsVisible = false;
         OrderListButton.IsVisible = false;
+        AllOrdersButton.IsVisible = false;
         LogOutButton.IsVisible = VariablesData.AuthorizatedUser != null;
         
         // If no user or no role data → exit

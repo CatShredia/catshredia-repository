@@ -25,7 +25,8 @@ public partial class UsersControl : UserControl
         
         UserButtonCreate.IsVisible = VariablesData.PermissionsAuthorizatedUser.
             Any(p => 
-                p.Split('.') is var parts && 
+                p.Split('.') is var parts &&
+                parts[0].StartsWith("Users") &&
                 parts[1].Contains('C')
             );
 
