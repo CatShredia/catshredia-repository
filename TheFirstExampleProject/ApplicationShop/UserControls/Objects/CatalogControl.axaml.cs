@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using ApplicationShop.Data;
 using ApplicationShop.Windows.Edit;
@@ -15,8 +16,34 @@ namespace ApplicationShop.UserControls.Objects;
 
 public partial class CatalogControl : UserControl
 {
+    // Data
     private static List<CatalogItem> allCatalogProducts;
+    private static List<CatalogItem> selectedCatalogProducts;
+    
+    private ListSortDirection _sortDirection = ListSortDirection.Ascending;
+    
+    // filters
+    private string _sortColumn = "IdOrderList";
 
+    //only filters
+    private void ApplyFiltersAndSort()
+    {
+        // Фильтрация
+        var query = allCatalogProducts.AsQueryable();
+
+        var searchText = SearchBox?.Text?.Trim();
+        if (!string.IsNullOrEmpty(searchText))
+        {
+            query = query.Where(item =>
+                item.Name.Contains(searchText, System.StringComparison.OrdinalIgnoreCase)
+            );
+        }
+
+        selectedCatalogProducts = query.ToList();
+
+        CatalogDataGrid.ItemsSource = selectedCatalogProducts;
+    }
+    
     private Window? GetWindow()
     {
         return this.GetVisualRoot() as Window;
@@ -55,6 +82,7 @@ public partial class CatalogControl : UserControl
                         Product = product,
                         Basket = baskets.FirstOrDefault()
                     })
+
                 .Select(x => new CatalogItem
                 {
                     ProductId = x.Product.IdProduct,
@@ -64,10 +92,14 @@ public partial class CatalogControl : UserControl
                     BasketCount = x.Basket != null ? x.Basket.Count : 0
                 })
                 .ToList();
+            
+            selectedCatalogProducts = allCatalogProducts;
 
-            CatalogDataGrid.ItemsSource = allCatalogProducts;
+            CatalogDataGrid.ItemsSource = selectedCatalogProducts;
 
             GetCount();
+            
+            ApplyFiltersAndSort();
         }
     }
 
@@ -198,13 +230,10 @@ public partial class CatalogControl : UserControl
         App.DbContext.SaveChanges();
         RefreshDate();
     }
+
+    private void OnSearchTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        ApplyFiltersAndSort();
+    }
 }
 
-public class CatalogItem
-{
-    public int ProductId { get; set; }
-    public string Name { get; set; }
-    public decimal Price { get; set; }
-    public string Provider { get; set; }
-    public int BasketCount { get; set; }
-}
