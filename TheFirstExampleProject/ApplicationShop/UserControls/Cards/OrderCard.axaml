@@ -11,7 +11,9 @@
             Margin="5">
         <StackPanel Spacing="6">
             <TextBlock FontWeight="Bold" FontSize="16">
-                <Run Text="Заказ №" />
+                <Run Text="Заказ пользователя " />
+                <Run Text="{Binding IdUserNavigation.Name}" />
+                <Run Text="№" />
                 <Run Text="{Binding IdOrder}" />
             </TextBlock>
 

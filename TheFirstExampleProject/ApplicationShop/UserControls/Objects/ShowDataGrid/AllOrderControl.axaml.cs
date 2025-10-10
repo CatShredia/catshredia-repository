@@ -11,11 +11,15 @@ public partial class AllOrderControl : UserControl
     public AllOrderControl()
     {
         InitializeComponent();
-        
-        DataGridOrders.ItemsSource = App.DbContext.OrderLists
-            .Include(list => list.IdOrderNavigation)
-                .ThenInclude(order => order.IdUserNavigation)
-            .Include(list => list.IdProductNavigation)
+
+        RefreshDate();
+    }
+
+    private void RefreshDate()
+    {
+        var orders = App.DbContext.Orders
             .ToList();
+
+        OrdersItemsControl.ItemsSource = orders;
     }
 }

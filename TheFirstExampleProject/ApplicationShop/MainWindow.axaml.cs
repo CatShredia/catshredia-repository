@@ -29,7 +29,7 @@ public partial class MainWindow : Window
 
     private async void OpenAuthWindow()
     {
-        SystemUser(4);
+        // SystemUser(4);
 
         if (VariablesData.AuthorizatedUser == null)
         {

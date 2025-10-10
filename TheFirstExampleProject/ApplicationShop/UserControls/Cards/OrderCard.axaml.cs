@@ -33,6 +33,8 @@ public partial class OrderCard : UserControl
         // Загружаем OrderLists с продуктами для этого заказа
         var orderLists = App.DbContext.OrderLists
             .Include(ol => ol.IdProductNavigation)
+            .Include(list => list.IdOrderNavigation)
+                .ThenInclude(user => user.IdUserNavigation)
             .Where(ol => ol.IdOrder == order.IdOrder)
             .ToList();
 

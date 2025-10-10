@@ -19,7 +19,7 @@
 
             <Grid Grid.Row="2" RowDefinitions="Auto Auto" Margin="5">
                 <TextBlock Grid.Row="0" Name="DescriptionEmployeeTextBlock">Описание:</TextBlock>
-                <TextBox Grid.Row="1" Name="DescriptionEmployeeTextBox" Text="{Binding IdUserNavigation.Desciption}"></TextBox>
+                <TextBox Grid.Row="1" Name="DescriptionEmployeeTextBox" Text="{Binding IdUserNavigation.Description}"></TextBox>
             </Grid>
 
             <Grid Grid.Row="3" RowDefinitions="Auto Auto" Margin="5">
