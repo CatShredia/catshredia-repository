@@ -17,7 +17,7 @@ public partial class AllOrderControl : UserControl
 
     private void RefreshDate()
     {
-        var orders = App.DbContext.Orders
+        var orders = App.DbContext.ShopOrders
             .ToList();
 
         OrdersItemsControl.ItemsSource = orders;

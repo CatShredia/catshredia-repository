@@ -15,5 +15,5 @@ public partial class Basket
 
     public virtual Product IdProductNavigation { get; set; } = null!;
 
-    public virtual User IdUserNavigation { get; set; } = null!;
+    public virtual AppUser IdUserNavigation { get; set; } = null!;
 }

@@ -18,7 +18,7 @@ public partial class OrderCard : UserControl
 
     private void OnDataContextChanged(object sender, EventArgs e)
     {
-        if (DataContext is Order order)
+        if (DataContext is ShopOrder order)
         {
             LoadOrderProducts(order);
         }
@@ -28,10 +28,10 @@ public partial class OrderCard : UserControl
         }
     }
 
-    private void LoadOrderProducts(Order order)
+    private void LoadOrderProducts(ShopOrder order)
     {
         // Загружаем OrderLists с продуктами для этого заказа
-        var orderLists = App.DbContext.OrderLists
+        var orderLists = App.DbContext.OrderItems
             .Include(ol => ol.IdProductNavigation)
             .Include(list => list.IdOrderNavigation)
                 .ThenInclude(user => user.IdUserNavigation)

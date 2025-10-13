@@ -17,5 +17,5 @@ public partial class Product
 
     public virtual ICollection<Basket> Baskets { get; set; } = new List<Basket>();
 
-    public virtual ICollection<OrderList> OrderLists { get; set; } = new List<OrderList>();
+    public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 }

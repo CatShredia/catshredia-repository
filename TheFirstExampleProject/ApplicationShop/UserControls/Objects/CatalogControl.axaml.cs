@@ -203,26 +203,26 @@ public partial class CatalogControl : UserControl
 
         if (basketItems == null) return;
 
-        var newOrder = new Order
+        var newOrder = new ShopOrder()
         {
-            IsPaided = false,
+            IsPaid = false,
             IsDelivered = false,
             IdUser = VariablesData.AuthorizatedUser.IdUser,
         };
 
-        App.DbContext.Orders.Add(newOrder);
+        App.DbContext.ShopOrders.Add(newOrder);
 
         App.DbContext.SaveChanges();
 
         foreach (var item in basketItems)
         {
-            var orderListItem = new OrderList()
+            var orderListItem = new OrderItem()
             {
                 IdOrder = newOrder.IdOrder,
                 IdProduct = item.IdProduct
             };
 
-            App.DbContext.OrderLists.Add(orderListItem);
+            App.DbContext.OrderItems.Add(orderListItem);
         }
 
         App.DbContext.Baskets.RemoveRange(basketItems);

@@ -42,7 +42,7 @@ public partial class MainWindow : Window
 
     private void SystemUser(int userId)
     {
-        VariablesData.AuthorizatedUser = App.DbContext.Users
+        VariablesData.AuthorizatedUser = App.DbContext.AppUsers
             .Include(user => user.IdRoleNavigation)
             .ThenInclude(r => r.RolePermissions)
             .FirstOrDefault(user => user.IdRole == userId);

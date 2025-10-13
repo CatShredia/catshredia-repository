@@ -13,5 +13,5 @@ public partial class Login
 
     public int IdUser { get; set; }
 
-    public virtual User IdUserNavigation { get; set; } = null!;
+    public virtual AppUser IdUserNavigation { get; set; } = null!;
 }

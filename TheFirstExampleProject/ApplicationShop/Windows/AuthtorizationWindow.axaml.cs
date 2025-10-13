@@ -6,7 +6,6 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
 namespace ApplicationShop.Windows;
 
@@ -59,7 +58,7 @@ public partial class AuthtorizationWindow : Window
                 );
             if (selectedLogin != null)
             {
-                var selectedUser = App.DbContext.Users
+                var selectedUser = App.DbContext.AppUsers
                     .Include(user => user.IdRoleNavigation)
                     .ThenInclude(r => r.RolePermissions)
                     .FirstOrDefault(user => selectedLogin.IdUser == user.IdUser);

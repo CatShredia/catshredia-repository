@@ -13,5 +13,5 @@ public partial class Street
 
     public virtual City IdCityNavigation { get; set; } = null!;
 
-    public virtual ICollection<UserAdress> UserAdresses { get; set; } = new List<UserAdress>();
+    public virtual ICollection<UserAddress> UserAddresses { get; set; } = new List<UserAddress>();
 }

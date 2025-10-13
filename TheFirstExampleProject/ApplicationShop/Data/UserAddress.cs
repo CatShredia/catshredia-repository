@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace ApplicationShop.Data;
 
-public partial class UserAdress
+public partial class UserAddress
 {
-    public int IdUserAdress { get; set; }
+    public int IdUserAddress { get; set; }
 
     public int IdUser { get; set; }
 
@@ -17,5 +17,5 @@ public partial class UserAdress
 
     public virtual Street IdStreetNavigation { get; set; } = null!;
 
-    public virtual User IdUserNavigation { get; set; } = null!;
+    public virtual AppUser IdUserNavigation { get; set; } = null!;
 }

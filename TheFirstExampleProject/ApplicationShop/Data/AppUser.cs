@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ApplicationShop.Data;
 
-public partial class User
+public partial class AppUser
 {
     public int IdUser { get; set; }
 
@@ -23,7 +23,7 @@ public partial class User
 
     public virtual ICollection<Login> Logins { get; set; } = new List<Login>();
 
-    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+    public virtual ICollection<ShopOrder> ShopOrders { get; set; } = new List<ShopOrder>();
 
-    public virtual ICollection<UserAdress> UserAdresses { get; set; } = new List<UserAdress>();
+    public virtual ICollection<UserAddress> UserAddresses { get; set; } = new List<UserAddress>();
 }

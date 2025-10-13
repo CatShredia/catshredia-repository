@@ -34,7 +34,7 @@ public partial class OrderControl : UserControl
 
     private void RefreshDate()
     {
-        var orders = App.DbContext.Orders
+        var orders = App.DbContext.ShopOrders
             .Where(o => o.IdUser == VariablesData.AuthorizatedUser.IdUser)
             .ToList();
 

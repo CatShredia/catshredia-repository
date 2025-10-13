@@ -22,7 +22,7 @@ public partial class UsersEditWindow : Window
         {
             DataContext = new Login
             {
-                IdUserNavigation = new User()
+                IdUserNavigation = new AppUser()
             };
 
             var defaultRole = roles.FirstOrDefault(r => r.IdRole == VariablesData.SelectedRoleId);

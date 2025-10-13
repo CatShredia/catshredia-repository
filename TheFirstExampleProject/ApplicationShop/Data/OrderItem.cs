@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace ApplicationShop.Data;
 
-public partial class OrderList
+public partial class OrderItem
 {
-    public int IdOrderList { get; set; }
+    public int IdOrderItem { get; set; }
 
     public int IdOrder { get; set; }
 
     public int IdProduct { get; set; }
 
-    public virtual Order IdOrderNavigation { get; set; } = null!;
+    public virtual ShopOrder IdOrderNavigation { get; set; } = null!;
 
     public virtual Product IdProductNavigation { get; set; } = null!;
 }
