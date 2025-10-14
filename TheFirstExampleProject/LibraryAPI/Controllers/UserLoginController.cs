@@ -22,8 +22,15 @@ public class UserLoginController
     
     [HttpPost]
     [Route("createNewUserAndLogin")]
-    public async Task<IActionResult> CreateNewUserAndLogin(UserPost newUser)
+    public async Task<IActionResult> CreateNewUserAndLogin(UserQuery newUser)
     {
         return await _usersLoginsService.CreateNewUserAndLoginAsync(newUser);
+    }
+    
+    [HttpPost]
+    [Route("editUserAndLogin")]
+    public async Task<IActionResult> EditUserAndLogin(SpecificUserQuery selectedUser)
+    {
+        return await _usersLoginsService.EditUserAndLoginAsync(selectedUser);
     }
 }
