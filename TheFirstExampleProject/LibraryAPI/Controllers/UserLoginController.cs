@@ -6,6 +6,7 @@ namespace LibraryAPI.Controllers;
 
 public class UserLoginController
 {
+    // User and Login
     private readonly IUsersLoginsService _usersLoginsService;
 
     public UserLoginController(IUsersLoginsService usersLoginsService)
@@ -27,10 +28,17 @@ public class UserLoginController
         return await _usersLoginsService.CreateNewUserAndLoginAsync(newUser);
     }
     
-    [Route("editUserAndLogin/{id}")]
     [HttpPut]
+    [Route("editUserAndLogin/{id}")]
     public async Task<IActionResult> EditUserAndLogin(int id, UserQuery selectedUser)
     {
         return await _usersLoginsService.EditUserAndLoginAsync(id, selectedUser);
+    }
+    
+    [HttpDelete]
+    [Route("deleteUserAndLogin/{id}")]
+    public async Task<IActionResult> DeleteUserAndLogin(int id)
+    {
+        return await _usersLoginsService.DeleteUserAndLoginAsync(id);
     }
 }

@@ -45,7 +45,8 @@ public class UserLoginService : IUsersLoginsService
 
         return new OkObjectResult(new
         {
-            status = true
+            status = true,
+            message = "User and login created successfully."
         });
     }
 
@@ -60,11 +61,9 @@ public class UserLoginService : IUsersLoginsService
             return new NotFoundObjectResult(new { status = false, message = "Login not found." });
         }
 
-        // Update Login properties
         existingLogin.login = selectedUser.Login;
         existingLogin.password = selectedUser.Password;
 
-        // Update related User properties
         existingLogin.User.name = selectedUser.Name;
         existingLogin.User.description = selectedUser.Description;
 
@@ -72,7 +71,34 @@ public class UserLoginService : IUsersLoginsService
 
         return new OkObjectResult(new
         {
-            status = true
+            status = true,
+            message = "User and login edited successfully."
+        });
+    }
+    public async Task<IActionResult> DeleteUserAndLoginAsync(int id)
+    {
+        var existingLogin = await _contextDatabase.Logins
+            .Include(l => l.User) 
+            .FirstOrDefaultAsync(l => l.id_user == id);
+
+        if (existingLogin == null)
+        {
+            return new NotFoundObjectResult(new { status = false, message = "Login not found." });
+        }
+
+        _contextDatabase.Logins.Remove(existingLogin);
+    
+        if (existingLogin.User != null)
+        {
+            _contextDatabase.Users.Remove(existingLogin.User);
+        }
+
+        await _contextDatabase.SaveChangesAsync();
+
+        return new OkObjectResult(new
+        {
+            status = true,
+            message = "User and login deleted successfully."
         });
     }
 }
