@@ -8,5 +8,5 @@ public interface IUsersLoginsService
     Task<IActionResult> GetAllUsersAsync();
     
     Task<IActionResult> CreateNewUserAndLoginAsync(UserQuery newUser);
-    Task<IActionResult> EditUserAndLoginAsync(SpecificUserQuery selectedUser);
+    Task<IActionResult> EditUserAndLoginAsync(int id, UserQuery selectedUser);
 }

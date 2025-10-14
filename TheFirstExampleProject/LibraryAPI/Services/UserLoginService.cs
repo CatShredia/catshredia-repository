@@ -49,14 +49,11 @@ public class UserLoginService : IUsersLoginsService
         });
     }
 
-    public async Task<IActionResult> EditUserAndLoginAsync(SpecificUserQuery selectedUser)
+    public async Task<IActionResult> EditUserAndLoginAsync(int id, UserQuery selectedUser)
     {
-        if (selectedUser.Id_User == null)
-            return new BadRequestObjectResult(new { status = false, message = "User ID is required." });
-
         var existingLogin = await _contextDatabase.Logins
             .Include(l => l.User)
-            .FirstOrDefaultAsync(l => l.id_user == int.Parse(selectedUser.Id_User));
+            .FirstOrDefaultAsync(l => l.id_user == id);
 
         if (existingLogin == null)
         {
