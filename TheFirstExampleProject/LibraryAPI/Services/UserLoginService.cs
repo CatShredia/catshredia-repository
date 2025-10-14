@@ -26,6 +26,23 @@ public class UserLoginService : IUsersLoginsService
             status = true
         });
     }
+    
+    public async Task<IActionResult> GetUserByIdAsync(int id)
+    {
+        var user = await _contextDatabase.Users
+            .FirstOrDefaultAsync(u => u.id_user == id); // assuming your User has Id
+
+        if (user == null)
+        {
+            return new NotFoundObjectResult(new { status = false, message = "User not found." });
+        }
+
+        return new OkObjectResult(new
+        {
+            status = true,
+            data = user
+        });
+    }
 
     public async Task<IActionResult> CreateNewUserAndLoginAsync(UserQuery newUser)
     {

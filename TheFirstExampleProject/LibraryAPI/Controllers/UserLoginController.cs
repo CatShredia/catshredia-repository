@@ -21,6 +21,12 @@ public class UserLoginController
         return await _usersLoginsService.GetAllUsersAsync();
     }
     
+    [HttpGet("user/{id}")]
+    public async Task<IActionResult> GetUserById(int id)
+    {
+        return await _usersLoginsService.GetUserByIdAsync(id);
+    }
+    
     [HttpPost]
     [Route("createNewUserAndLogin")]
     public async Task<IActionResult> CreateNewUserAndLogin(UserQuery newUser)
@@ -41,6 +47,7 @@ public class UserLoginController
     {
         return await _usersLoginsService.DeleteUserAndLoginAsync(id);
     }
+
     
     // books and genre
     [HttpGet]
