@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
+using LibraryAPI.Requests;
 
-namespace TestFirstWedAPIProject.Interfaces;
+namespace LibraryAPI.Interfaces;
 
 public interface IUsersLoginsService
 {
     Task<IActionResult> GetAllUsersAsync();
     
-    // Task<IActionResult> CreateNewUserAndLoginAsync(UserPost newUser);
+    Task<IActionResult> CreateNewUserAndLoginAsync(UserPost newUser);
 }

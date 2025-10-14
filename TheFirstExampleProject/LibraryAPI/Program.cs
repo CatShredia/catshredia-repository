@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using LibraryAPI.DatabaseContext;
+using LibraryAPI.Interfaces;
+using LibraryAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +16,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ContextDatabase>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("TestDBString")), ServiceLifetime.Scoped);
 
-// builder.Services.AddScoped<IUsersLoginsService, UserLoginService>();
+builder.Services.AddScoped<IUsersLoginsService, UserLoginService>();
 
 var app = builder.Build();
 
