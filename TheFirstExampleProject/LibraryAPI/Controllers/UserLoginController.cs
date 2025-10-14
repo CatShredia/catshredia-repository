@@ -41,4 +41,12 @@ public class UserLoginController
     {
         return await _usersLoginsService.DeleteUserAndLoginAsync(id);
     }
+    
+    // books and genre
+    [HttpGet]
+    [Route("getAllBooks")]
+    public async Task<IActionResult> GetAllBooks()
+    {
+        return await _usersLoginsService.GetAllBookAsync();
+    }
 }

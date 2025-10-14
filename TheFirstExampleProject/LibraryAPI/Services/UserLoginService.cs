@@ -101,4 +101,15 @@ public class UserLoginService : IUsersLoginsService
             message = "User and login deleted successfully."
         });
     }
+
+    public async Task<IActionResult> GetAllBookAsync()
+    {
+        var books = _contextDatabase.Books.ToListAsync();
+
+        return new OkObjectResult(new
+        {
+            data = new { books = books },
+            status = true
+        });
+    }
 }

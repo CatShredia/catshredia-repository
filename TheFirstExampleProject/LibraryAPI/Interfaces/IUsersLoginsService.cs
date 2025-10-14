@@ -10,4 +10,7 @@ public interface IUsersLoginsService
     Task<IActionResult> CreateNewUserAndLoginAsync(UserQuery newUser);
     Task<IActionResult> EditUserAndLoginAsync(int id, UserQuery selectedUser);
     Task<IActionResult> DeleteUserAndLoginAsync(int id);
+    
+    // Book and Genre
+    Task<IActionResult> GetAllBookAsync();
 }
