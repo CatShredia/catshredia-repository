@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TestFirstWedAPIProject.DatabaseContext;
 using TestFirstWedAPIProject.Interfaces;
+using TestFirstWedAPIProject.models;
+using TestWebApi321.Requests;
 
 namespace TestFirstWedAPIProject.Services;
 
@@ -21,6 +23,28 @@ public class UserLoginService : IUsersLoginsService
         return new OkObjectResult(new
         {
             data = new {users = users},
+            status = true
+        });
+    }
+    
+    public async Task<IActionResult> CreateNewUserAndLoginAsync(UserPost newUser)
+    {
+        var login = new Login()
+        {
+            User = new User()
+            {
+                description = newUser.Description,
+                name= newUser.Name,
+            },
+            password = newUser.Password,
+            login = newUser.Login
+        };
+
+        await _contextDatabase.AddAsync(login);
+        await _contextDatabase.SaveChangesAsync();
+
+        return new OkObjectResult(new
+        {
             status = true
         });
     }
