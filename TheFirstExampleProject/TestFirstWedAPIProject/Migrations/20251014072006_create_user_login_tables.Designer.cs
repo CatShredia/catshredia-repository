@@ -11,8 +11,8 @@ using TestFirstWedAPIProject.DatabaseContext;
 namespace TestFirstWedAPIProject.Migrations
 {
     [DbContext(typeof(ContextDatabase))]
-    [Migration("20251014054926_00_00_0000_create_user_login_tables")]
-    partial class _00_00_0000_create_user_login_tables
+    [Migration("20251014072006_create_user_login_tables")]
+    partial class create_user_login_tables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
