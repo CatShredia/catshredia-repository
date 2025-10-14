@@ -16,7 +16,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ContextDatabase>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("TestDBString")), ServiceLifetime.Scoped);
 
-builder.Services.AddScoped<IUsersLoginsService, UserLoginService>();
+builder.Services.AddScoped<ILibraryService, LibraryService>();
 
 var app = builder.Build();
 

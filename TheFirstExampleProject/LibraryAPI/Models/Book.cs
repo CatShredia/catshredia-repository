@@ -7,6 +7,9 @@ public class Book
 {
     [Key]
     public int id_book { get; set; }
+    
+    public string title { get; set; }
+    public string author { get; set; }
     public int cost { get; set; }
     public string description { get; set; }
     
