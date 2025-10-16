@@ -285,7 +285,15 @@ public class LibraryService : ILibraryService
 
         if (User == null) return new NotFoundObjectResult(new { status = false, message = "User not found." });
         if (book == null) return new NotFoundObjectResult(new { status = false, message = "Book not found." });
+        
+        bool alreadyRented = await _contextDatabase.RentLists
+            .AnyAsync(r => r.id_user == rentalStart.id_user && r.id_book == rentalStart.id_book);
 
+        if (alreadyRented)
+        {
+            return new NotFoundObjectResult(new { status = false, message = "This book already rented by this user." });
+        }
+        
         var newRental = new RentList()
         {
             id_user = rentalStart.id_user,
