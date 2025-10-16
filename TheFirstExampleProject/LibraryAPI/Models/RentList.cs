@@ -8,7 +8,7 @@ public class RentList
     [Key]
     public int id_list { get; set; }
     public DateOnly date_start { get; set; }
-    public DateOnly date_end { get; set; }
+    public DateOnly? date_end { get; set; }
     
     // relation to 'book' table
     [Required]

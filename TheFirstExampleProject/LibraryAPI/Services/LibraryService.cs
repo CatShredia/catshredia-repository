@@ -278,20 +278,19 @@ public class LibraryService : ILibraryService
         return new OkObjectResult(new { status = true, message = "Genre deleted." });
     }
 
-    public async Task<IActionResult> RentBookAsync(RentalQuery rental)
+    public async Task<IActionResult> RentBookAsync(RentalStartQuery rentalStart)
     {
-        var User = await _contextDatabase.Users.FindAsync(rental.id_user);
-        var book = await _contextDatabase.Books.FindAsync(rental.id_book);
+        var User = await _contextDatabase.Users.FindAsync(rentalStart.id_user);
+        var book = await _contextDatabase.Books.FindAsync(rentalStart.id_book);
 
         if (User == null) return new NotFoundObjectResult(new { status = false, message = "User not found." });
         if (book == null) return new NotFoundObjectResult(new { status = false, message = "Book not found." });
 
         var newRental = new RentList()
         {
-            id_user = rental.id_user,
-            id_book = rental.id_book,
-            date_start = DateOnly.FromDateTime(DateTime.Now),
-            date_end = DateOnly.FromDateTime(DateTime.Now.AddYears(1)),
+            id_user = rentalStart.id_user,
+            id_book = rentalStart.id_book,
+            date_start = rentalStart.date_start
         };
 
         await _contextDatabase.RentLists.AddAsync(newRental);
@@ -304,13 +303,11 @@ public class LibraryService : ILibraryService
     {
         var rental = await _contextDatabase.RentLists.FindAsync(rentalId);
 
-        rental.date_end = DateOnly.FromDateTime(DateTime.Now.AddYears(1));
+        rental.date_end = DateOnly.FromDateTime(DateTime.Now);
         var book = await _contextDatabase.Books.FindAsync(rental.id_book);
         
         await _contextDatabase.SaveChangesAsync();
         return new OkObjectResult(new { status = true, message = "Book returned." });
-
-        return null;
     }
 
     public async Task<IActionResult> GetRentalHistoryByUserAsync(int UserId)

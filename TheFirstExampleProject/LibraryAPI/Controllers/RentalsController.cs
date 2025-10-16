@@ -13,7 +13,7 @@ public class RentalsController
     public RentalsController(ILibraryService service) => _service = service;
 
     [HttpPost]
-    public async Task<IActionResult> Rent(RentalQuery rental) => await _service.RentBookAsync(rental);
+    public async Task<IActionResult> Rent(RentalStartQuery rentalStart) => await _service.RentBookAsync(rentalStart);
 
     [HttpPut("return/{rentalId}")]
     public async Task<IActionResult> Return(int rentalId) => await _service.ReturnBookAsync(rentalId);

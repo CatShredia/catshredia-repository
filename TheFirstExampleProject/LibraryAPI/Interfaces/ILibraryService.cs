@@ -33,7 +33,7 @@ public interface ILibraryService
     Task<IActionResult> DeleteGenreAsync(int id);
 
     // Rentals
-    Task<IActionResult> RentBookAsync(RentalQuery rental);
+    Task<IActionResult> RentBookAsync(RentalStartQuery rentalStart);
     Task<IActionResult> ReturnBookAsync(int rentalId);
     Task<IActionResult> GetRentalHistoryByUserAsync(int UserId);
     Task<IActionResult> GetRentalHistoryByBookAsync(int bookId);
