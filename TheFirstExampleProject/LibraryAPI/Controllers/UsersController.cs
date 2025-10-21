@@ -18,12 +18,12 @@ public class UsersController
     public async Task<IActionResult> GetById(int id) => await _service.GetUserByIdAsync(id);
 
     [HttpPost]
-    public async Task<IActionResult> Create(UserQuery reader) => await _service.CreateUserAsync(reader);
+    public async Task<IActionResult> Create(UserQuery reader) => await _service.CreateNewUserAndLoginAsync(reader);
 
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, UserQuery reader) =>
-        await _service.UpdateUserAsync(id, reader);
+        await _service.EditUserAndLoginAsync(id, reader);
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id) => await _service.DeleteUserAsync(id);
+    public async Task<IActionResult> Delete(int id) => await _service.DeleteUserAndLoginAsync(id);
 }

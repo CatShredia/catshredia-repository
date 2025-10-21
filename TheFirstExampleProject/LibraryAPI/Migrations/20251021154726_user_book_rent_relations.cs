@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LibraryAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class book_genre_rent_tables : Migration
+    public partial class user_book_rent_relations : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,11 +25,27 @@ namespace LibraryAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    id_user = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.id_user);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Books",
                 columns: table => new
                 {
                     id_book = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    author = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     cost = table.Column<int>(type: "int", nullable: false),
                     description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     id_genre = table.Column<int>(type: "int", nullable: false)
@@ -46,13 +62,34 @@ namespace LibraryAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Logins",
+                columns: table => new
+                {
+                    id_login = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    login = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    id_user = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Logins", x => x.id_login);
+                    table.ForeignKey(
+                        name: "FK_Logins_Users_id_user",
+                        column: x => x.id_user,
+                        principalTable: "Users",
+                        principalColumn: "id_user",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RentLists",
                 columns: table => new
                 {
                     id_list = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     date_start = table.Column<DateOnly>(type: "date", nullable: false),
-                    date_end = table.Column<DateOnly>(type: "date", nullable: false),
+                    date_end = table.Column<DateOnly>(type: "date", nullable: true),
                     id_book = table.Column<int>(type: "int", nullable: false),
                     id_user = table.Column<int>(type: "int", nullable: false)
                 },
@@ -79,9 +116,15 @@ namespace LibraryAPI.Migrations
                 column: "id_genre");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RentLists_id_book",
+                name: "IX_Logins_id_user",
+                table: "Logins",
+                column: "id_user");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RentLists_id_book_id_user",
                 table: "RentLists",
-                column: "id_book");
+                columns: new[] { "id_book", "id_user" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_RentLists_id_user",
@@ -93,10 +136,16 @@ namespace LibraryAPI.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Logins");
+
+            migrationBuilder.DropTable(
                 name: "RentLists");
 
             migrationBuilder.DropTable(
                 name: "Books");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Genres");

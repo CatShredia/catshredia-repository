@@ -21,11 +21,6 @@ public interface ILibraryService
     Task<IActionResult> GetBooksByGenreAsync(string genreName);
     Task<IActionResult> SearchBooksAsync(string? author, string? title);
 
-    // Users
-    Task<IActionResult> CreateUserAsync(UserQuery User);
-    Task<IActionResult> UpdateUserAsync(int id, UserQuery User);
-    Task<IActionResult> DeleteUserAsync(int id);
-
     // Genres
     Task<IActionResult> GetAllGenresAsync();
     Task<IActionResult> CreateGenreAsync(GenreQuery genre);

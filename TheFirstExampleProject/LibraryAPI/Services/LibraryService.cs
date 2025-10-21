@@ -206,39 +206,7 @@ public class LibraryService : ILibraryService
         var books = await query.Include(b => b.Genre).ToListAsync();
         return new OkObjectResult(new { status = true, data = new { books } });
     }
-
-    public async Task<IActionResult> CreateUserAsync(UserQuery User)
-    {
-        var newUser = new User
-        {
-            name = User.Name,
-        };
-        await _contextDatabase.Users.AddAsync(newUser);
-        await _contextDatabase.SaveChangesAsync();
-        return new OkObjectResult(new { status = true, message = "User created." });
-    }
-
-    public async Task<IActionResult> UpdateUserAsync(int id, UserQuery User)
-    {
-        var existing = await _contextDatabase.Users.FindAsync(id);
-        if (existing == null) return new NotFoundObjectResult(new { status = false, message = "User not found." });
-
-        existing.name = User.Name;
-
-        await _contextDatabase.SaveChangesAsync();
-        return new OkObjectResult(new { status = true, message = "User updated." });
-    }
-
-    public async Task<IActionResult> DeleteUserAsync(int id)
-    {
-        var User = await _contextDatabase.Users.FindAsync(id);
-        if (User == null) return new NotFoundObjectResult(new { status = false, message = "User not found." });
-
-        _contextDatabase.Users.Remove(User);
-        await _contextDatabase.SaveChangesAsync();
-        return new OkObjectResult(new { status = true, message = "User deleted." });
-    }
-
+    
     // ============ GENRES ============
     public async Task<IActionResult> GetAllGenresAsync() =>
         new OkObjectResult(new { data = new { genres = await _contextDatabase.Genres.ToListAsync() }, status = true });
