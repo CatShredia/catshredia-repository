@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LibraryAPI.Models;
 
-[Index(nameof(id_book), nameof(id_user), IsUnique = true)]
 public class RentList
 {
     [Key]

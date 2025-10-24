@@ -120,10 +120,9 @@ namespace LibraryAPI.Migrations
 
                     b.HasKey("id_list");
 
-                    b.HasIndex("id_user");
+                    b.HasIndex("id_book");
 
-                    b.HasIndex("id_book", "id_user")
-                        .IsUnique();
+                    b.HasIndex("id_user");
 
                     b.ToTable("RentLists");
                 });

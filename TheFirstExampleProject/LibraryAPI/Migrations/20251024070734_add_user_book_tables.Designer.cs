@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryAPI.Migrations
 {
     [DbContext(typeof(ContextDatabase))]
-    [Migration("20251021154726_user_book_rent_relations")]
-    partial class user_book_rent_relations
+    [Migration("20251024070734_add_user_book_tables")]
+    partial class add_user_book_tables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -123,10 +123,9 @@ namespace LibraryAPI.Migrations
 
                     b.HasKey("id_list");
 
-                    b.HasIndex("id_user");
+                    b.HasIndex("id_book");
 
-                    b.HasIndex("id_book", "id_user")
-                        .IsUnique();
+                    b.HasIndex("id_user");
 
                     b.ToTable("RentLists");
                 });

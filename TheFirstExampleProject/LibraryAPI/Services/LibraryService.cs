@@ -248,25 +248,37 @@ public class LibraryService : ILibraryService
 
     public async Task<IActionResult> RentBookAsync(RentalStartQuery rentalStart)
     {
-        var User = await _contextDatabase.Users.FindAsync(rentalStart.id_user);
+        var user = await _contextDatabase.Users.FindAsync(rentalStart.id_user);
         var book = await _contextDatabase.Books.FindAsync(rentalStart.id_book);
 
-        if (User == null) return new NotFoundObjectResult(new { status = false, message = "User not found." });
-        if (book == null) return new NotFoundObjectResult(new { status = false, message = "Book not found." });
-        
-        bool alreadyRented = await _contextDatabase.RentLists
-            .AnyAsync(r => r.id_user == rentalStart.id_user && r.id_book == rentalStart.id_book);
+        if (user == null)
+            return new NotFoundObjectResult(new { status = false, message = "User not found." });
+    
+        if (book == null)
+            return new NotFoundObjectResult(new { status = false, message = "Book not found." });
 
-        if (alreadyRented)
+        bool hasActiveRental = await _contextDatabase.RentLists
+            .AnyAsync(r => 
+                    r.id_user == rentalStart.id_user && 
+                    r.id_book == rentalStart.id_book && 
+                    r.date_end == null
+            );
+
+        if (hasActiveRental)
         {
-            return new NotFoundObjectResult(new { status = false, message = "This book already rented by this user." });
+            return new BadRequestObjectResult(new 
+            { 
+                status = false, 
+                message = "This user already has an active rental for this book." 
+            });
         }
-        
+
         var newRental = new RentList()
         {
             id_user = rentalStart.id_user,
             id_book = rentalStart.id_book,
-            date_start = rentalStart.date_start
+            date_start = rentalStart.date_start,
+            date_end = null // что аренда активна
         };
 
         await _contextDatabase.RentLists.AddAsync(newRental);
@@ -274,7 +286,7 @@ public class LibraryService : ILibraryService
 
         return new OkObjectResult(new { status = true, message = "Book rented successfully." });
     }
-
+    
     public async Task<IActionResult> ReturnBookAsync(int rentalId)
     {
         var rental = await _contextDatabase.RentLists.FindAsync(rentalId);

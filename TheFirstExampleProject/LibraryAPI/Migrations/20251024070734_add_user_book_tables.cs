@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LibraryAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class user_book_rent_relations : Migration
+    public partial class add_user_book_tables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -121,10 +121,9 @@ namespace LibraryAPI.Migrations
                 column: "id_user");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RentLists_id_book_id_user",
+                name: "IX_RentLists_id_book",
                 table: "RentLists",
-                columns: new[] { "id_book", "id_user" },
-                unique: true);
+                column: "id_book");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RentLists_id_user",
