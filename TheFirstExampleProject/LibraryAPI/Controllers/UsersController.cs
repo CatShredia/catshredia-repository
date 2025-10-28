@@ -26,8 +26,4 @@ public class UsersController
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id) => await _service.DeleteUserAndLoginAsync(id);
-    
-    // authtorization
-    [HttpPost("login")]
-    public async Task<IActionResult> Authtorization(LoginQuery reader) => await _service.AuthtorizationAsync(reader);
 }

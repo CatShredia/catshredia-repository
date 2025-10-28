@@ -209,7 +209,7 @@ public class LibraryService : ILibraryService
         var books = await query.Include(b => b.Genre).ToListAsync();
         return new OkObjectResult(new { status = true, data = new { books } });
     }
-    
+
     // ============ GENRES ============
     public async Task<IActionResult> GetAllGenresAsync() =>
         new OkObjectResult(new { data = new { genres = await _contextDatabase.Genres.ToListAsync() }, status = true });
@@ -256,23 +256,23 @@ public class LibraryService : ILibraryService
 
         if (user == null)
             return new NotFoundObjectResult(new { status = false, message = "User not found." });
-    
+
         if (book == null)
             return new NotFoundObjectResult(new { status = false, message = "Book not found." });
 
         bool hasActiveRental = await _contextDatabase.RentLists
-            .AnyAsync(r => 
-                    r.id_user == rentalStart.id_user && 
-                    r.id_book == rentalStart.id_book && 
-                    r.date_end == null
+            .AnyAsync(r =>
+                r.id_user == rentalStart.id_user &&
+                r.id_book == rentalStart.id_book &&
+                r.date_end == null
             );
 
         if (hasActiveRental)
         {
-            return new BadRequestObjectResult(new 
-            { 
-                status = false, 
-                message = "This user already has an active rental for this book." 
+            return new BadRequestObjectResult(new
+            {
+                status = false,
+                message = "This user already has an active rental for this book."
             });
         }
 
@@ -289,14 +289,14 @@ public class LibraryService : ILibraryService
 
         return new OkObjectResult(new { status = true, message = "Book rented successfully." });
     }
-    
+
     public async Task<IActionResult> ReturnBookAsync(int rentalId)
     {
         var rental = await _contextDatabase.RentLists.FindAsync(rentalId);
 
         rental.date_end = DateOnly.FromDateTime(DateTime.Now);
         var book = await _contextDatabase.Books.FindAsync(rental.id_book);
-        
+
         await _contextDatabase.SaveChangesAsync();
         return new OkObjectResult(new { status = true, message = "Book returned." });
     }
@@ -333,9 +333,25 @@ public class LibraryService : ILibraryService
 
         return new OkObjectResult(new { status = true, data = new { currentRentals = current } });
     }
-    
+
     public async Task<IActionResult> AuthtorizationAsync(LoginQuery query)
     {
-        return await 
+        var selectedUser = _contextDatabase.Users.Where(user => user.id_user == query.id_user);
+
+        string token = _jwtGenerator.GenerateJwtToken(new LoginQuery()
+        {
+            id_user = query.id_user,  
+            id_role = query.id_role,
+        });
+
+        _contextDatabase.Sessions.Add(new Session()
+        {
+            name = token,
+            id_user = query.id_user,
+        });
+        
+        await _contextDatabase.SaveChangesAsync();
+
+        return new OkObjectResult(new { status = true, data = token });
     }
 }

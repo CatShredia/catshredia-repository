@@ -21,6 +21,8 @@ public class JwtGenerator
         {
             new Claim("id_user", query.id_user.ToString()),
             new Claim("id_role", query.id_role.ToString()),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString()),
         };
         
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey));
