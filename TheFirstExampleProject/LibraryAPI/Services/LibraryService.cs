@@ -4,16 +4,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LibraryAPI.Interfaces;
 using LibraryAPI.Requests;
+using LibraryAPI.UniversalMethods;
 
 namespace LibraryAPI.Services;
 
 public class LibraryService : ILibraryService
 {
     private readonly ContextDatabase _contextDatabase;
+    private readonly JwtGenerator _jwtGenerator;
 
-    public LibraryService(ContextDatabase contextDatabase)
+    public LibraryService(ContextDatabase contextDatabase, JwtGenerator jwtGenerator)
     {
         _contextDatabase = contextDatabase;
+        _jwtGenerator = jwtGenerator;
     }
 
     public async Task<IActionResult> GetAllUsersAsync()
@@ -329,5 +332,10 @@ public class LibraryService : ILibraryService
             .ToListAsync();
 
         return new OkObjectResult(new { status = true, data = new { currentRentals = current } });
+    }
+    
+    public async Task<IActionResult> AuthtorizationAsync(LoginQuery query)
+    {
+        return await 
     }
 }

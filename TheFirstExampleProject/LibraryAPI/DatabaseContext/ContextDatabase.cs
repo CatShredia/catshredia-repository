@@ -16,4 +16,5 @@ public class ContextDatabase : DbContext
     public DbSet<Genre> Genres { get; set; }
     public DbSet<Book> Books { get; set; }
     public DbSet<RentList> RentLists { get; set; }
+    public DbSet<Session> Sessions { get; set; }
 }

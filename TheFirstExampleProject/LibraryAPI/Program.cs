@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using LibraryAPI.DatabaseContext;
 using LibraryAPI.Interfaces;
 using LibraryAPI.Services;
+using LibraryAPI.UniversalMethods;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,7 @@ builder.Services.AddDbContext<ContextDatabase>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TestDBString")), ServiceLifetime.Scoped);
 
 builder.Services.AddScoped<ILibraryService, LibraryService>();
+builder.Services.AddSingleton<JwtGenerator>();
 
 var app = builder.Build();
 

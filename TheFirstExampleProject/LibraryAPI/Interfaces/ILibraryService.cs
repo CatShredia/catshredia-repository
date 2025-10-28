@@ -33,4 +33,5 @@ public interface ILibraryService
     Task<IActionResult> GetRentalHistoryByUserAsync(int UserId);
     Task<IActionResult> GetRentalHistoryByBookAsync(int bookId);
     Task<IActionResult> GetCurrentRentalsAsync();
+    Task<IActionResult> AuthtorizationAsync(LoginQuery query);
 }
