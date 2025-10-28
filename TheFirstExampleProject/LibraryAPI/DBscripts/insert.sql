@@ -10,17 +10,22 @@ INSERT INTO [dbo].[Genres] ([id_genre], [name]) VALUES
     (5, 'Боевик');
 SET IDENTITY_INSERT [dbo].[Genres] OFF;
 GO
-
+SET IDENTITY_INSERT [dbo].[Roles] ON;
+INSERT INTO [dbo].[Roles] ([id_role], [name]) VALUES
+    (1, 'admin'),
+    (2, 'user');
+SET IDENTITY_INSERT [dbo].[Roles] OFF;
+GO
 -- ===========================================
 -- Вставка данных в Users (пользователи)
 -- ===========================================
 SET IDENTITY_INSERT [dbo].[Users] ON;
-INSERT INTO [dbo].[Users] ([id_user], [name], [description]) VALUES
-    (1, 'Иван Иванов', 'Любитель фантастики'),
-    (2, 'Мария Петрова', 'Обожает детективы'),
-    (3, 'Алексей Сидоров', 'Читает романы на ночь'),
-    (4, 'Елена Кузнецова', 'Фанат научной фантастики'),
-    (5, 'Дмитрий Морозов', 'Предпочитает боевики');
+INSERT INTO [dbo].[Users] ([id_user], [name], [description], [id_role]) VALUES
+    (1, 'Иван Иванов', 'Любитель фантастики', 2),
+    (2, 'Мария Петрова', 'Обожает детективы', 2),
+    (3, 'Алексей Сидоров', 'Читает романы на ночь', 2),
+    (4, 'Елена Кузнецова', 'Фанат научной фантастики', 1),
+    (5, 'Дмитрий Морозов', 'Предпочитает боевики', 1);
 SET IDENTITY_INSERT [dbo].[Users] OFF;
 GO
 
@@ -62,7 +67,6 @@ INSERT INTO [dbo].[RentLists] ([id_list], [date_start], [date_end], [id_book], [
     (5, '2025-01-30', null, 5, 5);
 SET IDENTITY_INSERT [dbo].[RentLists] OFF;
 GO
-
 -- ===========================================
 -- Проверка: вывод всех таблиц
 -- ===========================================

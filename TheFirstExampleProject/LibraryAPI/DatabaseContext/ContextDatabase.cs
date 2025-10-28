@@ -17,4 +17,5 @@ public class ContextDatabase : DbContext
     public DbSet<Book> Books { get; set; }
     public DbSet<RentList> RentLists { get; set; }
     public DbSet<Session> Sessions { get; set; }
+    public DbSet<Role> Roles { get; set; }
 }

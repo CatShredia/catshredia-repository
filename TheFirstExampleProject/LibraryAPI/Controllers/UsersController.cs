@@ -1,3 +1,4 @@
+using LibraryAPI.CustomAttributes;
 using LibraryAPI.Interfaces;
 using LibraryAPI.Requests;
 using Microsoft.AspNetCore.Mvc;
@@ -12,13 +13,15 @@ public class UsersController
     public UsersController(ILibraryService service) => _service = service;
 
     [HttpGet]
+    [RoleAuthorized(1)]
     public async Task<IActionResult> GetAll() => await _service.GetAllUsersAsync();
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id) => await _service.GetUserByIdAsync(id);
 
     [HttpPost]
-    public async Task<IActionResult> Create(UserQuery reader) => await _service.CreateNewUserAndLoginAsync(reader);
+    [RoleAuthorized(1)]
+    public async Task<IActionResult> Create([FromBody]UserQuery reader) => await _service.CreateNewUserAndLoginAsync(reader);
 
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, UserQuery reader) =>
