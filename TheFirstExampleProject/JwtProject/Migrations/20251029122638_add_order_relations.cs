@@ -19,11 +19,18 @@ namespace JwtProject.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     status = table.Column<int>(type: "integer", nullable: false),
                     deliveryType = table.Column<int>(type: "integer", nullable: false),
-                    address = table.Column<string>(type: "text", nullable: false)
+                    address = table.Column<string>(type: "text", nullable: false),
+                    id_user = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.id_order);
+                    table.ForeignKey(
+                        name: "FK_Orders_Users_id_user",
+                        column: x => x.id_user,
+                        principalTable: "Users",
+                        principalColumn: "id_user",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -53,14 +60,20 @@ namespace JwtProject.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderLists_id_order",
+                name: "IX_OrderLists_id_order_id_product",
                 table: "OrderLists",
-                column: "id_order");
+                columns: new[] { "id_order", "id_product" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderLists_id_product",
                 table: "OrderLists",
                 column: "id_product");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_id_user",
+                table: "Orders",
+                column: "id_user");
         }
 
         /// <inheritdoc />

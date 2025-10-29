@@ -197,4 +197,87 @@ public class ShopService : IShopService
             message = "Product deleted successfully."
         });
     }
+
+    public async Task<IActionResult> GetAllOrdersAsync()
+    {
+        var orderList = _contextDatabase.Orders
+            .Select(order => new
+            {
+                id_order = order.id_order,
+                status = order.status,
+                deliveryType = order.deliveryType,
+                address = order.address,
+                orderItems = _contextDatabase.OrderLists
+                    .Where(ol => ol.id_order == order.id_order)
+                    .Select(ol => ol.id_product)
+                    .ToList()
+            })
+            .ToListAsync();
+
+        if (orderList == null)
+        {
+            return new NotFoundObjectResult(new { status = false, message = "Orders not found." });
+        }
+
+        return new OkObjectResult(new
+        {
+            status = true,
+            data = orderList
+        });
+    }
+
+    public async Task<IActionResult> CreateOrderAsync(OrderQuery query)
+    {
+        var newOrder = new Order()
+        {
+            status = query.status,
+            deliveryType = query.deliveryType,
+            address = query.address,
+            // TODO: after auth
+            id_user = 1
+        };
+
+        await _contextDatabase.AddAsync(newOrder);
+        await _contextDatabase.SaveChangesAsync();
+
+        foreach (var _id_product in query.ids_products)
+        {
+            var newOrderList = new OrderList()
+            {
+                id_order = newOrder.id_order,
+                id_product = _id_product,
+            };
+            await _contextDatabase.AddAsync(newOrderList);
+        }
+
+        await _contextDatabase.SaveChangesAsync();
+
+        return new OkObjectResult(new
+        {
+            status = true,
+            message = "Order and Order List created successfully."
+        });
+    }
+
+    public async Task<IActionResult> CancelOrderAsync(int id)
+    {
+        var selectedOrder = await _contextDatabase.Orders
+            .FirstOrDefaultAsync(p => p.id_order == id);
+
+        if (selectedOrder == null)
+        {
+            return new NotFoundObjectResult(new { status = false, message = "Order not found." });
+        }
+
+        selectedOrder.status = OrderStatus.canceled;
+
+        _contextDatabase.Update(selectedOrder);
+        await _contextDatabase.SaveChangesAsync();
+
+        return new OkObjectResult(new
+        {
+            status = true,
+            message = "Order canceled successfully."
+        });
+    }
 }

@@ -16,4 +16,9 @@ public interface IShopService
     Task<IActionResult> CreateProductAsync(int id_role, ProductQuery query);
     Task<IActionResult> UpdateProductAsync(ProductQuery query, int id);
     Task<IActionResult> DeleteProductAsync(int id);
+    
+    // orders
+    Task<IActionResult> GetAllOrdersAsync();
+    Task<IActionResult> CreateOrderAsync(OrderQuery query);
+    Task<IActionResult> CancelOrderAsync(int id);
 }

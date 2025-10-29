@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace JwtProject.Migrations
 {
     [DbContext(typeof(ContextDatabase))]
-    [Migration("20251029115255_add_order_relations")]
+    [Migration("20251029122638_add_order_relations")]
     partial class add_order_relations
     {
         /// <inheritdoc />
@@ -87,10 +87,15 @@ namespace JwtProject.Migrations
                     b.Property<int>("deliveryType")
                         .HasColumnType("integer");
 
+                    b.Property<int>("id_user")
+                        .HasColumnType("integer");
+
                     b.Property<int>("status")
                         .HasColumnType("integer");
 
                     b.HasKey("id_order");
+
+                    b.HasIndex("id_user");
 
                     b.ToTable("Orders");
                 });
@@ -111,9 +116,10 @@ namespace JwtProject.Migrations
 
                     b.HasKey("id_order_list");
 
-                    b.HasIndex("id_order");
-
                     b.HasIndex("id_product");
+
+                    b.HasIndex("id_order", "id_product")
+                        .IsUnique();
 
                     b.ToTable("OrderLists");
                 });
@@ -204,6 +210,17 @@ namespace JwtProject.Migrations
                 });
 
             modelBuilder.Entity("JwtProject.Model.Login", b =>
+                {
+                    b.HasOne("JwtProject.Model.User", "User")
+                        .WithMany()
+                        .HasForeignKey("id_user")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("JwtProject.Model.Order", b =>
                 {
                     b.HasOne("JwtProject.Model.User", "User")
                         .WithMany()
