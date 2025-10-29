@@ -1,4 +1,6 @@
 using JwtProject.Database;
+using JwtProject.Interfaces;
+using JwtProject.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +16,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ContextDatabase>(options => 
     options.UseNpgsql(builder.Configuration.GetConnectionString("ConnectionString")));
 
-// builder.Services.AddScoped<ILibraryService, LibraryService>();
+builder.Services.AddScoped<IShopService, ShopService>();
 // builder.Services.AddSingleton<JwtGenerator>();
 
 var app = builder.Build();
