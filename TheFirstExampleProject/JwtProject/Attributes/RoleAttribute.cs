@@ -9,11 +9,11 @@ namespace JwtProject.Security.Attributes;
 public class RoleAttribute : Attribute, IAsyncActionFilter
 {
 
-    private int id_role;
+    private int[] ids_role;
 
-    public RoleAttribute(int _id_role)
+    public RoleAttribute(int[] _ids_role)
     {
-        id_role = _id_role;
+        ids_role = _ids_role;
     }
     
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
@@ -39,7 +39,7 @@ public class RoleAttribute : Attribute, IAsyncActionFilter
             return;
         }
 
-        if (session.User.id_role != id_role)
+        if (ids_role.Contains(session.User.id_role))
         {
             context.Result = new JsonResult(new { error = "Haven't permissions" })
                 { StatusCode = StatusCodes.Status401Unauthorized };
