@@ -14,8 +14,8 @@ public class Product
     public string stroke { get; set; }
     public bool is_active { get; set; }
     
-    public DateOnly created_at { get; set; }
-    public DateOnly updated_at { get; set; }
+    public DateOnly? created_at { get; set; }
+    public DateOnly? updated_at { get; set; }
     
     // relation to 'category' table
     [Required]
