@@ -16,15 +16,14 @@ public class ShopService : IShopService
         _contextDatabase = contextDatabase;
     }
     
-    public async Task<IActionResult> GetAllEmployeesAsync()
+    public async Task<IActionResult> GetAllUsersAsync(int id_role)
     {
         var employeesList = _contextDatabase.Users
-            .Include(user => user.Role)
-            .Where(user => user.Role.name == "employee");
+            .Where(user => user.id_role == id_role);
         
         if (employeesList == null)
         {
-            return new NotFoundObjectResult(new { status = false, message = "Employees not found." });
+            return new NotFoundObjectResult(new { status = false, message = "Users not found." });
         } 
 
         return new OkObjectResult(new
@@ -34,7 +33,7 @@ public class ShopService : IShopService
         });
     }
 
-    public async Task<IActionResult> CreateEmployeeAsync(UserLoginQuery query)
+    public async Task<IActionResult> CreateUserAsync(int _id_role, UserLoginQuery query)
     {
         var newLogin = new Login()
         {
@@ -42,7 +41,7 @@ public class ShopService : IShopService
             {
                 name = query.nameUser,
                 description = query.description,
-                id_role = 2
+                id_role = _id_role
             },
             password = query.password,
             login = query.login,
@@ -58,7 +57,7 @@ public class ShopService : IShopService
         });
     }
 
-    public async Task<IActionResult> UpdateEmployeeAsync(UserLoginQuery query, int id)
+    public async Task<IActionResult> UpdateUserAsync(UserLoginQuery query, int id)
     {
         var existingLogin = await _contextDatabase.Logins
             .Include(l => l.User)
@@ -84,7 +83,7 @@ public class ShopService : IShopService
         });
     }
 
-    public async Task<IActionResult> DeleteEmployeeAsync(int id)
+    public async Task<IActionResult> DeleteUserAsync(int id)
     {
         var existingLogin = await _contextDatabase.Logins
             .Include(l => l.User)
