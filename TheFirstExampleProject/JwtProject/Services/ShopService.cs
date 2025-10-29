@@ -1,7 +1,9 @@
 using JwtProject.Database;
 using JwtProject.Interfaces;
 using JwtProject.Model;
+using JwtProject.Models;
 using JwtProject.Queries;
+using JwtProject.Security;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,10 +12,12 @@ namespace JwtProject.Services;
 public class ShopService : IShopService
 {
     private readonly ContextDatabase _contextDatabase;
+    private readonly JwtTokensGenerator _jwtGenerator;
 
-    public ShopService(ContextDatabase contextDatabase)
+    public ShopService(ContextDatabase contextDatabase, JwtTokensGenerator jwtGenerator)
     {
         _contextDatabase = contextDatabase;
+        _jwtGenerator = jwtGenerator;
     }
 
     public async Task<IActionResult> GetAllUsersAsync(int id_role)
@@ -279,5 +283,23 @@ public class ShopService : IShopService
             status = true,
             message = "Order canceled successfully."
         });
+    }
+
+    public async Task<IActionResult> AuthorizationUserAsync(LoginQuery query)
+    {
+        string token = _jwtGenerator.GenerateJwtToken(new LoginQuery()
+        {
+            id_user = query.id_user,
+            id_role = query.id_role,
+        });
+
+        _contextDatabase.Sessions.Add(new Session()
+        {
+            name = token,
+            id_user = query.id_user,
+        });
+        await _contextDatabase.SaveChangesAsync();
+
+        return new OkObjectResult(new { status = true, data = token });
     }
 }

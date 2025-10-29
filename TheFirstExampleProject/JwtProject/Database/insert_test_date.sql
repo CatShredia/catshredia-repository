@@ -80,3 +80,6 @@ join "Products" p on c.id_category = p.id_category;
 select * 
 from "OrderLists" ol
 right join "Orders" o on ol.id_order = o.id_order;
+
+select * 
+from "Sessions" s;
