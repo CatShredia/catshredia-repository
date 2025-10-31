@@ -21,4 +21,6 @@ public class ContextDatabase :  DbContext
     public DbSet<OrderList> OrderLists { get; set; }
     
     public DbSet<Session> Sessions { get; set; }
+    
+    public DbSet<Logs> Logs { get; set; }
 }
