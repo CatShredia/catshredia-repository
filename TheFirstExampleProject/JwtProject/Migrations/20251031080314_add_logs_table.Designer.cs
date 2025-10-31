@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace JwtProject.Migrations
 {
     [DbContext(typeof(ContextDatabase))]
-    [Migration("20251031074950_add_logs_table")]
+    [Migration("20251031080314_add_logs_table")]
     partial class add_logs_table
     {
         /// <inheritdoc />
@@ -83,14 +83,8 @@ namespace JwtProject.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("IpAddress")
-                        .HasColumnType("text");
-
                     b.Property<string>("Method")
                         .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Payload")
                         .HasColumnType("text");
 
                     b.Property<string>("Url")
@@ -98,9 +92,6 @@ namespace JwtProject.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("UserAgent")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserId")
                         .HasColumnType("text");
 
                     b.HasKey("Id");

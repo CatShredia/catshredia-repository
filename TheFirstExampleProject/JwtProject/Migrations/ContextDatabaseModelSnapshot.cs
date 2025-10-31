@@ -80,14 +80,8 @@ namespace JwtProject.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("IpAddress")
-                        .HasColumnType("text");
-
                     b.Property<string>("Method")
                         .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Payload")
                         .HasColumnType("text");
 
                     b.Property<string>("Url")
@@ -95,9 +89,6 @@ namespace JwtProject.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("UserAgent")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserId")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
