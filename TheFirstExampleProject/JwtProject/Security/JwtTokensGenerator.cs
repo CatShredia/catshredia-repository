@@ -16,12 +16,12 @@ public class JwtTokensGenerator
         _secretKey =  configuration["Jwt:Key"] ?? throw new ArgumentNullException("Jwt:Key");  
     } 
     
-    public string GenerateJwtToken(LoginQuery query)
+    public string GenerateJwtToken(int id_user, int id_role)
     {
         var claims = new Claim[]
         {
-            new Claim("id_user", query.id_user.ToString()),
-            new Claim("id_role", query.id_role.ToString()),
+            new Claim("id_user", id_user.ToString()),
+            new Claim("id_role", id_role.ToString()),
             
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),

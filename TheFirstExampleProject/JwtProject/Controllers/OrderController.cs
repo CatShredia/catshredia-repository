@@ -24,4 +24,8 @@ public class OrderController
     [HttpPut("order/cancelOrder")]
     [Role([1])]
     public async Task<IActionResult> CancelOrder(int id) => await _service.CancelOrderAsync(id);
+    
+    [HttpPut("order/changeYourMindSet")]
+    [Role([1])]
+    public async Task<IActionResult> ChangeYourMindSet(int id, [FromBody] OrderQuery reader) => await _service.ChangeYourMindSet(id, reader);
 }

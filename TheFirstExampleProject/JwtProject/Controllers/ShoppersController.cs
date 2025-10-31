@@ -17,7 +17,7 @@ public class ShoppersController
 
     [HttpPost("shoppers/create")]
     [Role([1, 2])]
-    public async Task<IActionResult> CreateEShopper([FromBody] UserLoginQuery reader) =>
+    public async Task<IActionResult> CreateShopper([FromBody] UserLoginQuery reader) =>
         await _service.CreateUserAsync(3, reader);
 
     [HttpPut("shoppers/update")]

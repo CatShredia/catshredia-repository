@@ -285,21 +285,54 @@ public class ShopService : IShopService
         });
     }
 
-    public async Task<IActionResult> AuthorizationUserAsync(LoginQuery query)
+    public async Task<IActionResult> ChangeYourMindSet(int id, OrderQuery query)
     {
-        string token = _jwtGenerator.GenerateJwtToken(new LoginQuery()
-        {
-            id_user = query.id_user,
-            id_role = query.id_role,
-        });
+        var existingOrder = await _contextDatabase.Orders
+            .FirstOrDefaultAsync(l => l.id_user == id);
 
-        _contextDatabase.Sessions.Add(new Session()
+        if (existingOrder == null)
         {
-            name = token,
-            id_user = query.id_user,
-        });
+            return new NotFoundObjectResult(new { status = false, message = "Order not found." });
+        }
+
+        existingOrder.status = query.status;
+        existingOrder.deliveryType = query.deliveryType;
+        existingOrder.address = query.address;
+        existingOrder.status = query.status; 
+        
         await _contextDatabase.SaveChangesAsync();
 
-        return new OkObjectResult(new { status = true, data = token });
+        return new OkObjectResult(new
+        {
+            status = true,
+            message = "Order changed successfully."
+        });
+    }
+
+    public async Task<IActionResult> AuthorizationUserAsync(LoginQuery query)
+    {
+        var selectedUser = _contextDatabase.Logins
+            .Include(login => login.User)
+            // .ThenInclude(user => user.Role)
+            .FirstOrDefault(login => login.login == query.name && login.password == query.password);
+
+        if (selectedUser != null)
+        {
+            string token = _jwtGenerator.GenerateJwtToken(selectedUser.id_user, selectedUser.User.id_role);
+
+            _contextDatabase.Sessions.Add(new Session()
+            {
+                name = token,
+                id_user = selectedUser.id_user,
+            });
+            await _contextDatabase.SaveChangesAsync();
+
+            return new OkObjectResult(new { status = true, data = token });
+        }
+        else
+        {
+            return new NotFoundObjectResult(new
+                { status = false, message = "User not found. Check you login and password!" });
+        }
     }
 }

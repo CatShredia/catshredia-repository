@@ -21,6 +21,7 @@ public interface IShopService
     Task<IActionResult> GetAllOrdersAsync();
     Task<IActionResult> CreateOrderAsync(OrderQuery query);
     Task<IActionResult> CancelOrderAsync(int id);
+    Task<IActionResult> ChangeYourMindSet(int id, OrderQuery query);
     
     // user actions
     Task<IActionResult> AuthorizationUserAsync([FromBody]LoginQuery reader);

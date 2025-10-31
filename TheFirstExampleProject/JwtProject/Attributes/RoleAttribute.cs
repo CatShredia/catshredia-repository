@@ -39,7 +39,7 @@ public class RoleAttribute : Attribute, IAsyncActionFilter
             return;
         }
 
-        if (ids_role.Contains(session.User.id_role))
+        if (!ids_role.Contains(session.User.id_role))
         {
             context.Result = new JsonResult(new { error = "Haven't permissions" })
                 { StatusCode = StatusCodes.Status401Unauthorized };
