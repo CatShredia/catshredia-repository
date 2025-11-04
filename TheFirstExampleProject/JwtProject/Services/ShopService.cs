@@ -335,4 +335,20 @@ public class ShopService : IShopService
                 { status = false, message = "User not found. Check you login and password!" });
         }
     }
+
+    public async Task<IActionResult> GetProfileAsync(string Authorization)
+    {
+        var selectedUser = _contextDatabase.Sessions
+            .Include(session => session.User)
+            .FirstOrDefault(session => session.name == Authorization);
+        if (selectedUser != null)
+        {
+            return new OkObjectResult(new { status = true, selectedUser = selectedUser });
+        }
+        else
+        {
+            return new NotFoundObjectResult(new
+                { status = false, message = "Session not founded!" });
+        }
+    }
 }
