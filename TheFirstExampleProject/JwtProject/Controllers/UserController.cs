@@ -17,4 +17,7 @@ public class UserController
     
     [HttpGet("user/profile")]
     public async Task<IActionResult> GetProfile([FromHeader]string Authorization) => await _service.GetProfileAsync(Authorization);
+    
+    [HttpPost("user/profile")]
+    public async Task<IActionResult> UpdateProfile([FromHeader]string Authorization, UserLoginQuery reader) => await _service.UpdateProfileAsync(Authorization, reader);
 }

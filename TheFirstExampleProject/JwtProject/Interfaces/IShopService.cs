@@ -26,4 +26,5 @@ public interface IShopService
     // user actions
     Task<IActionResult> AuthorizationUserAsync([FromBody]LoginQuery reader);
     Task<IActionResult> GetProfileAsync(string Authorization);
+    Task<IActionResult> UpdateProfileAsync(string Authorization, UserLoginQuery reader);
 }

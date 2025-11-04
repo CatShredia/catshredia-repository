@@ -351,4 +351,40 @@ public class ShopService : IShopService
                 { status = false, message = "Session not founded!" });
         }
     }
+
+    public async Task<IActionResult> UpdateProfileAsync(string Authorization, UserLoginQuery reader)
+    {
+        var selectedSession = _contextDatabase.Sessions.FirstOrDefault(session => session.name == Authorization);
+
+        if (selectedSession != null)
+        {
+            var existingLogin = await _contextDatabase.Logins
+                .Include(l => l.User)
+                .FirstOrDefaultAsync(l => l.id_user == selectedSession.id_user);
+
+            if (existingLogin == null)
+            {
+                return new NotFoundObjectResult(new { status = false, message = "Login not found." });
+            }
+
+            existingLogin.login = reader.login;
+            existingLogin.password = reader.password;
+
+            existingLogin.User.name = reader.nameUser;
+            existingLogin.User.description = reader.description;
+
+            await _contextDatabase.SaveChangesAsync();
+
+            return new OkObjectResult(new
+            {
+                status = true,
+                message = "User and login edited successfully."
+            });
+        }
+        else
+        {
+            return new NotFoundObjectResult(new
+                { status = false, message = "Session not founded!" });
+        }
+    }
 }
