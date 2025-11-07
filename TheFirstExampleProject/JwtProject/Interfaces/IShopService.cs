@@ -12,7 +12,11 @@ public interface IShopService
     Task<IActionResult> DeleteUserAsync(int id);
     
     // products
-    Task<IActionResult> GetAllProductsAsync(int id_role);
+    Task<IActionResult> GetAllProductsAsync();
+    Task<IActionResult> GetAllProductsWithSortFiltersAsync(
+        string? searchTerm = null,     
+        string? sortBy = "Id",        
+        string? sortOrder = "asc");
     Task<IActionResult> CreateProductAsync(int id_role, ProductQuery query);
     Task<IActionResult> UpdateProductAsync(ProductQuery query, int id);
     Task<IActionResult> DeleteProductAsync(int id);

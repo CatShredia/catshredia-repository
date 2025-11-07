@@ -114,9 +114,51 @@ public class ShopService : IShopService
         });
     }
 
-    public async Task<IActionResult> GetAllProductsAsync(int id_role)
+    public async Task<IActionResult> GetAllProductsAsync()
     {
         var productsList = _contextDatabase.Products;
+
+        if (!productsList.Any())
+        {
+            return new NotFoundObjectResult(new { status = false, message = "Products not found." });
+        }
+
+        return new OkObjectResult(new
+        {
+            status = true,
+            data = productsList
+        });
+    }
+
+    public async Task<IActionResult> GetAllProductsWithSortFiltersAsync(
+        string? searchTerm = null,     
+        string? sortBy = "Id",        
+        string? sortOrder = "asc")    
+    {
+        var query = _contextDatabase.Products.AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(searchTerm))
+        {
+            query = query.Where(p =>
+                EF.Functions.Like(p.name, $"%{searchTerm}%"));
+        }
+
+        sortOrder = sortOrder?.ToLower() == "desc" ? "desc" : "asc";
+    
+        query = sortBy?.ToLower() switch
+        {
+            "name" => sortOrder == "asc" 
+                ? query.OrderBy(p => p.name) 
+                : query.OrderByDescending(p => p.name),
+            "price" => sortOrder == "asc" 
+                ? query.OrderBy(p => p.price) 
+                : query.OrderByDescending(p => p.price),
+            _ => sortOrder == "asc" 
+                ? query.OrderBy(p => p.id_product) 
+                : query.OrderByDescending(p => p.id_product) 
+        };
+
+        var productsList = await query.ToListAsync();
 
         if (!productsList.Any())
         {

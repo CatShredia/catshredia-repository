@@ -12,7 +12,15 @@ public class ProductController
 
     [HttpGet("product/all")]
     [Role([1])]
-    public async Task<IActionResult> GetAllProducts() => await _service.GetAllProductsAsync(2);
+    public async Task<IActionResult> GetAllProducts() => await _service.GetAllProductsAsync();
+    
+    [HttpGet("product/allWithSortFilters")]
+    [Role([3])]
+    public async Task<IActionResult> GetAllProductsWithSortFilters(
+        string? searchTerm = null,     
+        string? sortBy = "Id",        
+        string? sortOrder = "asc") 
+        => await _service.GetAllProductsWithSortFiltersAsync(searchTerm, sortBy, sortOrder);
 
     [HttpPost("product/create")]
     [Role([1])]
