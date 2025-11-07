@@ -298,8 +298,8 @@ public class ShopService : IShopService
         existingOrder.status = query.status;
         existingOrder.deliveryType = query.deliveryType;
         existingOrder.address = query.address;
-        existingOrder.status = query.status; 
-        
+        existingOrder.status = query.status;
+
         await _contextDatabase.SaveChangesAsync();
 
         return new OkObjectResult(new
@@ -386,5 +386,82 @@ public class ShopService : IShopService
             return new NotFoundObjectResult(new
                 { status = false, message = "Session not founded!" });
         }
+    }
+    
+    // categories
+    public async Task<IActionResult> GetAllCategoriesAsync()
+    {
+        var categoriesList = _contextDatabase.Categories;
+        if (categoriesList == null)
+        {
+            return new NotFoundObjectResult(new { status = false, message = "Categories not found." });
+        }
+
+        return new OkObjectResult(new
+        {
+            status = true,
+            data = categoriesList
+        });
+    }
+
+    public async Task<IActionResult> CreateCategoryAsync(int _id_role, CategoryQuery query)
+    {
+        var newCategory = new Category()
+        {
+            name = query.name,
+            description = query.description,
+        };
+
+        await _contextDatabase.AddAsync(newCategory);
+        await _contextDatabase.SaveChangesAsync();
+
+        return new OkObjectResult(new
+        {
+            status = true,
+            message = "Category created successfully."
+        });
+    }
+
+    public async Task<IActionResult> UpdateCategoryAsync(CategoryQuery query, int id)
+    {
+        var existingCategory = await _contextDatabase.Categories
+            .FirstOrDefaultAsync(l => l.id_category == id);
+
+        if (existingCategory == null)
+        {
+            return new NotFoundObjectResult(new { status = false, message = "Category not found." });
+        }
+
+        existingCategory.name = query.name;
+        existingCategory.description = query.description;
+
+        await _contextDatabase.SaveChangesAsync();
+
+        return new OkObjectResult(new
+        {
+            status = true,
+            message = "Category edited successfully."
+        });
+    }
+
+    public async Task<IActionResult> DeleteCategoryAsync(int id)
+    {
+        var existingCategory = await _contextDatabase.Categories
+            .FirstOrDefaultAsync(l => l.id_category == id);
+
+        if (existingCategory == null)
+        {
+            return new NotFoundObjectResult(new { status = false, message = "Category not found." });
+        }
+
+        _contextDatabase.Categories.Remove(existingCategory);
+        
+        await _contextDatabase.SaveChangesAsync();
+
+        return new OkObjectResult(new
+        {
+            status = true,
+            message = "Category deleted successfully."
+        });
     }
 }

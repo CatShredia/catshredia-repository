@@ -27,4 +27,23 @@ public class ProductController
     [HttpDelete("product/delete")]
     [Role([1])]
     public async Task<IActionResult> DeleteProduct(int id) => await _service.DeleteProductAsync(id);
+
+    // category
+    [HttpGet("category/all")]
+    [Role([1])]
+    public async Task<IActionResult> GetAllCategories() => await _service.GetAllCategoriesAsync();
+
+    [HttpPost("category/create")]
+    [Role([1])]
+    public async Task<IActionResult> CreateCategory([FromBody] CategoryQuery reader) =>
+        await _service.CreateCategoryAsync(2, reader);
+
+    [HttpPut("category/update")]
+    [Role([1])]
+    public async Task<IActionResult> UpdateCategory([FromBody] CategoryQuery reader, int id) =>
+        await _service.UpdateCategoryAsync(reader, id);
+
+    [HttpDelete("category/delete")]
+    [Role([1])]
+    public async Task<IActionResult> DeleteCategory(int id) => await _service.DeleteCategoryAsync(id);
 }

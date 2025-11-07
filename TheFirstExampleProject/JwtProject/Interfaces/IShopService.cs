@@ -27,4 +27,10 @@ public interface IShopService
     Task<IActionResult> AuthorizationUserAsync([FromBody]LoginQuery reader);
     Task<IActionResult> GetProfileAsync(string Authorization);
     Task<IActionResult> UpdateProfileAsync(string Authorization, UserLoginQuery reader);
+    
+    // categories
+    Task<IActionResult> GetAllCategoriesAsync();
+    Task<IActionResult> CreateCategoryAsync(int id_role, CategoryQuery query);
+    Task<IActionResult> UpdateCategoryAsync(CategoryQuery query, int id);
+    Task<IActionResult> DeleteCategoryAsync(int id);
 }
