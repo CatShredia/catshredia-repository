@@ -8,8 +8,8 @@ namespace JwtProject.Controllers;
 [ApiController]
 public class UserController
 {
-    private readonly IShopService _service;
-    public UserController(IShopService service) => _service = service;
+    private readonly IAuthService _service;
+    public UserController(IAuthService service) => _service = service;
     
     [AllowAnonymous]
     [HttpPost("user/authorization")]

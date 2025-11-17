@@ -4,8 +4,9 @@ namespace JwtProject.Queries;
 
 public class OrderQuery
 {
-    public OrderStatus status { get; set; }
-    public OrderDeliveryType deliveryType { get; set; }
+    public int id_status { get; set; }
+    public int id_delivery_type { get; set; }
+    
     public string address { get; set; }
     public int[] ids_products { get; set; }
 }

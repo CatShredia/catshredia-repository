@@ -7,8 +7,8 @@ namespace JwtProject.Controllers;
 
 public class ProductController
 {
-    private readonly IShopService _service;
-    public ProductController(IShopService service) => _service = service;
+    private readonly IProductService _service;
+    public ProductController(IProductService service) => _service = service;
 
     [HttpGet("product/all")]
     [Role([1])]

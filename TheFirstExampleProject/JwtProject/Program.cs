@@ -1,7 +1,6 @@
 using JwtProject.Database;
 using JwtProject.Interfaces;
 using JwtProject.Security;
-using JwtProject.Services;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
@@ -17,7 +16,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ContextDatabase>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("ConnectionString")));
 
-builder.Services.AddScoped<IShopService, ShopService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddSingleton<JwtTokensGenerator>();
 
 var app = builder.Build();

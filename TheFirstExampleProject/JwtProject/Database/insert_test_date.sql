@@ -34,7 +34,8 @@ INSERT INTO "OrderStatus" ("id_status", "name")
 VALUES (1, 'preparing'),
        (2, 'delivering'),
        (3, 'delivered'),
-       (4, 'canceled');
+       (4, 'canceled'),
+       (5, 'basket');
 
 -- Insert OrderDeliveryType
 INSERT INTO "OrderDeliveryType" ("id_delivery_type", "name")

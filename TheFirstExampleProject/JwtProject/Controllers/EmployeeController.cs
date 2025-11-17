@@ -9,8 +9,8 @@ namespace JwtProject.Controllers;
 [ApiController]
 public class EmployeeController
 {
-    private readonly IShopService _service;
-    public EmployeeController(IShopService service) => _service = service;
+    private readonly IUserService _service;
+    public EmployeeController(IUserService service) => _service = service;
 
     [HttpGet("employees/all")]
     [Role([1])]

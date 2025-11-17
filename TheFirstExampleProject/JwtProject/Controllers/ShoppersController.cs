@@ -8,8 +8,8 @@ namespace JwtProject.Controllers;
 [ApiController]
 public class ShoppersController
 {
-    private readonly IShopService _service;
-    public ShoppersController(IShopService service) => _service = service;
+    private readonly IUserService _service;
+    public ShoppersController(IUserService service) => _service = service;
 
     [HttpGet("shoppers/all")]
     [Role([1, 2])]
