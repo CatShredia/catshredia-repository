@@ -3,18 +3,18 @@ using JwtProject.Interfaces;
 using JwtProject.Security;
 using JwtProject.Services;
 using Microsoft.EntityFrameworkCore;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddOpenApi();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // import DatabaseContext file
-builder.Services.AddDbContext<ContextDatabase>(options => 
+builder.Services.AddDbContext<ContextDatabase>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("ConnectionString")));
 
 builder.Services.AddScoped<IShopService, ShopService>();
@@ -26,8 +26,15 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+
+    app.UseSwaggerUI(options => { options.SwaggerEndpoint("/openapi/v1.json", "Open API V1"); });
+
+    app.UseReDoc(options => { options.SpecUrl("/openapi/v1.json"); });
+
+    app.MapScalarApiReference();
 }
+
+app.MapOpenApi();
 
 app.UseMiddleware<LoggingMiddleware>();
 app.UseHttpsRedirection();
