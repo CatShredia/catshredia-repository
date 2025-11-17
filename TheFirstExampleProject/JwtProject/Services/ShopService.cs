@@ -250,8 +250,8 @@ public class ShopService : IShopService
             .Select(order => new
             {
                 id_order = order.id_order,
-                status = order.status,
-                deliveryType = order.deliveryType,
+                status = order.OrderStatus,
+                deliveryType = order.OrderDeliveryType,
                 address = order.address,
                 orderItems = _contextDatabase.OrderLists
                     .Where(ol => ol.id_order == order.id_order)
@@ -276,8 +276,8 @@ public class ShopService : IShopService
     {
         var newOrder = new Order()
         {
-            status = query.status,
-            deliveryType = query.deliveryType,
+            OrderStatus = query.status,
+            OrderDeliveryType = query.deliveryType,
             address = query.address,
             // TODO: after auth
             id_user = 1
@@ -315,7 +315,7 @@ public class ShopService : IShopService
             return new NotFoundObjectResult(new { status = false, message = "Order not found." });
         }
 
-        selectedOrder.status = OrderStatus.canceled;
+        // selectedOrder.OrderStatus = _contextDatabase.Order;
 
         _contextDatabase.Update(selectedOrder);
         await _contextDatabase.SaveChangesAsync();
@@ -337,10 +337,10 @@ public class ShopService : IShopService
             return new NotFoundObjectResult(new { status = false, message = "Order not found." });
         }
 
-        existingOrder.status = query.status;
-        existingOrder.deliveryType = query.deliveryType;
+        existingOrder.OrderStatus = query.status;
+        existingOrder.OrderDeliveryType = query.deliveryType;
         existingOrder.address = query.address;
-        existingOrder.status = query.status;
+        existingOrder.OrderStatus = query.status;
 
         await _contextDatabase.SaveChangesAsync();
 

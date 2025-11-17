@@ -4,23 +4,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JwtProject.Database;
 
-public class ContextDatabase :  DbContext
+public class ContextDatabase : DbContext
 {
     public ContextDatabase(DbContextOptions options) : base(options)
     {
     }
-    
+
     public DbSet<Role> Roles { get; set; }
     public DbSet<Login> Logins { get; set; }
     public DbSet<User> Users { get; set; }
-    
+
     public DbSet<Product> Products { get; set; }
     public DbSet<Category> Categories { get; set; }
-    
+
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderList> OrderLists { get; set; }
-    
+    public DbSet<OrderStatus> OrderStatus { get; set; }
+    public DbSet<OrderDeliveryType> OrderDeliveryType { get; set; }
+
     public DbSet<Session> Sessions { get; set; }
-    
+
     public DbSet<Logs> Logs { get; set; }
 }
