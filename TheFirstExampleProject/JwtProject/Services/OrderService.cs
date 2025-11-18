@@ -58,6 +58,26 @@ public class OrderService : IOrderService
         await _context.SaveChangesAsync();
         return new OkObjectResult(new { status = true, message = "Order created successfully." });
     }
+    
+    public async Task<IActionResult> UpdateProductListAsync(ProductListQuery query, int _id_order)
+    {
+        var selectedLists = await _context.OrderLists
+            .Where(ol => ol.id_order == _id_order)
+            .ToListAsync();
+
+        if (selectedLists == null)
+            return new NotFoundObjectResult(new { status = false, message = "Order not found." });
+        
+        _context.OrderLists.RemoveRange(selectedLists);
+
+        foreach (var id in query.productList)
+        {
+            _context.OrderLists.Add(new OrderList { id_order = _id_order, id_product = id });
+        }
+
+        await _context.SaveChangesAsync();
+        return new OkObjectResult(new { status = true, message = "OrderList updated successfully." });
+    }
 
     public async Task<IActionResult> ChangeYourMindSet1(int id, string status)
     {

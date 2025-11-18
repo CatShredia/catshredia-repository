@@ -21,6 +21,11 @@ public class OrderController
     public async Task<IActionResult> CreateOrder([FromBody] OrderQuery reader, [FromHeader] string authorization) =>
         await _service.CreateOrderAsync(reader, authorization);
     
+    [HttpPut("order/updateProductList")]
+    [Role([1])]
+    public async Task<IActionResult> UpdateProductList([FromBody] ProductListQuery reader, int id) =>
+        await _service.UpdateProductListAsync(reader, id);
+    
     [HttpPut("order/changeStatus")]
     [Role([1])]
     public async Task<IActionResult> ChangeYourMindSet1(int id, string status) => await _service.ChangeYourMindSet1(id, status);
