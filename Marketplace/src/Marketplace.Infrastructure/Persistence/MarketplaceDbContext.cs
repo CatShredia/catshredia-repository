@@ -125,12 +125,16 @@ public class MarketplaceDbContext : DbContext
         // Inventory
         builder.Entity<Inventory>(entity =>
         {
+            // Explicitly map properties to lowercase column names
+            entity.Property(e => e.Quantity).HasColumnName("quantity");
+            entity.Property(e => e.Reserved).HasColumnName("reserved");
+
             entity.Property(e => e.Quantity).IsRequired();
             entity.Property(e => e.Reserved).IsRequired();
 
-            // Add CHECK constraints via HasCheckConstraint (optional but recommended)
-            entity.HasCheckConstraint("CK_Inventory_Quantity", "\"quantity\" >= 0");
-            entity.HasCheckConstraint("CK_Inventory_Reserved", "\"reserved\" >= 0 AND \"reserved\" <= \"quantity\"");
+            // Now use unquoted or consistently quoted names in constraints
+            entity.HasCheckConstraint("CK_Inventory_Quantity", "quantity >= 0");
+            entity.HasCheckConstraint("CK_Inventory_Reserved", "reserved >= 0 AND reserved <= quantity");
 
             entity.HasIndex(i => new { i.ProductId, i.WarehouseId }).IsUnique();
 
@@ -160,5 +164,13 @@ public class MarketplaceDbContext : DbContext
 
         // PostgreSQL enum
         builder.HasPostgresEnum<TxnType>();
+
+        foreach (var entityType in builder.Model.GetEntityTypes())
+        {
+            foreach (var property in entityType.GetProperties())
+            {
+                property.SetColumnName(property.Name.ToLowerInvariant());
+            }
+        }
     }
 }
