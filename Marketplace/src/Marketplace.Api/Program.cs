@@ -1,6 +1,7 @@
 using Marketplace.Infrastructure;
 using Marketplace.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 if (args.Contains("--migrate-only"))
 {
@@ -28,6 +29,17 @@ var connectionString = builder.Configuration.GetConnectionString("Default");
 builder.Services.AddInfrastructure(connectionString);
 builder.Services.AddOpenApi();
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Marketplace API",
+        Version = "v1",
+        Description = "A marketplace backend API for products, inventory, and sellers."
+    });
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -36,6 +48,13 @@ if (app.Environment.IsDevelopment())
     var context = scope.ServiceProvider.GetRequiredService<MarketplaceDbContext>();
     context.Database.Migrate();
     app.MapOpenApi();
+    
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Marketplace API v1");
+        c.RoutePrefix = string.Empty;
+    });
 }
 
 app.MapGet("/", () => "Marketplace API is running!");
